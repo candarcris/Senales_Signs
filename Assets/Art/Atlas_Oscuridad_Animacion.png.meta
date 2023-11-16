@@ -1,0 +1,651 @@
+fileFormatVersion: 2
+guid: 38abf3c9a6ce4234abd59c65b5321d9a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_0
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 3333
+        width: 642
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763c372d846aca14397777946c4e3d46
+      internalID: -2026051406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_1
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 3333
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45087156b4da3994f8a70aba51b6824d
+      internalID: -326805687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_2
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 3333
+        width: 638
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad330de81af316142aa9bfbb861eba1f
+      internalID: -1323678119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_3
+      rect:
+        serializedVersion: 2
+        x: 2519
+        y: 3333
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fd7d605c4919bb489a78d97b5118547
+      internalID: -1745303049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_4
+      rect:
+        serializedVersion: 2
+        x: 3321
+        y: 3333
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8188005ca805134fa904dc344be0ba3
+      internalID: 761830098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_5
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 2547
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2907a83773938324895324a48d54a2d1
+      internalID: -1085817227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_6
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 2547
+        width: 641
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e2b4a5b52ec3014ca26c9b37cb848f6
+      internalID: -373843532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_7
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 2547
+        width: 642
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be94a07e81c51e343922f005dd6a9591
+      internalID: 582589157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_8
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 2547
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83db79c7752fb444881d8f9aac1d1ed5
+      internalID: 375463557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_9
+      rect:
+        serializedVersion: 2
+        x: 3315
+        y: 2547
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbeb0c5b1bbb9c4caf897b1a2ff4791
+      internalID: -1983186618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_10
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 1763
+        width: 641
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f97fc3ea3cfb444e9e6d65bd0953973
+      internalID: 512249177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_11
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 1763
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b23eaa4003b314ab344960c40dc7c1
+      internalID: 1303095466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_12
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 1763
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b1c88cb1dccc1447a5132e733b8757d
+      internalID: 703781826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_13
+      rect:
+        serializedVersion: 2
+        x: 2505
+        y: 1763
+        width: 641
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09028494af7c3f438fa3bb026b456c1
+      internalID: -111304009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_14
+      rect:
+        serializedVersion: 2
+        x: 3309
+        y: 1763
+        width: 640
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa22af198e35b0b4496499d13e97f5b4
+      internalID: 609562301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_15
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 979
+        width: 641
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c6396ca53e057449d2980e065a1169
+      internalID: 970266090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_16
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 979
+        width: 642
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3291174adaae98e43922e1eb6442d11d
+      internalID: -1149766533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_17
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 979
+        width: 640
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3e170e7e51052b4d8f7d3c1d5efaab3
+      internalID: -2005151584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_18
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 979
+        width: 640
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 802d9525d174bb146bc92fa08695cbbf
+      internalID: -1308421133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_19
+      rect:
+        serializedVersion: 2
+        x: 3314
+        y: 979
+        width: 641
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a5c26d329bac4b40bf8ced5a8f02245
+      internalID: 219390951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_20
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 193
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efc3e3cdfc5237e4992b38f1c2f10518
+      internalID: 2044105904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_21
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 193
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b38e6f8ae1cbe844e96c8a52c4fb0977
+      internalID: 118465691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_22
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 193
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d655134fa93d3fa45a41d54db0ee07c2
+      internalID: -1956145887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_Oscuridad_Animacion_23
+      rect:
+        serializedVersion: 2
+        x: 2517
+        y: 193
+        width: 640
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77cf2b2205bca604b9cd9f3720727832
+      internalID: -982405322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 8d0ea6857c17d0f4b90f15015d0cc641
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Atlas_Oscuridad_Animacion_5: -1085817227
+      Atlas_Oscuridad_Animacion_14: 609562301
+      Atlas_Oscuridad_Animacion_9: -1983186618
+      Atlas_Oscuridad_Animacion_17: -2005151584
+      Atlas_Oscuridad_Animacion_15: 970266090
+      Atlas_Oscuridad_Animacion_16: -1149766533
+      Atlas_Oscuridad_Animacion_4: 761830098
+      Atlas_Oscuridad_Animacion_22: -1956145887
+      Atlas_Oscuridad_Animacion_20: 2044105904
+      Atlas_Oscuridad_Animacion_7: 582589157
+      Atlas_Oscuridad_Animacion_21: 118465691
+      Atlas_Oscuridad_Animacion_3: -1745303049
+      Atlas_Oscuridad_Animacion_6: -373843532
+      Atlas_Oscuridad_Animacion_8: 375463557
+      Atlas_Oscuridad_Animacion_19: 219390951
+      Atlas_Oscuridad_Animacion_13: -111304009
+      Atlas_Oscuridad_Animacion_11: 1303095466
+      Atlas_Oscuridad_Animacion_0: -2026051406
+      Atlas_Oscuridad_Animacion_23: -982405322
+      Atlas_Oscuridad_Animacion_10: 512249177
+      Atlas_Oscuridad_Animacion_2: -1323678119
+      Atlas_Oscuridad_Animacion_12: 703781826
+      Atlas_Oscuridad_Animacion_1: -326805687
+      Atlas_Oscuridad_Animacion_18: -1308421133
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
