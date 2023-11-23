@@ -6,7 +6,6 @@ using Cinemachine;
 public class CamerasManager : MonoBehaviour
 {
     public CinemachineVirtualCamera _cinemachineCam;
-
     int number = 0;
     private void Start()
     {
