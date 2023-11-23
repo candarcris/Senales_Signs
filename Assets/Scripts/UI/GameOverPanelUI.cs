@@ -13,6 +13,10 @@ public class GameOverPanelUI : UIElement
         _anim = GetComponent<Animator>();
     }
 
+    public void Cambio()
+    {
+
+    }
     private void OnEnable()
     {
         _continuarButton.gameObject.SetActive(false);
