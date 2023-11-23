@@ -8,7 +8,6 @@ public class PlayerSkills : MonoBehaviour
     [Header("Animacion")]
     private Animator _anim;
     private Rigidbody _rb2D;
-    bool newbool = false;
 
     [Header("Habilidades")]
     public GameObject _dialogUI;
