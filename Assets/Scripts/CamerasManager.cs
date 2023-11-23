@@ -7,6 +7,7 @@ public class CamerasManager : MonoBehaviour
 {
     public CinemachineVirtualCamera _cinemachineCam;
 
+    int number = 0;
     private void Start()
     {
         _cinemachineCam.m_Lens.FieldOfView = 40f;
