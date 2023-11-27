@@ -11,10 +11,7 @@ public class ManagerLocator : MonoBehaviour
 
     // Singleton para acceder a esta clase desde cualquier lugar
     private static ManagerLocator instance;
-    public void New()
-    {
-        
-    }
+
     private void Awake()
     {
         // Aseg�rate de que solo haya una instancia de ManagerLocator en la escena
