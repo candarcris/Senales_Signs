@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public bool _isRizpaForm = false;
     public List<GameObject> _eventsTrigerList = new();
+    public DialogsManager _dialogsUI;
 
     [Header("Damage and Die")]
     public bool _inDamage;
@@ -51,6 +52,13 @@ public class PlayerController : MonoBehaviour
         _anim.SetLayerWeight(1, 1f);
         _rb2D.drag = 50;
         _rb2D.drag = 49;
+
+        _dialogsUI.OnNextAction += SetPlayerValues;
+    }
+
+    private void SetPlayerValues()
+    {
+        _rb2D.drag = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -197,6 +205,7 @@ public class PlayerController : MonoBehaviour
         _jump = false;
 
         _rb2D.AddForce(Vector3.down * Physics.gravity.magnitude * _gravityMultiplier);
+        //_rb2D.AddForce(Vector2.down * Physics2D.gravity.y);
 
         if (_rb2D.velocity.y < 0)
         {

@@ -314,6 +314,7 @@ Transform:
   - {fileID: 510298155}
   - {fileID: 123897176}
   - {fileID: 1637561660}
+  - {fileID: 355214006}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -537,6 +538,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &355214004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355214006}
+  - component: {fileID: 355214005}
+  m_Layer: 0
+  m_Name: DIALOGS_MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &355214005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355214004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1cfa8ea9544c0418f279a39282326e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: 
+  _dialogPrefab: {fileID: 6148385843804237749, guid: 90ad447530f96954ea78360230522678,
+    type: 3}
+  _dialogInstanced: {fileID: 0}
+  _queueDialogsList: []
+  _parent: {fileID: 1592715417}
+  _dialogIndex: 0
+  _mainDialogColor: {r: 1, g: 1, b: 1, a: 0}
+  _secondDialogColor: {r: 0, g: 1, b: 0.6656568, a: 0}
+  _thirdDialogColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!4 &355214006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355214004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1592715417}
+  m_Father: {fileID: 141861400}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +802,7 @@ MonoBehaviour:
   _gameManager: {fileID: 510298156}
   _camerasManager: {fileID: 1637561661}
   _soundManager: {fileID: 616556328}
+  _dialogsManager: {fileID: 355214005}
 --- !u!1 &616556324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,13 +1588,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592715416}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.01836864, y: -0.017257538, z: -0.00046597273, w: 0.99968225}
+  m_LocalPosition: {x: 1.1194215, y: 150.58928, z: -12.676852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1630883521}
-  m_RootOrder: 2
+  m_Father: {fileID: 355214006}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630883517
 GameObject:
@@ -1645,7 +1702,6 @@ Transform:
   m_Children:
   - {fileID: 1268520685}
   - {fileID: 616556325}
-  - {fileID: 1592715417}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1703,12 +1759,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1630883517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1cfa8ea9544c0418f279a39282326e, type: 3}
+  m_Script: {fileID: 11500000, guid: 04295dea32f9f22439f5c00184982ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: 'No se donde estoy... '
-  _dialog: {fileID: 6148385843804237749, guid: 90ad447530f96954ea78360230522678, type: 3}
-  _parent: {fileID: 1592715417}
 --- !u!1 &1637561659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,9 +2010,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1802398746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0bab0fceb99a5d438686112e030b8fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b1072371f1bc8a48b2c4a0703e49361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1983731122}
 --- !u!1 &1927066050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,6 +2448,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 306024322}
     m_Modifications:
+    - target: {fileID: 2974393507116434763, guid: 46b1c76a08405ea4290b8d19962afbd9,
+        type: 3}
+      propertyPath: _dialogsUI
+      value: 
+      objectReference: {fileID: 355214005}
     - target: {fileID: 2974393507116434763, guid: 46b1c76a08405ea4290b8d19962afbd9,
         type: 3}
       propertyPath: _initParent

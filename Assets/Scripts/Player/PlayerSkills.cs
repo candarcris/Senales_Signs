@@ -7,10 +7,8 @@ public class PlayerSkills : MonoBehaviour
     PlayerController _playerController;
     [Header("Animacion")]
     private Animator _anim;
-    private Rigidbody _rb2D;
 
     [Header("Habilidades")]
-    public GameObject _dialogUI;
     public List<GameObject> _eventsTrigerList = new();
     public bool _isRizpaForm = false;
 
@@ -22,11 +20,6 @@ public class PlayerSkills : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _anim = GetComponent<Animator>();
-    }
-
-    public void Talk(string msg)
-    {
-
     }
 
     public void EnterRizpaForm()
