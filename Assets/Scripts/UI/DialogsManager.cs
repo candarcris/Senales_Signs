@@ -3,114 +3,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static DialogEvent;
 
 public class DialogsManager : MonoBehaviour
 {
-    public string _text;
-    public Dialog _dialogPrefab;
-    [SerializeField] private Dialog _dialogInstanced;
-    public List<string> _queueDialogsList = new();
-    public Transform _parent;
-    private float _typingSpeed = 0.05f;
-    private string _currentDialog;
-    private int _dialoglettersIndex;
-    [SerializeField] private int _dialogIndex;
-    public event Action OnNextAction;
-    public Color _mainDialogColor, _secondDialogColor, _thirdDialogColor;
+    public DialogPanelUI _dialogPanel;
+    public Queue <string> _queueDialogs = new();
+    Dialogs _dialogs;
+    [SerializeField] private TextMeshProUGUI _screenText;
 
-    public enum ENUM_CharTypeDialogs
+    public void SetDialog(Dialogs dialogEvent, Color color)
     {
-        mainChar,
-        secondChar,
-        thirdChar
+        _dialogPanel.ShowDialog();
+        _dialogs = dialogEvent;
+        SetText();
     }
 
-    private void Start()
+    public void SetText()
     {
-        _dialogIndex = 0;
-        _text = _queueDialogsList[_dialogIndex];
+        _queueDialogs.Clear();
+        foreach (string keepText in _dialogs.arrayTexts)
+        {
+            _queueDialogs.Enqueue(keepText);
+        }
+        NextPhrase();
     }
 
-    public void setDialog()
+    public void NextPhrase()
     {
-        if(_dialogInstanced == null)
+        if(_queueDialogs.Count == 0)
         {
-            _dialogInstanced = Instantiate(_dialogPrefab, _parent);
-            _dialogInstanced.OnNextDialog += HandleNextDialog;
+            FinishDialog();
+            return;
         }
-
-        _currentDialog = _queueDialogsList[_dialogIndex];
-        _dialoglettersIndex = 0;
-        StartCoroutine(TypeText());
+        string currentPhrase = _queueDialogs.Dequeue();
+        _screenText.text = currentPhrase;
+        StartCoroutine(ShowCharacters(currentPhrase));
     }
 
-    IEnumerator TypeText()
+    public void FinishDialog()
     {
-        _text = ""; // Limpiar el texto antes de empezar
-        _dialogInstanced.ShowDialog();
-
-        while (_dialoglettersIndex < _currentDialog.Length)
-        {
-            _text += _currentDialog[_dialoglettersIndex];
-            _dialogInstanced.SetDialogText(_text);
-            _dialoglettersIndex++;
-            yield return new WaitForSeconds(_typingSpeed);
-        }
-
-        if(_dialoglettersIndex == _currentDialog.Length)
-        {
-            _dialogInstanced._nextButton.gameObject.SetActive(true);
-        }
+        _dialogPanel.HideDialog();
+        FindObjectOfType<PlayerController>().SetPlayerValues();
     }
 
-    private void HandleNextDialog()
+    public IEnumerator ShowCharacters(string showText)
     {
-        if((_dialogIndex + 1) >= _queueDialogsList.Count)
+        _screenText.text = "";
+        int index = 0;
+
+        foreach (char character in showText.ToCharArray())
         {
-            _dialogInstanced.HideDialog();
-            NextAction();
-        }
-        if(_queueDialogsList.Count > 1 && (_dialogIndex + 1) < _queueDialogsList.Count)
-        {
-            _dialogIndex++;
-            _text = _queueDialogsList[_dialogIndex];
-            setDialog();
-        }
-    }
+            _screenText.text += character;
+            yield return new WaitForSeconds(0.05f);
+            index++;
 
-    public void ChangeCharacterDialogs(ENUM_CharTypeDialogs type)
-    {
-        _queueDialogsList.Clear();
-
-        switch (type)
-        {
-            case ENUM_CharTypeDialogs.mainChar:
-                _dialogPrefab._text.color = _mainDialogColor;
-                break;
-            case ENUM_CharTypeDialogs.secondChar:
-                _dialogPrefab._text.color = _secondDialogColor;
-                break;
-            case ENUM_CharTypeDialogs.thirdChar:
-                _dialogPrefab._text.color = _thirdDialogColor;
-                break;
-        }
-
-    }
-
-    private void NextAction()
-    {
-        if (OnNextAction != null)
-        {
-            OnNextAction.Invoke();
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_dialogInstanced != null)
-        {
-            _dialogInstanced.OnNextDialog -= HandleNextDialog;
-
+            // Verificar si se han mostrado todos los caracteres
+            if (index == showText.Length)
+            {
+                // La palabra showText ha sido completamente mostrada
+                _dialogPanel._nextButton.gameObject.SetActive(true);
+            }
         }
     }
 }

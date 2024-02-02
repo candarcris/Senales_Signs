@@ -38,25 +38,24 @@ public class PlayerController : MonoBehaviour
 
     public bool _isRizpaForm = false;
     public List<GameObject> _eventsTrigerList = new();
-    public DialogsManager _dialogsUI;
 
     [Header("Damage and Die")]
     public bool _inDamage;
-    public bool _sePuedeMover = true;
+    public bool _sePuedeMover;
     [SerializeField] private Vector2 _velocidadRebote;
 
     private void Start()
     {
+        _sePuedeMover = false;
         _anim = GetComponent<Animator>();
         _rb2D = GetComponent<Rigidbody>();
         _anim.SetLayerWeight(1, 1f);
         _rb2D.drag = 50;
         _rb2D.drag = 49;
-
-        _dialogsUI.OnNextAction += SetPlayerValues;
     }
 
-    private void SetPlayerValues()
+
+    public void SetPlayerValues()
     {
         _rb2D.drag = 0;
     }
@@ -101,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator fieldOfViewAnim(int time)
     {
-        ManagerLocator.GetCamerasManager().SetFieldOfView(Mathf.Lerp(40, 70, time));
+        ManagerLocator.GetCamerasManager().SetFieldOfView(Mathf.Lerp(40, 60, time));
         yield return new WaitForSeconds(0f);
     }
 
@@ -109,6 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(fieldOfViewAnim(5));
         _firstFall = true;
+        if (!ManagerLocator.GetDialogsManager()._dialogPanel.gameObject.activeSelf) { _sePuedeMover = true; }
         _anim.SetBool("InGround", _inGround);
         _anim.SetBool("FirstFall", false);
     }
@@ -169,15 +169,16 @@ public class PlayerController : MonoBehaviour
             _HorizontalMove = Input.GetAxisRaw("Horizontal") * _movementVelocity;
         }
 
-        _anim.SetFloat("Horizontal", Mathf.Abs(_HorizontalMove));
-        _anim.SetFloat("VelocityY", _rb2D.velocity.y);
-
-        if (Input.GetButtonDown("Jump") && _inGround)
-        {
-            _jump = true;
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0); // Resetea la velocidad vertical antes de saltar
+        if (_sePuedeMover) 
+        { 
+            _anim.SetFloat("Horizontal", Mathf.Abs(_HorizontalMove));
+            _anim.SetFloat("VelocityY", _rb2D.velocity.y);
+            if (Input.GetButtonDown("Jump") && _inGround)
+            {
+                _jump = true;
+                _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0); // Resetea la velocidad vertical antes de saltar
+            }
         }
-
         //EnterRizpaForm();
     }
 

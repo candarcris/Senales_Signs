@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventFallingIntro : Event
+public class EventFallingIntro : MonoBehaviour
 {
-    public PlayerController _player;
-    public override void ExecuteEvent()
-    {
-        _player.FallingIntro();
-    }
+    private DialogEvent _dialogEvent;
 
+    private void Start()
+    {
+        _dialogEvent = GetComponent<DialogEvent>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            ExecuteEvent();
+            _dialogEvent.ExecuteDialogEvent();
+            FindObjectOfType<PlayerController>().FallingIntro();
         }
     }
 }
