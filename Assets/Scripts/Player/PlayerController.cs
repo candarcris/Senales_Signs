@@ -52,12 +52,32 @@ public class PlayerController : MonoBehaviour
         _anim.SetLayerWeight(1, 1f);
         _rb2D.drag = 50;
         _rb2D.drag = 49;
+
+        DialogsManager.OnFinishDialog += SetPlayerValues;
+    }
+
+    private void OnDestroy()
+    {
+        DialogsManager.OnFinishDialog -= SetPlayerValues;
     }
 
 
     public void SetPlayerValues()
     {
         _rb2D.drag = 0;
+    }
+
+    public IEnumerator ReductFallingVelocity()
+    {
+        float totalTime = 1f; 
+        int totalIterations = 30;
+        float waitTime = totalTime / totalIterations; 
+
+        for (int i = 0; i < totalIterations; i++)
+        {
+            _rb2D.drag = i;
+            yield return new WaitForSeconds(waitTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -98,17 +118,38 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    private IEnumerator fieldOfViewAnim(int time)
+    private IEnumerator fieldOfViewAnim(float duration)
     {
-        ManagerLocator.GetCamerasManager().SetFieldOfView(Mathf.Lerp(40, 60, time));
-        yield return new WaitForSeconds(0f);
+        float elapsedTime = 0f;
+        float startFOV = ManagerLocator.GetCamerasManager().GetFieldOfView();
+        float targetFOV = Mathf.Lerp(40, 60, duration);
+
+        while (elapsedTime < duration)
+        {
+            float newFOV = Mathf.Lerp(startFOV, targetFOV, elapsedTime / duration);
+            ManagerLocator.GetCamerasManager().SetFieldOfView(newFOV);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Asegurémonos de que el FOV sea exactamente el valor final
+        ManagerLocator.GetCamerasManager().SetFieldOfView(targetFOV);
+    }
+
+    public void SetGameValues()
+    {
+        StartCoroutine(fieldOfViewAnim(2));
+        StartCoroutine(ReductFallingVelocity());
+    }
+
+    public void DialogMeanTimeValues()
+    {
+        _anim.SetFloat("Horizontal", 0);
     }
 
     public void FallingIntro()
     {
-        StartCoroutine(fieldOfViewAnim(5));
         _firstFall = true;
-        if (!ManagerLocator.GetDialogsManager()._dialogPanel.gameObject.activeSelf) { _sePuedeMover = true; }
         _anim.SetBool("InGround", _inGround);
         _anim.SetBool("FirstFall", false);
     }

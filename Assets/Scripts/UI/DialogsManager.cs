@@ -10,10 +10,13 @@ public class DialogsManager : MonoBehaviour
     public DialogPanelUI _dialogPanel;
     public Queue <string> _queueDialogs = new();
     Dialogs _dialogs;
+    private Color _color;
     [SerializeField] private TextMeshProUGUI _screenText;
+    public static event Action OnFinishDialog;
 
     public void SetDialog(Dialogs dialogEvent, Color color)
     {
+        _color = color;
         _dialogPanel.ShowDialog();
         _dialogs = dialogEvent;
         SetText();
@@ -41,15 +44,16 @@ public class DialogsManager : MonoBehaviour
         StartCoroutine(ShowCharacters(currentPhrase));
     }
 
-    public void FinishDialog()
+    public static void FinishDialog()
     {
-        _dialogPanel.HideDialog();
-        FindObjectOfType<PlayerController>().SetPlayerValues();
+        //Se ejecutan todas las funciones suscritas a esta
+        OnFinishDialog?.Invoke();
     }
 
     public IEnumerator ShowCharacters(string showText)
     {
         _screenText.text = "";
+        _screenText.color = _color;
         int index = 0;
 
         foreach (char character in showText.ToCharArray())

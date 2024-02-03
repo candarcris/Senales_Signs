@@ -10,6 +10,15 @@ public class DialogPanelUI : MonoBehaviour
     public Button _nextButton;
     public Color _mainDialogColor, _secondDialogColor, _thirdDialogColor;
 
+    private void Start()
+    {
+        DialogsManager.OnFinishDialog += HideDialog;
+    }
+    private void OnDestroy()
+    {
+        DialogsManager.OnFinishDialog -= HideDialog;
+    }
+
     public void ShowDialog()
     {
         FindObjectOfType<PlayerController>()._sePuedeMover = false;

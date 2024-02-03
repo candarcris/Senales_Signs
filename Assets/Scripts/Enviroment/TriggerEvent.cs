@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
-public class EventFallingIntro : MonoBehaviour
+public class TriggerEvent : MonoBehaviour
 {
+    public string _colliderName;
     private DialogEvent _dialogEvent;
 
     private void Start()
     {
         _dialogEvent = GetComponent<DialogEvent>();
     }
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == _colliderName)
         {
             _dialogEvent.ExecuteDialogEvent();
-            FindObjectOfType<PlayerController>().FallingIntro();
+            FindObjectOfType<PlayerController>().DialogMeanTimeValues();
         }
         gameObject.SetActive(false);
     }

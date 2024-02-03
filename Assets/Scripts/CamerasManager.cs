@@ -15,4 +15,9 @@ public class CamerasManager : MonoBehaviour
     {
         _cinemachineCam.m_Lens.FieldOfView = amount;
     }
+
+    public float GetFieldOfView()
+    {
+        return _cinemachineCam.m_Lens.FieldOfView;
+    }
 }
