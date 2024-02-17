@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class TriggerEvent : MonoBehaviour
+public class TriggerDialogueEvent : MonoBehaviour
 {
     public string _colliderName;
     private DialogEvent _dialogEvent;
@@ -17,7 +17,7 @@ public class TriggerEvent : MonoBehaviour
         if (other.tag == _colliderName)
         {
             _dialogEvent.ExecuteDialogEvent();
-            FindObjectOfType<PlayerController>().DialogMeanTimeValues();
+            FindObjectOfType<PlayerController>().PlayerValuesDialogMeanTime();
         }
         gameObject.SetActive(false);
     }

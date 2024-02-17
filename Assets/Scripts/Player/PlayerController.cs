@@ -118,6 +118,34 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
+    private void OnGUI()
+    {
+        // Define el tamaño del área central
+        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+
+        // Añade espacios flexibles para centrar verticalmente
+        GUILayout.FlexibleSpace();
+
+        // Comienza un área para el botón
+        GUILayout.BeginHorizontal();
+        // Añade espacios flexibles para centrar horizontalmente
+        GUILayout.FlexibleSpace();
+
+        // Coloca el botón en el centro
+        if (GUILayout.Button("Mi Botón", GUILayout.Width(200), GUILayout.Height(50)))
+        {
+            // Acción cuando se hace clic en el botón
+            Debug.Log("¡Has hecho clic en el botón!");
+        }
+
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        // Añade espacios flexibles para centrar verticalmente
+        GUILayout.FlexibleSpace();
+        GUILayout.EndArea();
+    }
+
     private IEnumerator fieldOfViewAnim(float duration)
     {
         float elapsedTime = 0f;
@@ -142,7 +170,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ReductFallingVelocity());
     }
 
-    public void DialogMeanTimeValues()
+    public void PlayerValuesDialogMeanTime()
     {
         _anim.SetFloat("Horizontal", 0);
     }
@@ -152,6 +180,7 @@ public class PlayerController : MonoBehaviour
         _firstFall = true;
         _anim.SetBool("InGround", _inGround);
         _anim.SetBool("FirstFall", false);
+        _rb2D.drag = 0;
     }
 
     private void Move(float mover, bool saltar)
