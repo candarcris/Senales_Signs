@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System;
-
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _movementVelocity;
     [SerializeField] private float _moveSoftener;
     private Vector3 _velocity = Vector3.zero;
-    private bool _isLookingRight = true;
+    public bool _isLookingRight = true;
     public Transform _initParent;
     public bool _firstFall = false;
 
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
         DialogsManager.OnFinishDialog += SetPlayerValues;
     }
+
+
 
     private void OnDestroy()
     {
@@ -116,34 +118,6 @@ public class PlayerController : MonoBehaviour
         //{
         //    _eventsTrigerList[1].SetActive(false);
         //}
-    }
-
-    private void OnGUI()
-    {
-        // Define el tamaño del área central
-        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-
-        // Añade espacios flexibles para centrar verticalmente
-        GUILayout.FlexibleSpace();
-
-        // Comienza un área para el botón
-        GUILayout.BeginHorizontal();
-        // Añade espacios flexibles para centrar horizontalmente
-        GUILayout.FlexibleSpace();
-
-        // Coloca el botón en el centro
-        if (GUILayout.Button("Mi Botón", GUILayout.Width(200), GUILayout.Height(50)))
-        {
-            // Acción cuando se hace clic en el botón
-            Debug.Log("¡Has hecho clic en el botón!");
-        }
-
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
-        // Añade espacios flexibles para centrar verticalmente
-        GUILayout.FlexibleSpace();
-        GUILayout.EndArea();
     }
 
     private IEnumerator fieldOfViewAnim(float duration)
@@ -285,3 +259,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+[CustomEditor(typeof(PlayerController))]
+public class PLayerControllerEditor : Editor
+{
+    void OnSceneGUI()
+    {
+        Handles.color = Color.yellow;
+        PlayerController miScript = (PlayerController)target;
+        var lookingDirection = (miScript._isLookingRight ? Vector3.right : Vector3.left) * 2;
+        Handles.DrawLine(miScript.transform.position, miScript.transform.position + lookingDirection);
+    }
+}
+
