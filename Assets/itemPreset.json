@@ -1,0 +1,13 @@
+{
+    "_item": {
+        "_itemDisplayName": "basic sword",
+        "_itemType": 0,
+        "_itemIcon": {
+            "instanceID": 31168
+        },
+        "_itemDamage": 60.0,
+        "_itemRestoreAmount": 0,
+        "_itemPrice": 200.0,
+        "_itemDescription": "This weapon is dark but brutal!"
+    }
+}

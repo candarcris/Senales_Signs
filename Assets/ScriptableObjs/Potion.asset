@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   _item:
-    _displayName: Health Potion
+    _itemDisplayName: HealthPotion
     _itemType: 1
     _itemIcon: {fileID: 21300000, guid: a67b58d6cddcd4345b1e001340de5a76, type: 3}
-    _itemDamage: 0
+    _itemDamage: 60
     _itemRestoreAmount: 50
+    _itemPrice: 200
+    _itemDescription: Restore life in small amount

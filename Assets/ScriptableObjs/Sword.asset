@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   _item:
-    _displayName: Espada
+    _itemDisplayName: basic sword
     _itemType: 0
     _itemIcon: {fileID: -2026051406, guid: 38abf3c9a6ce4234abd59c65b5321d9a, type: 3}
     _itemDamage: 60
     _itemRestoreAmount: 0
+    _itemPrice: 500
+    _itemDescription: This weapon is dark but brutal!
