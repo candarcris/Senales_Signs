@@ -17,16 +17,7 @@ public class DarkAura : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerSkills controller = collision.GetComponent<PlayerSkills>();
 
-            if(!controller._isRizpaForm) 
-            {
-                controller.Damage(collision.transform.position.normalized);
-            }
-            else
-            {
-                _darkAnim.SetTrigger("Disolve");
-            }
 
         }
     }
@@ -35,12 +26,7 @@ public class DarkAura : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            PlayerSkills controller = collision.GetComponent<PlayerSkills>();
 
-            if (!controller._isRizpaForm)
-            {
-                controller._inDamage = false;
-            }
         }
     }
 }

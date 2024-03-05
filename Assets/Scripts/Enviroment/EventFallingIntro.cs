@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventFallingIntro : MonoBehaviour
+public class EventFallingIntro : MonoBehaviour, IDialog
 {
-    private DialogEvent _dialogEvent;
-
-    private void Start()
+    public Dialogs _dialogs;
+    public void DoDialog()
     {
-        _dialogEvent = GetComponent<DialogEvent>();
+        ManagerLocator.GetDialogsManager().SetDialog(ManagerLocator.GetDialogsManager().ChangeDialogColor(ENUM_CharTypeDialogs.mainChar), _dialogs);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            _dialogEvent.ExecuteDialogEvent();
-            FindObjectOfType<PlayerController>().FallingIntro();
+            DoDialog();
         }
         gameObject.SetActive(false);
     }

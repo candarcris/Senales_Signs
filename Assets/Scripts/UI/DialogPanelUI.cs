@@ -4,35 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+public enum ENUM_CharTypeDialogs
+{
+    mainChar,
+    secondChar,
+    thirdChar
+}
 public class DialogPanelUI : MonoBehaviour
 {
     public Button _nextButton;
     public Color _mainDialogColor, _secondDialogColor, _thirdDialogColor;
-
-    private void Start()
-    {
-        DialogsManager.OnFinishDialog += HideDialog;
-    }
-    private void OnDestroy()
-    {
-        DialogsManager.OnFinishDialog -= HideDialog;
-    }
-
-    public void ShowDialog()
-    {
-        FindObjectOfType<PlayerController>()._sePuedeMover = false;
-        this.gameObject.SetActive(true);
-    }
-
-    public void HideDialog()
-    {
-        FindObjectOfType<PlayerController>()._sePuedeMover = true;
-        this.gameObject.SetActive(false);
-    }
-
-    public void NextPhrase()
-    {
-        ManagerLocator.GetDialogsManager().NextPhrase();
-    }
+    public TextMeshProUGUI _screenText;
+    public ENUM_CharTypeDialogs charType;
 }

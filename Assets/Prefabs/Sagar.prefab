@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 2974393507116434775}
   - component: {fileID: 2974393507116434763}
   - component: {fileID: 2974393507116434772}
-  - component: {fileID: 2974393507116434762}
   - component: {fileID: 2974393507116434760}
   - component: {fileID: 2974393507116434761}
   m_Layer: 0
@@ -60,7 +59,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974393507116434773}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.68, y: 152.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -133,10 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13ed84731e686240833db48b9821593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sePuedeMover: 1
+  _isLookingRight: 1
   _movementVelocity: 200
   _moveSoftener: 0
-  _initParent: {fileID: 0}
-  _firstFall: 0
   _jumpForce: 600
   _fallMultiplier: 2.5
   _whatIsGround:
@@ -147,11 +146,6 @@ MonoBehaviour:
   _inGround: 0
   _extraGravityMultiplier: 5
   _gravityMultiplier: 2
-  _isRizpaForm: 0
-  _eventsTrigerList: []
-  _inDamage: 0
-  _sePuedeMover: 1
-  _velocidadRebote: {x: 3, y: 0}
 --- !u!95 &2974393507116434772
 Animator:
   serializedVersion: 5
@@ -172,24 +166,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &2974393507116434762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974393507116434773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1d35b6d1004fc418b8a88b9389bff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogUI: {fileID: 0}
-  _eventsTrigerList:
-  - {fileID: 0}
-  _isRizpaForm: 0
-  _inDamage: 0
-  _tiempoPerdidaControl: 0.4
 --- !u!136 &2974393507116434760
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -197,7 +173,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974393507116434773}
-  m_Material: {fileID: 13400000, guid: 6edc8cba60a239c42a2b78ebd0792f54, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.635
