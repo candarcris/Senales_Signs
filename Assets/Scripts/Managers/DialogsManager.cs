@@ -14,7 +14,6 @@ public class DialogsManager : MonoBehaviour
     public Queue <string> _queueDialogs = new();
     public Dialogs _dialogs;
     private Color _color;
-    public static event Action OnFinishDialog;
 
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class DialogsManager : MonoBehaviour
     }
     private void Start()
     {
-        _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
+        
     }
 
     private void OnEnable()
@@ -31,7 +30,7 @@ public class DialogsManager : MonoBehaviour
         //InputSystem.onDeviceChange += OnDeviceChange;
         submitAction = inputActions.UI.Submit;
         submitAction.Enable();
-        submitAction.performed += OnNextPhrase;
+        
     }
 
     private void OnDisable()
@@ -88,7 +87,9 @@ public class DialogsManager : MonoBehaviour
         {
             _queueDialogs.Enqueue(keepText);
         }
-        NextPhrase();
+        string currentPhrase = _queueDialogs.Dequeue();
+        _dialogPanel._screenText.text = currentPhrase;
+        StartCoroutine(AnimateLetters(currentPhrase));
     }
 
     private void OnNextPhrase(InputAction.CallbackContext context)
@@ -104,7 +105,6 @@ public class DialogsManager : MonoBehaviour
             return;
         }
         string currentPhrase = _queueDialogs.Dequeue();
-        _dialogPanel._screenText.text = currentPhrase;
         StartCoroutine(AnimateLetters(currentPhrase));
     }
 
@@ -112,7 +112,6 @@ public class DialogsManager : MonoBehaviour
     {
         //Se ejecutan todas las funciones suscritas a esta
         HideDialogPanel();
-        OnFinishDialog?.Invoke();
     }
 
     private IEnumerator AnimateLetters(string showText)
@@ -120,18 +119,27 @@ public class DialogsManager : MonoBehaviour
         _dialogPanel._screenText.text = "";
         _dialogPanel._screenText.color = _color;
         int index = 0;
+        float time = 0.05f;
 
         foreach (char character in showText.ToCharArray())
         {
             _dialogPanel._screenText.text += character;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(time);
             index++;
 
             // Verificar si se han mostrado todos los caracteres
             if (index == showText.Length)
             {
                 // La palabra showText ha sido completamente mostrada
-                _dialogPanel._nextButton.gameObject.SetActive(true);
+                _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
+                submitAction.performed += OnNextPhrase;
+                time = 0.05f;
+            }
+            else
+            {
+                _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
+                submitAction.performed -= OnNextPhrase;
+                time = 0.01f;
             }
         }
     }

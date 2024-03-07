@@ -121,19 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7403477443049809962}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5090615563101514042}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8483743198193922392
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8497878381918674333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -397,7 +385,7 @@ Canvas:
   m_GameObject: {fileID: 8497878381918674321}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -463,8 +451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextButton: {fileID: 3606457230891417245}
   _mainDialogColor: {r: 1, g: 1, b: 1, a: 1}
-  _secondDialogColor: {r: 0, g: 1, b: 0.6834545, a: 1}
-  _thirdDialogColor: {r: 1, g: 0.79205453, b: 0, a: 1}
+  _secondDialogColor: {r: 0.27772337, g: 0.745283, b: 0.57035524, a: 1}
+  _thirdDialogColor: {r: 0.7735849, g: 0.6763364, b: 0.18609823, a: 1}
   _screenText: {fileID: 8497878382065319567}
   charType: 0
 --- !u!1 &8497878382065319565
@@ -567,7 +555,7 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 50
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 32
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
