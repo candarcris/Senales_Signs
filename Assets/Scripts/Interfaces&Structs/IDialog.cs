@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDialog
 {
-    void DoDialog();
+    void DoDialog(ENUM_CharTypeDialogs characterImportance, Dialogs dialogs);
 }

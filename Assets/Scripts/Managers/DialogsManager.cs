@@ -7,17 +7,19 @@ using UnityEngine.InputSystem;
 
 public class DialogsManager : MonoBehaviour
 {
-    private InputActions inputActions;
-    private InputAction submitAction;
+    private InputActions _inputActions;
+    private InputAction _submitAction;
 
     public DialogPanelUI _dialogPanel;
     public Queue <string> _queueDialogs = new();
     public Dialogs _dialogs;
     private Color _color;
+    public int _nextButtonPressed = 0;
+    private float _timeLettersAnim = 0.05f;
 
     private void Awake()
     {
-        inputActions = new InputActions();
+        _inputActions = new InputActions();
 
     }
     private void Start()
@@ -28,14 +30,17 @@ public class DialogsManager : MonoBehaviour
     private void OnEnable()
     {
         //InputSystem.onDeviceChange += OnDeviceChange;
-        submitAction = inputActions.UI.Submit;
-        submitAction.Enable();
-        
+        _submitAction = _inputActions.UI.Submit;
+        _submitAction.Enable();
+        _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
+        _submitAction.performed += OnNextPhrase;
     }
 
     private void OnDisable()
     {
         //InputSystem.onDeviceChange -= OnDeviceChange;
+        _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
+        _submitAction.performed -= OnNextPhrase;
     }
 
     //private void OnDeviceChange(InputDevice device, InputDeviceChange change)
@@ -99,13 +104,22 @@ public class DialogsManager : MonoBehaviour
 
     private void NextPhrase()
     {
-        if(_queueDialogs.Count == 0)
+        if(_nextButtonPressed == 0)
         {
-            FinishDialog();
-            return;
+            if (_queueDialogs.Count == 0)
+            {
+                FinishDialog();
+                return;
+            }
+            _timeLettersAnim = 0.05f;
+            string currentPhrase = _queueDialogs.Dequeue();
+            StartCoroutine(AnimateLetters(currentPhrase));
+            _nextButtonPressed += 1;
         }
-        string currentPhrase = _queueDialogs.Dequeue();
-        StartCoroutine(AnimateLetters(currentPhrase));
+        else
+        {
+            _timeLettersAnim = 0.01f;
+        }
     }
 
     private void FinishDialog()
@@ -119,12 +133,11 @@ public class DialogsManager : MonoBehaviour
         _dialogPanel._screenText.text = "";
         _dialogPanel._screenText.color = _color;
         int index = 0;
-        float time = 0.05f;
 
         foreach (char character in showText.ToCharArray())
         {
             _dialogPanel._screenText.text += character;
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(_timeLettersAnim);
             index++;
 
             // Verificar si se han mostrado todos los caracteres
@@ -132,14 +145,8 @@ public class DialogsManager : MonoBehaviour
             {
                 // La palabra showText ha sido completamente mostrada
                 _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
-                submitAction.performed += OnNextPhrase;
-                time = 0.05f;
-            }
-            else
-            {
-                _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
-                submitAction.performed -= OnNextPhrase;
-                time = 0.01f;
+                _submitAction.performed += OnNextPhrase;
+                _nextButtonPressed = 0;
             }
         }
     }
