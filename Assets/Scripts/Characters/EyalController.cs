@@ -8,12 +8,6 @@ public class EyalController : MonoBehaviour
     private float velocidad = 10f;
     private int indiceActual = 0;
     private bool _puedeMoverse = true;
-    private SpriteRenderer _spriteRenderer;
-
-    private void Start()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     public void StartMovement()
     {
@@ -25,7 +19,7 @@ public class EyalController : MonoBehaviour
         ResumeMovement();
         while (_puedeMoverse)
         {
-            _spriteRenderer.flipX = false;
+            //_spriteRenderer.flipX = false;
             if (_rutePoints.Length == 0)
                 yield break;
 
@@ -56,7 +50,7 @@ public class EyalController : MonoBehaviour
             {
                 // Detiene el movimiento
                 _puedeMoverse = false;
-                _spriteRenderer.flipX = true;
+                //_spriteRenderer.flipX = true;
                 // Establece el índice al siguiente punto de ruta
                 indiceActual = (indiceActual + 1) % _rutePoints.Length;
             }
@@ -64,7 +58,7 @@ public class EyalController : MonoBehaviour
     }
 
     // Función para reanudar el movimiento
-    public void ResumeMovement()
+    private void ResumeMovement()
     {
         _puedeMoverse = true;
     }

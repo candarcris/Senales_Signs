@@ -14,7 +14,7 @@ public class DialogsManager : MonoBehaviour
     public Queue <string> _queueDialogs = new();
     public Dialogs _dialogs;
     private Color _color;
-    public int _nextButtonPressed = 0;
+    public bool _nextButtonPressed = false;
     private float _timeLettersAnim = 0.05f;
 
     private void Awake()
@@ -64,6 +64,10 @@ public class DialogsManager : MonoBehaviour
     //        }
     //    }
     //}
+    public void DoDialog(ENUM_CharTypeDialogs characterImportance, Dialogs dialogs)
+    {
+        SetDialog(ChangeDialogColor(characterImportance), dialogs);
+    }
 
     public void SetDialog(Color color, Dialogs dialogs)
     {
@@ -93,7 +97,6 @@ public class DialogsManager : MonoBehaviour
             _queueDialogs.Enqueue(keepText);
         }
         string currentPhrase = _queueDialogs.Dequeue();
-        _dialogPanel._screenText.text = currentPhrase;
         StartCoroutine(AnimateLetters(currentPhrase));
     }
 
@@ -104,7 +107,8 @@ public class DialogsManager : MonoBehaviour
 
     private void NextPhrase()
     {
-        if(_nextButtonPressed == 0)
+        _nextButtonPressed = !_nextButtonPressed;
+        if (_nextButtonPressed == false)
         {
             if (_queueDialogs.Count == 0)
             {
@@ -114,11 +118,13 @@ public class DialogsManager : MonoBehaviour
             _timeLettersAnim = 0.05f;
             string currentPhrase = _queueDialogs.Dequeue();
             StartCoroutine(AnimateLetters(currentPhrase));
-            _nextButtonPressed += 1;
         }
         else
         {
             _timeLettersAnim = 0.01f;
+            _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
+            _submitAction.performed -= OnNextPhrase;
+            _dialogPanel._nextButton.gameObject.SetActive(false);
         }
     }
 
@@ -146,7 +152,7 @@ public class DialogsManager : MonoBehaviour
                 // La palabra showText ha sido completamente mostrada
                 _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
                 _submitAction.performed += OnNextPhrase;
-                _nextButtonPressed = 0;
+                _dialogPanel._nextButton.gameObject.SetActive(true);
             }
         }
     }
