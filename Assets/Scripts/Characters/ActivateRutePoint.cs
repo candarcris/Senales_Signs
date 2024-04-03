@@ -6,11 +6,11 @@ public class ActivateRutePoint : TriggerEvent
 {
     protected override void DoTriggerEvent()
     {
-        FindObjectOfType<EyalController>().StartMovement();
+        FindObjectOfType<EyalController>().Movement();
         gameObject.SetActive(false);
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {

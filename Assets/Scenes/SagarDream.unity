@@ -301,6 +301,7 @@ Transform:
   - {fileID: 123897176}
   - {fileID: 1637561660}
   - {fileID: 355214006}
+  - {fileID: 873119366}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -873,8 +874,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1983731119}
   - {fileID: 1388153060}
+  - {fileID: 1983731119}
   - {fileID: 301789795}
   - {fileID: 638697301}
   - {fileID: 145358619}
@@ -1063,8 +1064,6 @@ MonoBehaviour:
   _dialogs:
     arrayTexts: []
   _nextButtonPressed: 0
-  _currentTextShowing: 
-  _indexCharacter: 0
 --- !u!4 &355214006
 Transform:
   m_ObjectHideFlags: 0
@@ -1991,7 +1990,8 @@ MonoBehaviour:
     arrayTexts:
     - Aca se hace la prueba de texto 1
     - luego se hace la prueba de texto 2
-    - entonces se hace la prueba de texto 3
+    - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua.
     - finalmente se hace la prueba de texto 4
   _type: 1
 --- !u!65 &580316839
@@ -3280,6 +3280,37 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &831396923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831396924}
+  m_Layer: 3
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &831396924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831396923}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.74, y: -1.79, z: -2.407557}
+  m_LocalScale: {x: 1.62433, y: 1.6243297, z: 0.5431905}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 873119366}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3329,6 +3360,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &873119365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873119366}
+  - component: {fileID: 873119367}
+  m_Layer: 0
+  m_Name: LEVEL_MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &873119366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873119365}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 831396924}
+  m_Father: {fileID: 141861400}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873119367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873119365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4e739054013224a9d44353e8709c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 3284854239970299708, guid: b5fef8ea0db609d4d990de79e0daaf03,
+    type: 3}
+  _enemyList: []
+  _enemySpawner: {fileID: 831396924}
 --- !u!1 &873564250
 GameObject:
   m_ObjectHideFlags: 0
@@ -5501,7 +5581,7 @@ Transform:
   m_Children:
   - {fileID: 50688117}
   m_Father: {fileID: 306024322}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1388153061
 Animator:
@@ -10640,7 +10720,7 @@ PrefabInstance:
     - target: {fileID: 2974393507116434774, guid: 46b1c76a08405ea4290b8d19962afbd9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2974393507116434774, guid: 46b1c76a08405ea4290b8d19962afbd9,
         type: 3}

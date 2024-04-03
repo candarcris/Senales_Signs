@@ -14,7 +14,7 @@ public class DialogTriggerEvent : TriggerEvent
         gameObject.SetActive(false);
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {

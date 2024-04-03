@@ -9,7 +9,7 @@ public class EyalController : MonoBehaviour
     private int indiceActual = 0;
     private bool _puedeMoverse = true;
 
-    public void StartMovement()
+    public void Movement()
     {
         StartCoroutine(MoveToNextPositionCoroutine());
     }

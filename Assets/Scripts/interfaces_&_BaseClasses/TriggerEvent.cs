@@ -4,6 +4,5 @@ using UnityEngine;
 
 public abstract class TriggerEvent : MonoBehaviour
 {
-    protected abstract void OnTriggerEnter(Collider other);
     protected abstract void DoTriggerEvent();
 }
