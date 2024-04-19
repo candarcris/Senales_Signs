@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUI : MonoBehaviour
+
+
+public class System_NewGame : MonoBehaviour
 {
-    public Button _botonNuevaPartida;
+    public void Play_New() {
+        SceneManager.LoadScene(2);
+    }
+
 }

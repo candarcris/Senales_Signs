@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: fe4f73ddc4ab8004e93d711466cc577c
+  - enabled: 1
     path: Assets/Scenes/SagarDream.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/Nueva_partida.unity
+    guid: cea3086baa143f24fb8cb3a60f700ffd
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: fa123d17ae50db24da6b84e6fc867cb6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 92707d58872433c41ac7dbe255ce2b6c,
       type: 2}

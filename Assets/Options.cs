@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUI : MonoBehaviour
+public class Options : MonoBehaviour
 {
-    public Button _botonNuevaPartida;
+    public void Select_options()
+    {
+        SceneManager.LoadScene(2);
+    }
 }
