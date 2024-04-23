@@ -48,11 +48,11 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = new InputActions();
-        _hudManager = ManagerLocator.GetHUDManager();
     }
 
     private void Start()
     {
+        _hudManager = ManagerLocator.GetHUDManager();
         _faithMaxAmount = ReEscale.Normalize(100, 0, 100, 0, 1);
     }
 

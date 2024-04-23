@@ -2109,7 +2109,7 @@ MonoBehaviour:
   _camerasManager: {fileID: 1637561661}
   _soundManager: {fileID: 616556328}
   _dialogsManager: {fileID: 355214005}
-  _hudManager: {fileID: 0}
+  _hudManager: {fileID: 644630636}
 --- !u!1 &510739944
 GameObject:
   m_ObjectHideFlags: 0
