@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateRutePoint : TriggerEvent
+[RequireComponent(typeof(Dialogs))]
+public class DialogTriggerEvent : TriggerEvent
 {
+    public Dialogs _dialogs;
+    public ENUM_CharTypeDialogs _type;
+
     protected override void DoTriggerEvent()
     {
-        FindObjectOfType<EyalController>().Movement();
+        ManagerLocator.GetDialogsManager().DoDialog(_type, _dialogs);
         gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if(other.tag == "Player")
         {
             DoTriggerEvent();
         }
