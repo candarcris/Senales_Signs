@@ -9,6 +9,7 @@ public class ManagerLocator : MonoBehaviour
     public CamerasManager _camerasManager;
     public SoundManager _soundManager;
     public DialogsManager _dialogsManager;
+    public HUDManager _hudManager;
 
     // Singleton para acceder a esta clase desde cualquier lugar
     private static ManagerLocator instance;
@@ -46,5 +47,10 @@ public class ManagerLocator : MonoBehaviour
     public static DialogsManager GetDialogsManager()
     {
         return instance._dialogsManager;
+    }
+
+    public static HUDManager GetHUDManager()
+    {
+        return instance._hudManager;
     }
 }

@@ -15,7 +15,8 @@ public class GroundEnemy : Enemy
 
     private void Start()
     {
-        AdjustScale(20);// este valor es el entrante, no debe ser definido sino referenciado
+        reEscaledDamageAmount = ReEscale.Normalize(20, 0, _lifeAmount, 0, 1);// 20....este valor es el entrante, no debe ser definido sino referenciado
+        reEscaledLifeAmount = ReEscale.Normalize(_lifeAmount, 0, _lifeAmount, 0, 1);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,11 +54,5 @@ public class GroundEnemy : Enemy
         Debug.Log("Ground enemy has been defeated.");
         // animacion de muerte, 
         this.gameObject.SetActive(false);
-    }
-
-    public override void AdjustScale(float amount)
-    {
-        reEscaledDamageAmount = ReEscale.Normalize(amount, 0, _lifeAmount, 0, 1);
-        reEscaledLifeAmount = ReEscale.Normalize(_lifeAmount, 0, _lifeAmount, 0, 1);
     }
 }

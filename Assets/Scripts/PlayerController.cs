@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private InputActions inputActions;
     private InputAction jumpAction;
     private InputAction moveAction;
+    private InputAction prayAction;
 
     [Header("Movimiento")]
     [Space]
@@ -34,6 +36,11 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private Rigidbody _rigidbody;
 
+    [Header("Skills")]
+    [Space]
+    [SerializeField] private HUDManager _hudManager;
+    public float _faithMaxAmount = 0;
+    public float _faithAmount = 0;
 
     private void Awake()
     {
@@ -41,7 +48,14 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = new InputActions();
+        _hudManager = ManagerLocator.GetHUDManager();
     }
+
+    private void Start()
+    {
+        _faithMaxAmount = ReEscale.Normalize(100, 0, 100, 0, 1);
+    }
+
     private void OnEnable()
     {
         jumpAction = inputActions.PlayerControl.Jump;
@@ -50,12 +64,28 @@ public class PlayerController : MonoBehaviour
 
         moveAction = inputActions.PlayerControl.Move;
         moveAction.Enable();
+
+        prayAction = inputActions.PlayerControl.Pray;
+        prayAction.Enable();
+        prayAction.performed += OnPray;
     }
 
     private void OnDisable()
     {
         jumpAction.Disable();
+        moveAction.Disable();
+        prayAction.Disable();
     }
+
+    public void OnPray(InputAction.CallbackContext context)
+    {
+        if(_sePuedeMover)
+        {
+            Debug.Log("Orando");
+            _faithAmount = _hudManager.GetFaithFillAmount();
+        }
+    }
+
     public void OnMove(float mover)
     {
         if(_sePuedeMover)
@@ -81,7 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             _inGround = false;
             _rigidbody.velocity = new Vector2(0, 0); // Resetea la velocidad vertical antes de saltar
-            _rigidbody.AddForce(new Vector3(0f, _jumpForce));
+            _rigidbody.AddForce(new Vector2(0f, _jumpForce));
         }
     }
 
@@ -95,7 +125,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //_HorizontalMove = Input.GetAxisRaw("Horizontal") * _movementVelocity;
         _HorizontalMove = moveAction.ReadValue<float>() * _movementVelocity;
 
         if (_sePuedeMover) 
@@ -103,6 +132,8 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat("Horizontal", Mathf.Abs(_HorizontalMove));
             _animator.SetFloat("VelocityY", _rigidbody.velocity.y);
         }
+
+        Debug.Log("fase de pray " + prayAction.phase);
     }
 
     private void FixedUpdate()

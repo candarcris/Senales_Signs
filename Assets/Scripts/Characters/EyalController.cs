@@ -8,10 +8,32 @@ public class EyalController : MonoBehaviour
     private float velocidad = 10f;
     private int indiceActual = 0;
     private bool _puedeMoverse = true;
+    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Transform _sagarTransform;
+
+    private void Start()
+    {
+        _sagarTransform = FindObjectOfType<PlayerController>().transform;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void Movement()
     {
         StartCoroutine(MoveToNextPositionCoroutine());
+    }
+
+    public void LookAtSagar()
+    {
+        Vector2 distance = transform.position - _sagarTransform.position;
+
+        if(distance.x > 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if(distance.x < 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
     }
 
     private IEnumerator MoveToNextPositionCoroutine()
@@ -61,5 +83,10 @@ public class EyalController : MonoBehaviour
     private void ResumeMovement()
     {
         _puedeMoverse = true;
+    }
+
+    private void Update()
+    {
+        LookAtSagar();
     }
 }

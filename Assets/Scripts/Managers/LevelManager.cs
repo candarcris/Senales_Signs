@@ -11,9 +11,9 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        SetEnemy();
+        SetEnemies();
     }
-    public void SetEnemy()
+    public void SetEnemies()
     {
         GroundEnemy newEnemy = new GroundEnemy(10f, 100f);
         GroundEnemy InstanceNewEnemy = Instantiate(_enemyPrefab, _enemySpawner.position, _enemySpawner.rotation, _enemySpawner);

@@ -16,5 +16,4 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Attack();
     public abstract void GetDamage(float amount);
-    public abstract void AdjustScale(float amount);
 }
