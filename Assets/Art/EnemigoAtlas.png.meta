@@ -1,0 +1,685 @@
+fileFormatVersion: 2
+guid: ba9b3a4acbe94bd4392f727a6cc25d5c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EnemigoAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6a49a1354afcbd428c040e4fbf1a376
+      internalID: -626702215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125f8509954de3c4c90c4c8341f719d5
+      internalID: 1435532812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8958bcad67806eb409b93e4112dcca2d
+      internalID: 1383235983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c19137d68156d46b0ebf25788c7253
+      internalID: -1276581400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d547267bf8083b4eabf75426a486387
+      internalID: 1417959148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 1707
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b8178f2370e0684584d30a18703bf45
+      internalID: 762416218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d084aa08f2e9ce748ba083fb70926bb3
+      internalID: -2040784007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f64c4d1888947e43bac9dbe923f7105
+      internalID: -1639194295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8118c78a05a27de41881934f6e78223b
+      internalID: -1040252077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6356b4b933b0e2f4390b0d2d91ac1d09
+      internalID: -779061013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0506fc9ede670b245ab95abcd102191d
+      internalID: -161373231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 1366
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af1a5e0f9c7c8f14a92ee219f3449500
+      internalID: -1081955234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 299ed05668b3654478f808729b3525cf
+      internalID: 825483014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53bd15a33950e5640a4fcb09730077ab
+      internalID: 333716965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd4dd95f0b37efe4a84666a0ae144ec5
+      internalID: 1868905279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ffc1af260217b244a41a8442801abfe
+      internalID: -1895213209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ac7b8e9ec4156458b0481cab821d66
+      internalID: -859864532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 1025
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d481c541d3f7bc45b88195ad57ab9bd
+      internalID: 2024931721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad94f777f50eb6f4187a442ec3c0dd7f
+      internalID: 470775028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766cbae3987bb03408d8e52d4e6f7fb2
+      internalID: -2146103450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b6a43d4a2cdab42a4e7730c9c2d131
+      internalID: -2016529797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dee56c898af61414494cb487f6d23173
+      internalID: 238126730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f24b1156c04c194da1a02a97ff58430
+      internalID: 2048511829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 684
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f6b99e1bb0e5f458e04d22e4b9d424
+      internalID: -2115178003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 343
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b29b070fb262f4ba6129c5f2565f09
+      internalID: 1484110361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: cfea7ab0a82674c4b86d99880f07ee03
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      EnemigoAtlas_17: 2024931721
+      EnemigoAtlas_24: 1484110361
+      EnemigoAtlas_15: -1895213209
+      EnemigoAtlas_18: 470775028
+      EnemigoAtlas_2: 1383235983
+      EnemigoAtlas_10: -161373231
+      EnemigoAtlas_11: -1081955234
+      EnemigoAtlas_0: -626702215
+      EnemigoAtlas_6: -2040784007
+      EnemigoAtlas_22: 2048511829
+      EnemigoAtlas_1: 1435532812
+      EnemigoAtlas_12: 825483014
+      EnemigoAtlas_21: 238126730
+      EnemigoAtlas_9: -779061013
+      EnemigoAtlas_7: -1639194295
+      EnemigoAtlas_14: 1868905279
+      EnemigoAtlas_19: -2146103450
+      EnemigoAtlas_23: -2115178003
+      EnemigoAtlas_16: -859864532
+      EnemigoAtlas_8: -1040252077
+      EnemigoAtlas_3: -1276581400
+      EnemigoAtlas_4: 1417959148
+      EnemigoAtlas_20: -2016529797
+      EnemigoAtlas_5: 762416218
+      EnemigoAtlas_13: 333716965
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

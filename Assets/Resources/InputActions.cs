@@ -29,12 +29,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""7afd8b86-2b43-403d-baaf-4456f78dc341"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",

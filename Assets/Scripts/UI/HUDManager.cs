@@ -6,12 +6,7 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour
 {
     public Image _faithBar;
-    public Image _healthBar;
-
-    private void Start()
-    {
-        _faithBar.fillAmount = FindObjectOfType<PlayerController>()._faithMaxAmount;
-    }
+    public PlayerController _playerController;
 
     public float GetFaithFillAmount()
     {

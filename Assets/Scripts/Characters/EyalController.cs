@@ -36,6 +36,16 @@ public class EyalController : MonoBehaviour
         }
     }
 
+    public void FollowSagar()
+    {
+
+    }
+
+    public void HoldJumpSagar()
+    {
+
+    }
+
     private IEnumerator MoveToNextPositionCoroutine()
     {
         ResumeMovement();

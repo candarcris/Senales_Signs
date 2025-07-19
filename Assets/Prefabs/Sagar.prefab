@@ -85,7 +85,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1d2f9185300cca748a508b5641b1698d, type: 2}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -458242267, guid: f452be01ee2b84b4bb769d7e7d40b46a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,11 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13ed84731e686240833db48b9821593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sePuedeMover: 1
+  _sePuedeMover: 0
   _isLookingRight: 1
-  _movementVelocity: 200
-  _moveSoftener: 0
-  _jumpForce: 600
+  _HorizontalMove: 0
+  _movementVelocity: 3
+  _moveSoftener: 0.2
+  _velocity: {x: 0, y: 0, z: 0}
+  _jumpForce: 500
   _fallMultiplier: 2.5
   _whatIsGround:
     serializedVersion: 2
@@ -146,6 +148,9 @@ MonoBehaviour:
   _inGround: 0
   _extraGravityMultiplier: 5
   _gravityMultiplier: 2
+  _hudManager: {fileID: 0}
+  _faithMaxAmount: 0
+  _faithAmount: 0
 --- !u!95 &2974393507116434772
 Animator:
   serializedVersion: 5

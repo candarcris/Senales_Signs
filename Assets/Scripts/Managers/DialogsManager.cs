@@ -14,8 +14,13 @@ public class DialogsManager : MonoBehaviour
     public Queue <string> _queueDialogs = new();
     public Dialogs _dialogs;
     private Color _color;
-    public bool _nextButtonPressed = false;
     private float _timeLettersAnim = 0.05f;
+
+    private bool _isAnimating = false;
+    private Coroutine _currentCoroutine = null;
+    private string _currentPhrase = "";
+
+    public Action OnFinishDialog;
 
     private void Awake()
     {
@@ -79,7 +84,7 @@ public class DialogsManager : MonoBehaviour
 
     private void ShowDialogPanel()
     {
-        FindObjectOfType<PlayerController>()._sePuedeMover = false;
+        //FindObjectOfType<PlayerController>()._sePuedeMover = false;
         _dialogPanel.gameObject.SetActive(true);
     }
 
@@ -96,8 +101,22 @@ public class DialogsManager : MonoBehaviour
         {
             _queueDialogs.Enqueue(keepText);
         }
-        string currentPhrase = _queueDialogs.Dequeue();
-        StartCoroutine(AnimateLetters(currentPhrase));
+        ShowNextPhrase();
+    }
+
+    private void ShowNextPhrase()
+    {
+        if (_queueDialogs.Count > 0)
+        {
+            _currentPhrase = _queueDialogs.Dequeue();
+            if (_currentCoroutine != null)
+                StopCoroutine(_currentCoroutine);
+            _currentCoroutine = StartCoroutine(AnimateLetters(_currentPhrase));
+        }
+        else
+        {
+            FinishDialog();
+        }
     }
 
     private void OnNextPhrase(InputAction.CallbackContext context)
@@ -107,24 +126,20 @@ public class DialogsManager : MonoBehaviour
 
     private void NextPhrase()
     {
-        _nextButtonPressed = !_nextButtonPressed;
-        if (_nextButtonPressed == false)
+        if (_isAnimating)
         {
-            if (_queueDialogs.Count == 0)
-            {
-                FinishDialog();
-                return;
-            }
-            _timeLettersAnim = 0.05f;
-            string currentPhrase = _queueDialogs.Dequeue();
-            StartCoroutine(AnimateLetters(currentPhrase));
+            // Si la animación está corriendo, mostrar el texto completo inmediatamente
+            if (_currentCoroutine != null)
+                StopCoroutine(_currentCoroutine);
+            _dialogPanel._screenText.text = _currentPhrase;
+            _isAnimating = false;
+            _dialogPanel._nextButton.gameObject.SetActive(true);
         }
         else
         {
-            _timeLettersAnim = 0.01f;
-            _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
-            _submitAction.performed -= OnNextPhrase;
+            // Si la animación terminó, pasar a la siguiente frase
             _dialogPanel._nextButton.gameObject.SetActive(false);
+            ShowNextPhrase();
         }
     }
 
@@ -132,29 +147,24 @@ public class DialogsManager : MonoBehaviour
     {
         //Se ejecutan todas las funciones suscritas a esta
         HideDialogPanel();
+        OnFinishDialog?.Invoke();
     }
 
     private IEnumerator AnimateLetters(string showText)
     {
+        _isAnimating = true;
         _dialogPanel._screenText.text = "";
         _dialogPanel._screenText.color = _color;
-        int index = 0;
 
         foreach (char character in showText.ToCharArray())
         {
             _dialogPanel._screenText.text += character;
             yield return new WaitForSeconds(_timeLettersAnim);
-            index++;
-
-            // Verificar si se han mostrado todos los caracteres
-            if (index == showText.Length)
-            {
-                // La palabra showText ha sido completamente mostrada
-                _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
-                _submitAction.performed += OnNextPhrase;
-                _dialogPanel._nextButton.gameObject.SetActive(true);
-            }
+            if (!_isAnimating) yield break; // Si se interrumpe la animación, salir
         }
+
+        _isAnimating = false;
+        _dialogPanel._nextButton.gameObject.SetActive(true);
     }
 
     public Color ChangeDialogColor(ENUM_CharTypeDialogs colorChar)

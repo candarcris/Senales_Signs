@@ -23,13 +23,13 @@ public class PlayerController : MonoBehaviour
     [Header("Salto")]
     [Space]
     [SerializeField] private float _jumpForce; // fuerza que se le anade al rigidbody para el salto
-    [SerializeField] private float _fallMultiplier; // Ajusta este valor según sea necesario
+    [SerializeField] private float _fallMultiplier; // Ajusta este valor segï¿½n sea necesario
     [SerializeField] private LayerMask _whatIsGround; // capa para el suelo
     [SerializeField] private Transform _groundController; // objeto en los pies del personaje que detecta el suelo
     [SerializeField] private Vector3 _boxDimensions; // dimensiones de la caja de los pies del personaje
     [SerializeField] private bool _inGround; // tocando el piso?
     [SerializeField] private float _extraGravityMultiplier; // fuerza extra de gravedad al caer
-    [SerializeField] private float _gravityMultiplier = 2.5f; // Ajusta este valor según sea necesario
+    [SerializeField] private float _gravityMultiplier = 2.5f; // Ajusta este valor segï¿½n sea necesario
 
     [Header("Animacion y fisicas")]
     [Space]
@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour
     [Header("Skills")]
     [Space]
     [SerializeField] private HUDManager _hudManager;
-    public float _faithMaxAmount = 0;
-    public float _faithAmount = 0;
+    public float _faithMaxAmount;
+    public float _faithAmount;
 
     private void Awake()
     {
-        _sePuedeMover = true;
+        //_sePuedeMover = true;
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = new InputActions();
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         _hudManager = ManagerLocator.GetHUDManager();
         _faithMaxAmount = ReEscale.Normalize(100, 0, 100, 0, 1);
+        _hudManager.SetFaithAmount(0);
     }
 
     private void OnEnable()
@@ -77,6 +78,19 @@ public class PlayerController : MonoBehaviour
         prayAction.Disable();
     }
 
+    public void SetFallingDrag(float falling)
+    {
+        _rigidbody.drag = falling;
+    }
+
+    public void SetAnimation(string stateName, bool stateValue, bool typeBool = false, bool typeFloat = false, bool typeTrigger = false)
+    {
+        if (typeBool)
+        {
+            _animator.SetBool(stateName, stateValue);
+        }
+    }
+
     public void OnPray(InputAction.CallbackContext context)
     {
         if(_sePuedeMover)
@@ -90,10 +104,9 @@ public class PlayerController : MonoBehaviour
     {
         if(_sePuedeMover)
         {
-            Vector3 targetVelocity = new Vector3(mover, _rigidbody.velocity.y);
-            _rigidbody.velocity = Vector3.SmoothDamp(_rigidbody.velocity, targetVelocity, ref _velocity, _moveSoftener);
+            _rigidbody.velocity = new Vector3(mover * _movementVelocity, _rigidbody.velocity.y, 0);
 
-            if ((_HorizontalMove > 0 && !_isLookingRight) || (_HorizontalMove < 0 && _isLookingRight))
+            if ((mover > 0 && !_isLookingRight) || (mover < 0 && _isLookingRight))
             {
                 Rotate();
             }
@@ -125,15 +138,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _HorizontalMove = moveAction.ReadValue<float>() * _movementVelocity;
+        _HorizontalMove = moveAction.ReadValue<float>();
 
         if (_sePuedeMover) 
         { 
             _animator.SetFloat("Horizontal", Mathf.Abs(_HorizontalMove));
             _animator.SetFloat("VelocityY", _rigidbody.velocity.y);
         }
-
-        Debug.Log("fase de pray " + prayAction.phase);
     }
 
     private void FixedUpdate()
@@ -141,7 +152,7 @@ public class PlayerController : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(_groundController.position, _boxDimensions, Quaternion.identity, _whatIsGround);
         _inGround = colliders.Length > 0;
         _animator.SetBool("InGround", _inGround);
-        OnMove(_HorizontalMove * Time.deltaTime);
+        OnMove(_HorizontalMove);
 
         if (!_inGround) 
         { 
