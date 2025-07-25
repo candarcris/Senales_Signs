@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,6 +9,7 @@ public class DialogTriggerEvent : TriggerEvent
     public PlayerController _playerController;
     [SerializeField] private bool _isGroundAfterFirstFall;
     BoxCollider _boxCollider;
+    public Animator _cinemaCameraDutchAnim;
     private float tiempo = 0;
 
     private void Start()
@@ -19,8 +21,11 @@ public class DialogTriggerEvent : TriggerEvent
     {
         _isGroundAfterFirstFall = true;
         _playerController.SetFallingDrag(0);
+        if (_cinemaCameraDutchAnim != null)
+        {
+            _cinemaCameraDutchAnim.speed = 3.0f;
+        }
         _playerController.SetAnimation("FirstFall", false, true);
-        _boxCollider.enabled = false;
     }
 
     private void Update()

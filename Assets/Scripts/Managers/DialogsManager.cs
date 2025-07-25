@@ -84,12 +84,18 @@ public class DialogsManager : MonoBehaviour
 
     private void ShowDialogPanel()
     {
+        // Deshabilita los controles del jugador y habilita los de UI
+        _inputActions.PlayerControl.Disable();
+        _inputActions.UI.Enable();
         //FindObjectOfType<PlayerController>()._sePuedeMover = false;
         _dialogPanel.gameObject.SetActive(true);
     }
 
     private void HideDialogPanel()
     {
+        // Habilita los controles del jugador y deshabilita los de UI
+        _inputActions.UI.Disable();
+        _inputActions.PlayerControl.Enable();
         FindObjectOfType<PlayerController>()._sePuedeMover = true;
         _dialogPanel.gameObject.SetActive(false);
     }

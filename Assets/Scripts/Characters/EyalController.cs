@@ -2,19 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EyalController : MonoBehaviour
+public class EyalController : MonoBehaviour, IHangable
 {
     public Transform[] _rutePoints;
-    private float velocidad = 10f;
+    private float velocidad = 5f;
     private int indiceActual = 0;
     private bool _puedeMoverse = true;
     private SpriteRenderer _spriteRenderer;
+    public SphereCollider _ehyalCollider;
     [SerializeField] private Transform _sagarTransform;
+
+    [SerializeField] private Transform hangPoint;
+    public Transform HangPoint => hangPoint;
+
+    private void Awake()
+    {
+        PlayerController.OnHold += HoldSagarAir;
+        PlayerController.OnDrop += DropSagar;
+
+        _sagarTransform = FindObjectOfType<PlayerController>().transform;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnHold -= HoldSagarAir;
+        PlayerController.OnDrop -= DropSagar;
+    }
 
     private void Start()
     {
-        _sagarTransform = FindObjectOfType<PlayerController>().transform;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     public void Movement()
@@ -41,9 +59,14 @@ public class EyalController : MonoBehaviour
 
     }
 
-    public void HoldJumpSagar()
+    public void HoldSagarAir()
     {
+        Movement();
+    }
 
+    public void DropSagar()
+    {
+        _ehyalCollider.enabled = false;
     }
 
     private IEnumerator MoveToNextPositionCoroutine()

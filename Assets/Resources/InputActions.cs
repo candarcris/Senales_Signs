@@ -53,6 +53,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""10a1f2b2-d258-43fb-a29e-ee32732c7efa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +152,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Pray"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7743c5fe-53b2-446e-a2c5-ad74765c7f13"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -193,6 +213,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_PlayerControl_Move = m_PlayerControl.FindAction("Move", throwIfNotFound: true);
         m_PlayerControl_Jump = m_PlayerControl.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControl_Pray = m_PlayerControl.FindAction("Pray", throwIfNotFound: true);
+        m_PlayerControl_Action = m_PlayerControl.FindAction("Action", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
@@ -258,6 +279,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControl_Move;
     private readonly InputAction m_PlayerControl_Jump;
     private readonly InputAction m_PlayerControl_Pray;
+    private readonly InputAction m_PlayerControl_Action;
     public struct PlayerControlActions
     {
         private @InputActions m_Wrapper;
@@ -265,6 +287,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerControl_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerControl_Jump;
         public InputAction @Pray => m_Wrapper.m_PlayerControl_Pray;
+        public InputAction @Action => m_Wrapper.m_PlayerControl_Action;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +306,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pray.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPray;
                 @Pray.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPray;
                 @Pray.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPray;
+                @Action.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
             }
             m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -296,6 +322,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pray.started += instance.OnPray;
                 @Pray.performed += instance.OnPray;
                 @Pray.canceled += instance.OnPray;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
             }
         }
     }
@@ -338,6 +367,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPray(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

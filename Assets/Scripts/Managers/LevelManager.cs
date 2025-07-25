@@ -13,9 +13,9 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        SetEnemies();
         _sagarController.SetFallingDrag(50);
         _sagarController.SetAnimation("FirstFall", true, true);
+        SetEnemies();
     }
     public void SetEnemies()
     {

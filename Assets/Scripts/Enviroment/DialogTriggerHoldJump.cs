@@ -10,10 +10,10 @@ public class DialogTriggerHoldJump : TriggerEvent
     public ENUM_CharTypeDialogs _type;
     public PlayerController _playerController;
     public CinemachineVirtualCamera _cinemaCamera;
-    public Transform _enemyTarget;
+    [SerializeField] private Transform _enemyTarget;
     public LevelManager _levelManager;
 
-    private void Start()
+    private void Awake()
     {
         _levelManager.OnSetEnemies += SetTarget;
     }
@@ -21,7 +21,8 @@ public class DialogTriggerHoldJump : TriggerEvent
     public void SagarContinueWalking()
     {
         _playerController.SetFallingDrag(0);
-        _cinemaCamera.Follow = _playerController.gameObject.transform;
+        _playerController._sePuedeMover = true;
+        _cinemaCamera.Follow = _playerController.transform;
     }
 
     private void OnDisable()
@@ -36,9 +37,10 @@ public class DialogTriggerHoldJump : TriggerEvent
 
     protected override void DoTriggerEvent()
     {
+        _playerController.StopState();
+        _cinemaCamera.Follow = _enemyTarget;
         ManagerLocator.GetDialogsManager().OnFinishDialog = null;
         ManagerLocator.GetDialogsManager().OnFinishDialog += SagarContinueWalking;
-        _cinemaCamera.Follow = _enemyTarget;
         ManagerLocator.GetDialogsManager().DoDialog(_type, _dialogs);
         gameObject.SetActive(false);
     }

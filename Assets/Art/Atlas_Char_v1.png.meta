@@ -435,7 +435,7 @@ TextureImporter:
       name: Atlas_Char_v1_15
       rect:
         serializedVersion: 2
-        x: 51
+        x: 53
         y: 976
         width: 177
         height: 185
@@ -561,9 +561,9 @@ TextureImporter:
       name: Atlas_Char_v1_21
       rect:
         serializedVersion: 2
-        x: 1378
+        x: 1376
         y: 999
-        width: 200
+        width: 203
         height: 110
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -587,7 +587,7 @@ TextureImporter:
         width: 136
         height: 129
       alignment: 9
-      pivot: {x: 0.5, y: 0.13702014}
+      pivot: {x: 0.5, y: 0.15}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

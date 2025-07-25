@@ -1,5 +1,9 @@
-using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -10,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private InputAction jumpAction;
     private InputAction moveAction;
     private InputAction prayAction;
+    private InputAction actionAction;
 
     [Header("Movimiento")]
     [Space]
@@ -35,16 +40,23 @@ public class PlayerController : MonoBehaviour
     [Space]
     private Animator _animator;
     private Rigidbody _rigidbody;
+    public Transform _handPoint;
+    public Transform _mainParent;
 
     [Header("Skills")]
     [Space]
     [SerializeField] private HUDManager _hudManager;
     public float _faithMaxAmount;
     public float _faithAmount;
+    private bool _isHolding;
+
+    public static event Action OnHold;
+    public static event Action OnDrop;
 
     private void Awake()
     {
         //_sePuedeMover = true;
+        _mainParent = this.transform.parent;
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = new InputActions();
@@ -69,6 +81,10 @@ public class PlayerController : MonoBehaviour
         prayAction = inputActions.PlayerControl.Pray;
         prayAction.Enable();
         prayAction.performed += OnPray;
+
+        actionAction = inputActions.PlayerControl.Action;
+        actionAction.Enable();
+        actionAction.performed += OnAction;
     }
 
     private void OnDisable()
@@ -100,6 +116,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<IHangable>(out var hangable) && hangable.HangPoint != null)
+        {
+            HoldJumpEhyal(hangable.HangPoint);
+        }
+    }
+
+    public void StopState()
+    {
+        _sePuedeMover = false;
+        _HorizontalMove = 0;
+        _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0); // Detiene movimiento horizontal
+    }
+
     public void OnMove(float mover)
     {
         if(_sePuedeMover)
@@ -128,6 +159,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void HoldJumpEhyal(Transform hangPoint)
+    {
+        _isHolding = true;
+        if (_handPoint != null && hangPoint != null)
+        {
+            // Calcula el offset entre el pivote del personaje y la mano
+            Vector3 offset = this.transform.position - _handPoint.position;
+            // Coloca el personaje de modo que la mano coincida con el hangPoint
+            this.transform.position = hangPoint.position + offset;
+        }
+        else
+        {
+            this.transform.position = hangPoint.position; // fallback
+        }
+        //_animator.SetTrigger("HoldAir");
+        _animator.SetBool("HoldAir2", true);
+        this.transform.parent = hangPoint.parent; // O el objeto que prefieras
+        _rigidbody.velocity = Vector3.zero; // Detén cualquier movimiento
+        _rigidbody.isKinematic = true;      // Desactiva la física
+        _sePuedeMover = false;
+        OnHold?.Invoke();
+    }
+
+    public void OnAction(InputAction.CallbackContext context)
+    { 
+        if(_isHolding)
+        {
+            Debug.Log("Drop ejecutandose");
+            this.transform.parent = _mainParent;
+            _animator.SetBool("HoldAir2", false);
+            //this.transform.parent = hangPoint.parent; // O el objeto que prefieras
+            _rigidbody.isKinematic = false;      // Desactiva la física
+            _sePuedeMover = true;
+            OnDrop?.Invoke();
+        }
+    }
+
     private void Rotate()
     {
         _isLookingRight = !_isLookingRight;
@@ -144,6 +212,10 @@ public class PlayerController : MonoBehaviour
         { 
             _animator.SetFloat("Horizontal", Mathf.Abs(_HorizontalMove));
             _animator.SetFloat("VelocityY", _rigidbody.velocity.y);
+        }
+        else
+        {
+            _animator.SetFloat("Horizontal", 0); // Asegura que la animación de caminar pare
         }
     }
 
