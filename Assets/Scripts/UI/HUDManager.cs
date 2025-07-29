@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour
 {
     public Image _faithBar;
+    public Image _faithBar2;
     public PlayerController _playerController;
+
+    private void Start()
+    {
+        _faithBar2.gameObject.SetActive(false);
+    }
 
     public float GetFaithFillAmount()
     {

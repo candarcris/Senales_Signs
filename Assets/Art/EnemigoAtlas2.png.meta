@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 31cf30a89a67a4a4faaaab101fbd3fa2
+guid: 16506b6456861834c8def8410c61f47d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FaithBar_Atlas_0
+      name: EnemigoAtlas2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1639
-        width: 409
-        height: 409
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97ba77f7fd4538d409e90168935515a6
-      internalID: 858915075
+      spriteID: 6cf0766a6e530504bb0bf93a73f71838
+      internalID: -1068701856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_1
+      name: EnemigoAtlas2_1
       rect:
         serializedVersion: 2
-        x: 409
-        y: 1639
-        width: 409
-        height: 409
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e8e4d5c8f8d7ef4b9253bd3826aa169
-      internalID: 1627329450
+      spriteID: d4b5640c982c42447afc2b752bfc765f
+      internalID: 1482066729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_2
+      name: EnemigoAtlas2_2
       rect:
         serializedVersion: 2
-        x: 818
-        y: 1639
-        width: 409
-        height: 409
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c0e5e581c62b4f4a8148c3b363f3e5e
-      internalID: -2084740432
+      spriteID: 503a3b5b0c485ec43bdc8a7470e3d7a9
+      internalID: 1181952033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_3
+      name: EnemigoAtlas2_3
       rect:
         serializedVersion: 2
-        x: 1227
-        y: 1639
-        width: 409
-        height: 409
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,41 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb007529858439a4aa19434457ab69e9
-      internalID: -869158424
+      spriteID: d0187b7bc57f02649a9ab9de64a2a8e8
+      internalID: -1627821378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_4
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 1639
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04d41eefaf141d5438c318f86257623c
-      internalID: 511710107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_5
+      name: EnemigoAtlas2_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 1230
-        width: 409
-        height: 409
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdc7b25c8ed47904d94b953748127599
-      internalID: 18031002
+      spriteID: e47760e2227667343b22ae58a234bb01
+      internalID: -1235198559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_6
+      name: EnemigoAtlas2_5
       rect:
         serializedVersion: 2
-        x: 409
-        y: 1230
-        width: 409
-        height: 409
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +236,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad31b692d84c82f4a93cdf3ae37045fd
-      internalID: -1582285109
+      spriteID: 6a67424893f75f748a75e5f80ae92620
+      internalID: -55076281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_7
+      name: EnemigoAtlas2_6
       rect:
         serializedVersion: 2
-        x: 818
-        y: 1230
-        width: 409
-        height: 409
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a900999401eb7546999ea4c91d36048
-      internalID: -718662333
+      spriteID: 92fa737c178266640bb7aaed471ec367
+      internalID: -1721332064
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_8
+      name: EnemigoAtlas2_7
       rect:
         serializedVersion: 2
-        x: 1227
-        y: 1230
-        width: 409
-        height: 409
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,41 +278,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 495f8807d0c8cf64eae8f2cd9755bde2
-      internalID: -679260442
+      spriteID: 3ad39df020c205347a54b1b1143c6280
+      internalID: 586494639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_9
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 1230
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f727e0de58279f499c366681a2174bd
-      internalID: -65019299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_10
+      name: EnemigoAtlas2_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 821
-        width: 409
-        height: 409
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,20 +299,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58d04306b9b530d459241556b20c6f00
-      internalID: -771854992
+      spriteID: 6e8960c3e8e29c24d950ffe3a5f0abfd
+      internalID: 1020595139
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_11
+      name: EnemigoAtlas2_9
       rect:
         serializedVersion: 2
-        x: 409
-        y: 821
-        width: 409
-        height: 409
+        x: 512
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,20 +320,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fafa1669374d9ed48b1ea6a2c0407efe
-      internalID: -660318140
+      spriteID: 1246f6de5ddd03c44b0766b4599467c6
+      internalID: 1946335145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_12
+      name: EnemigoAtlas2_10
       rect:
         serializedVersion: 2
-        x: 818
-        y: 821
-        width: 409
-        height: 409
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -383,20 +341,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb7a1c9ceed3ef4aa1b97b333a71c79
-      internalID: -41132714
+      spriteID: 71e896de2846b9447970463e38a0c7bd
+      internalID: 529652889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_13
+      name: EnemigoAtlas2_11
       rect:
         serializedVersion: 2
-        x: 1227
-        y: 821
-        width: 409
-        height: 409
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -404,41 +362,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ed1caee57e6d0d419799295630c945e
-      internalID: 57104547
+      spriteID: 06b54082387985e408feaa1adf828382
+      internalID: 1108118566
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_14
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 821
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e496d798ee6d1044ea1709bce7891c6a
-      internalID: -1824505376
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_15
+      name: EnemigoAtlas2_12
       rect:
         serializedVersion: 2
         x: 0
-        y: 412
-        width: 409
-        height: 409
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,20 +383,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 283041f2543894d46858cf135b19202e
-      internalID: -1448762012
+      spriteID: a3700dd75f6627141a062b338b65165f
+      internalID: 869291914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_16
+      name: EnemigoAtlas2_13
       rect:
         serializedVersion: 2
-        x: 409
-        y: 412
-        width: 409
-        height: 409
+        x: 512
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -467,20 +404,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 859282ce3c7ca984493d8a6c596fc8ff
-      internalID: -1667107974
+      spriteID: e929633d4221dfa4683e10559c4ec201
+      internalID: -1169086523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_17
+      name: EnemigoAtlas2_14
       rect:
         serializedVersion: 2
-        x: 818
-        y: 412
-        width: 409
-        height: 409
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -488,20 +425,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd18491be0a8bbb40a762f71285b082d
-      internalID: -538582457
+      spriteID: efbdc89978e4ad14899071e0da8224ce
+      internalID: 1276333148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FaithBar_Atlas_18
+      name: EnemigoAtlas2_15
       rect:
         serializedVersion: 2
-        x: 1227
-        y: 412
-        width: 409
-        height: 409
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -509,113 +446,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb861faf38f212040ba505bcdb8bea21
-      internalID: -1572845408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_19
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 412
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d04c1ccd20bfe5e4ebe4c10dcef5e2c7
-      internalID: -358786383
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_20
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 3
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f875f5f1ed32bb499c1b9d7dcc4849a
-      internalID: 1229984243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_21
-      rect:
-        serializedVersion: 2
-        x: 409
-        y: 3
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a83c51712badbd8418a96896d451e2b5
-      internalID: 841668976
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_22
-      rect:
-        serializedVersion: 2
-        x: 818
-        y: 3
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf8b10e6228a07c46ae51e627acd68d9
-      internalID: -1571215628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FaithBar_Atlas_23
-      rect:
-        serializedVersion: 2
-        x: 1227
-        y: 3
-        width: 409
-        height: 409
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b44b9ab5b7329ad42997d4edf7803ad6
-      internalID: 1242110401
+      spriteID: 7c0d0251618a0a8419386d54bf2dbaba
+      internalID: 1055159587
       vertices: []
       indices: 
       edges: []
@@ -623,7 +455,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8b0279d4ee4ccad4db853f0d0903fad4
+    spriteID: bc3e5ec7f8762e949bc922c4bc0c4244
     internalID: 0
     vertices: []
     indices: 
@@ -631,30 +463,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      FaithBar_Atlas_17: -538582457
-      FaithBar_Atlas_18: -1572845408
-      FaithBar_Atlas_23: 1242110401
-      FaithBar_Atlas_16: -1667107974
-      FaithBar_Atlas_22: -1571215628
-      FaithBar_Atlas_4: 511710107
-      FaithBar_Atlas_20: 1229984243
-      FaithBar_Atlas_12: -41132714
-      FaithBar_Atlas_3: -869158424
-      FaithBar_Atlas_19: -358786383
-      FaithBar_Atlas_6: -1582285109
-      FaithBar_Atlas_0: 858915075
-      FaithBar_Atlas_2: -2084740432
-      FaithBar_Atlas_5: 18031002
-      FaithBar_Atlas_13: 57104547
-      FaithBar_Atlas_15: -1448762012
-      FaithBar_Atlas_9: -65019299
-      FaithBar_Atlas_8: -679260442
-      FaithBar_Atlas_7: -718662333
-      FaithBar_Atlas_21: 841668976
-      FaithBar_Atlas_14: -1824505376
-      FaithBar_Atlas_11: -660318140
-      FaithBar_Atlas_1: 1627329450
-      FaithBar_Atlas_10: -771854992
+      EnemigoAtlas2_6: -1721332064
+      EnemigoAtlas2_8: 1020595139
+      EnemigoAtlas2_4: -1235198559
+      EnemigoAtlas2_3: -1627821378
+      EnemigoAtlas2_12: 869291914
+      EnemigoAtlas2_1: 1482066729
+      EnemigoAtlas2_7: 586494639
+      EnemigoAtlas2_5: -55076281
+      EnemigoAtlas2_10: 529652889
+      EnemigoAtlas2_2: 1181952033
+      EnemigoAtlas2_15: 1055159587
+      EnemigoAtlas2_14: 1276333148
+      EnemigoAtlas2_0: -1068701856
+      EnemigoAtlas2_11: 1108118566
+      EnemigoAtlas2_9: 1946335145
+      EnemigoAtlas2_13: -1169086523
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

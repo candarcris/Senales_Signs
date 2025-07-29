@@ -8,13 +8,13 @@ public class DialogTriggerEvent : TriggerEvent
 {
     public PlayerController _playerController;
     [SerializeField] private bool _isGroundAfterFirstFall;
-    BoxCollider _boxCollider;
+    //BoxCollider _boxCollider;
     public Animator _cinemaCameraDutchAnim;
     private float tiempo = 0;
 
     private void Start()
     {
-        _boxCollider = GetComponent<BoxCollider>();
+        //_boxCollider = GetComponent<BoxCollider>();
     }
 
     protected override void DoTriggerEvent()
@@ -23,7 +23,7 @@ public class DialogTriggerEvent : TriggerEvent
         _playerController.SetFallingDrag(0);
         if (_cinemaCameraDutchAnim != null)
         {
-            _cinemaCameraDutchAnim.speed = 3.0f;
+            _cinemaCameraDutchAnim.speed = 5.0f;
         }
         _playerController.SetAnimation("FirstFall", false, true);
     }
@@ -34,6 +34,7 @@ public class DialogTriggerEvent : TriggerEvent
         {
             tiempo += Time.deltaTime / 1f;
             tiempo = Mathf.Clamp01(tiempo); // asegura que no pase de 1
+            ManagerLocator.GetHUDManager()._faithBar2.gameObject.SetActive(true);
             ManagerLocator.GetHUDManager().SetFaithAmount(Mathf.Lerp(0, _playerController._faithMaxAmount, tiempo));
             if (tiempo >= 1f)
             {

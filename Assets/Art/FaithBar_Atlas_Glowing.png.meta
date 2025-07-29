@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 505aaf6e7b8e80e40ba29fe0456dfd4e
+guid: 7d89f259f3cc1fd4a8b925182d9b4e44
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,190 +117,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Atlas_01_Menu_0
+      name: FaithBar_Atlas_Glowing_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 1504
-        width: 1209
-        height: 512
+        x: 0
+        y: 1639
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57dea3857ffc54343987cbee1ccefd3b
-      internalID: 1279006968
+      spriteID: becf404f51944fe4195cb19c4e171520
+      internalID: -1401954781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_1
+      name: FaithBar_Atlas_Glowing_1
       rect:
         serializedVersion: 2
-        x: 240
-        y: 1251
-        width: 802
-        height: 181
+        x: 409
+        y: 1639
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11896dd3196a9504c9f8f4d63210f744
-      internalID: 1806536163
+      spriteID: b7799c152035daa46870657e0dd1f042
+      internalID: -214541501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_2
+      name: FaithBar_Atlas_Glowing_2
       rect:
         serializedVersion: 2
-        x: 423
-        y: 1176
-        width: 268
-        height: 57
+        x: 818
+        y: 1639
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcd81c2052f833a42b03d8032a192821
-      internalID: -2123886668
+      spriteID: 6d248fafe1a181848af14b96eaa47ec3
+      internalID: 1310704358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_3
+      name: FaithBar_Atlas_Glowing_3
       rect:
         serializedVersion: 2
-        x: 241
-        y: 1076
-        width: 158
-        height: 160
+        x: 1227
+        y: 1639
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06c2c5db2f51f344db7b51e93b98fda5
-      internalID: -995115944
+      spriteID: 28a83dacaa9096f4fb34d309e34c0ded
+      internalID: -1220790211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_4
+      name: FaithBar_Atlas_Glowing_4
       rect:
         serializedVersion: 2
-        x: 436
-        y: 1115
-        width: 67
-        height: 44
+        x: 1636
+        y: 1639
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 859bd80f87e72da4eb743058d082bf07
-      internalID: 658292395
+      spriteID: 04e846b67edb7fc4fac8fb8841236529
+      internalID: 2048796240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_5
+      name: FaithBar_Atlas_Glowing_5
       rect:
         serializedVersion: 2
-        x: 525
-        y: 1112
-        width: 50
-        height: 50
+        x: 0
+        y: 1230
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 25, z: 25, w: 25}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2fea93538eb5e4b4ab40c9a6faafc9b8
-      internalID: 910050607
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Atlas_01_Menu_6
-      rect:
-        serializedVersion: 2
-        x: 595
-        y: 1120
-        width: 35
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 18, y: 0, z: 17, w: 17}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f443f2370bb5b694d9ed62d9425bae9c
-      internalID: -1803568858
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Atlas_01_Menu_7
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 1314
-        width: 43
-        height: 91
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af4d459d2d658db40b3e486134dc34d2
-      internalID: -1783911597
+      spriteID: b30836db9c0864147bb6897b17e4cc23
+      internalID: 915189764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_01_Menu_8
+      name: FaithBar_Atlas_Glowing_6
       rect:
         serializedVersion: 2
-        x: 56
-        y: 632
-        width: 56
-        height: 784
+        x: 409
+        y: 1230
+        width: 409
+        height: 409
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 071a14365a743424a8b9f3a5b0219007
-      internalID: -2130259500
+      spriteID: bce64243679e2e54a9085c0bb5b98d26
+      internalID: 1768485032
       vertices: []
       indices: 
       edges: []
@@ -308,7 +266,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: af08c9ca94276e646bf3b9d15a57ea4e
+    spriteID: fd657f2d9b5685145ae97438c6fd1426
     internalID: 0
     vertices: []
     indices: 
@@ -316,15 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Atlas_01_Menu_3: -995115944
-      Atlas_01_Menu_8: -2130259500
-      Atlas_01_Menu_2: -2123886668
-      Atlas_01_Menu_5: 910050607
-      Atlas_01_Menu_4: 658292395
-      Atlas_01_Menu_0: 1279006968
-      Atlas_01_Menu_7: -1783911597
-      Atlas_01_Menu_1: 1806536163
-      Atlas_01_Menu_6: -1803568858
+      FaithBar_Atlas_Glowing_3: -1220790211
+      FaithBar_Atlas_Glowing_0: -1401954781
+      FaithBar_Atlas_Glowing_4: 2048796240
+      FaithBar_Atlas_Glowing_2: 1310704358
+      FaithBar_Atlas_Glowing_1: -214541501
+      FaithBar_Atlas_Glowing_5: 915189764
+      FaithBar_Atlas_Glowing_6: 1768485032
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
