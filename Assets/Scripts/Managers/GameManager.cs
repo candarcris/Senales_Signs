@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public enum ENUM_GameState
@@ -9,12 +11,25 @@ public enum ENUM_GameState
     inGame,
     gameOver
 }
+
+public enum Context
+{
+    Player,
+    UI,
+    Ehyal
+}
+
 public class GameManager : MonoBehaviour
 {
     UIController _uiController;
     public static GameManager _sharedInstance;// singleton
     public ENUM_GameState _currentGameState = ENUM_GameState.menu;
     public List<GameObject> _uiContentsList = new();
+
+    public Context _context;
+
+    // Referencia al InputActions
+    private InputActions _inputActions;
 
     private void Awake()
     {
@@ -24,6 +39,9 @@ public class GameManager : MonoBehaviour
         }
 
         _uiController = this.GetComponent<UIController>();
+        
+        // Inicializar InputActions
+        _inputActions = new InputActions();
     }
 
     private void Start()
@@ -78,5 +96,53 @@ public class GameManager : MonoBehaviour
         }
 
         this._currentGameState = newGameState;
+    }
+
+    /// <summary>
+    /// Método para cambiar el contexto de input activo
+    /// </summary>
+    /// <param name="context">El contexto a activar (Player, UI, o Ehyal)</param>
+    public void SetContext(Context context)
+    {
+        // Deshabilitar todos los Action Maps
+        foreach(var action in _inputActions)
+        {
+            action.Disable();
+        }
+        //_inputActions.PlayerControl.Disable();
+        //_inputActions.UI.Disable();
+        //_inputActions.EhyalControl.Disable();
+
+        // Habilitar solo el Action Map especificado
+        switch (context)
+        {
+            case Context.Player:
+                _inputActions.PlayerControl.Enable();
+                _context = Context.Player;
+                break;
+            case Context.UI:
+                _inputActions.UI.Enable();
+                _context = Context.UI;
+                break;
+            case Context.Ehyal:
+                _inputActions.EhyalControl.Enable();
+                _context = Context.Ehyal;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Método para obtener la referencia a InputActions
+    /// </summary>
+    /// <returns>La instancia de InputActions</returns>
+    public InputActions GetInputActions()
+    {
+        return _inputActions;
+    }
+
+    private void OnDestroy()
+    {
+        // Limpiar recursos de InputActions
+        _inputActions?.Dispose();
     }
 }

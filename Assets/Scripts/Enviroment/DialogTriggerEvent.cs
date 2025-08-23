@@ -34,8 +34,6 @@ public class DialogTriggerEvent : TriggerEvent
         {
             tiempo += Time.deltaTime / 1f;
             tiempo = Mathf.Clamp01(tiempo); // asegura que no pase de 1
-            ManagerLocator.GetHUDManager()._faithBar2.gameObject.SetActive(true);
-            ManagerLocator.GetHUDManager().SetFaithAmount(Mathf.Lerp(0, _playerController._faithMaxAmount, tiempo));
             if (tiempo >= 1f)
             {
                 _isGroundAfterFirstFall = false; // opcional: ya terminó

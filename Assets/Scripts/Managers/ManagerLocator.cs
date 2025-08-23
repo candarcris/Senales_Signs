@@ -10,6 +10,12 @@ public class ManagerLocator : MonoBehaviour
     public SoundManager _soundManager;
     public DialogsManager _dialogsManager;
     public HUDManager _hudManager;
+    public LevelManager _levelManager;
+
+    public static InputActions GetInputActions()
+    {
+        return GameManager._sharedInstance?.GetInputActions();
+    }
 
     // Singleton para acceder a esta clase desde cualquier lugar
     private static ManagerLocator instance;
@@ -52,5 +58,10 @@ public class ManagerLocator : MonoBehaviour
     public static HUDManager GetHUDManager()
     {
         return instance._hudManager;
+    }
+
+    public static LevelManager GetLevelManager()
+    { 
+        return instance._levelManager; 
     }
 }

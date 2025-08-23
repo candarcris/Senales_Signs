@@ -6,7 +6,7 @@ public class ActivateRutePoint : TriggerEvent
 {
     protected override void DoTriggerEvent()
     {
-        FindObjectOfType<EyalController>().Movement();
+        FindObjectOfType<EyalController>().Movement(true);
         gameObject.SetActive(false);
     }
 

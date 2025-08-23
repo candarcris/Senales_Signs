@@ -82,6 +82,10 @@ public class GroundEnemy : Enemy
         {
             GetDamage(20);
         }
+        else if(other.CompareTag("DeadZone"))
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public override void Attack()
@@ -112,7 +116,7 @@ public class GroundEnemy : Enemy
             reEscaledLifeAmount = 0;
         }
         _lifeUI.fillAmount = reEscaledLifeAmount;
-        Debug.Log("Ground enemy received damage. Remaining life: " + reEscaledLifeAmount);
+        Debug.Log("enemy received damage. Remaining life: " + reEscaledLifeAmount);
 
         if (reEscaledLifeAmount <= 0)
         {
@@ -127,7 +131,7 @@ public class GroundEnemy : Enemy
         {
             _animator.SetTrigger("Die");
         }
-        Debug.Log("Ground enemy has been defeated.");
+        OnEnemyDeath();
         StartCoroutine(DeactivateAfterDeath());
     }
 

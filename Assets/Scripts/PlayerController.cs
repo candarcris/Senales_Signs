@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction prayAction;
     private InputAction actionAction;
+    private InputAction combatAction;
 
     [Header("Movimiento")]
     [Space]
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _inGround; // tocando el piso?
     [SerializeField] private float _extraGravityMultiplier; // fuerza extra de gravedad al caer
     [SerializeField] private float _gravityMultiplier = 2.5f; // Ajusta este valor seg�n sea necesario
+    [SerializeField] private float _coyoteTime = 0.1f; // Tiempo extra para saltar
+    private float _coyoteTimeCounter;
 
     [Header("Animacion y fisicas")]
     [Space]
@@ -42,16 +46,22 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     public Transform _handPoint;
     public Transform _mainParent;
+    [SerializeField] private bool _isFloating;
 
     [Header("Skills")]
     [Space]
     [SerializeField] private HUDManager _hudManager;
     public float _faithMaxAmount;
     public float _faithAmount;
-    private bool _isHolding;
+    [SerializeField] private bool _isHolding;
+    public bool _canPray;
+    public bool _canCombat;
 
     public static event Action OnHold;
     public static event Action OnDrop;
+    public static event Action OnPray;
+    public static event Action OnPrayEnd;
+    public static event Action OnCombat;
 
     private void Awake()
     {
@@ -59,7 +69,24 @@ public class PlayerController : MonoBehaviour
         _mainParent = this.transform.parent;
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        inputActions = new InputActions();
+        inputActions = ManagerLocator.GetInputActions();
+
+        if (inputActions == null)
+        {
+            StartCoroutine(WaitForGameManager());
+        }
+    }
+
+    private IEnumerator WaitForGameManager()
+    {
+        while (GameManager._sharedInstance == null)
+        {
+            yield return null;
+        }
+        inputActions = ManagerLocator.GetInputActions();
+
+        // Configurar las acciones una vez que tengamos la referencia
+        SetupInputActions();
     }
 
     private void Start()
@@ -67,31 +94,65 @@ public class PlayerController : MonoBehaviour
         _hudManager = ManagerLocator.GetHUDManager();
         _faithMaxAmount = ReEscale.Normalize(100, 0, 100, 0, 1);
         _hudManager.SetFaithAmount(0);
+
+        // Si ya tenemos la referencia, configurar las acciones
+        if (inputActions != null)
+        {
+            SetupInputActions();
+        }
     }
 
-    private void OnEnable()
+    private void SetupInputActions()
     {
         jumpAction = inputActions.PlayerControl.Jump;
         jumpAction.Enable();
-        jumpAction.performed += OnJump;
+        jumpAction.performed += Jump;
 
         moveAction = inputActions.PlayerControl.Move;
         moveAction.Enable();
 
         prayAction = inputActions.PlayerControl.Pray;
         prayAction.Enable();
-        prayAction.performed += OnPray;
+        prayAction.performed += Pray;
+        prayAction.canceled += Pray;
 
         actionAction = inputActions.PlayerControl.Action;
         actionAction.Enable();
-        actionAction.performed += OnAction;
+        actionAction.performed += GeneralAction;
+
+        combatAction = inputActions.PlayerControl.Combat;
+        combatAction.Enable();
+        combatAction.performed += Combat;
+    }
+
+    private void OnEnable()
+    {
+        if (inputActions != null)
+        {
+            SetupInputActions();
+        }
     }
 
     private void OnDisable()
     {
+        // Desuscribirse de los eventos
+        if (jumpAction != null)
+            jumpAction.performed -= Jump;
+        if (prayAction != null)
+            prayAction.performed -= Pray;
+        if (prayAction != null)
+            prayAction.canceled -= Pray;
+        if (actionAction != null)
+            actionAction.performed -= GeneralAction;
+        if (combatAction != null)
+            combatAction.performed -= Combat;
+
+
         jumpAction.Disable();
         moveAction.Disable();
         prayAction.Disable();
+        actionAction.Disable();
+        combatAction.Disable();
     }
 
     public void SetFallingDrag(float falling)
@@ -107,12 +168,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnPray(InputAction.CallbackContext context)
+    public void Pray(InputAction.CallbackContext context)
     {
-        if(_sePuedeMover)
+        if(_sePuedeMover && _canPray)
         {
-            Debug.Log("Orando");
-            _faithAmount = _hudManager.GetFaithFillAmount();
+            if (context.performed)
+            {
+                _faithAmount = _hudManager.GetFaithFillAmount();
+                OnPray?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                OnPrayEnd?.Invoke();
+            }
+        }
+        else if (!_canPray && context.performed)
+        {
+            // Si no se puede orar pero el botón se presiona, cancelar inmediatamente
+            OnPrayEnd?.Invoke();
+        }
+        else if (!_canPray && context.canceled)
+        {
+            // También cancelar si se suelta el botón y no se puede orar
+            OnPrayEnd?.Invoke();
         }
     }
 
@@ -121,6 +199,10 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent<IHangable>(out var hangable) && hangable.HangPoint != null)
         {
             HoldJumpEhyal(hangable.HangPoint);
+        }
+        if(other.CompareTag("DeadZone"))
+        {
+            //animacion de muerte
         }
     }
 
@@ -149,13 +231,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
-        if (_inGround && _sePuedeMover)
+        if (context.performed && _sePuedeMover)
         {
-            _inGround = false;
-            _rigidbody.velocity = new Vector2(0, 0); // Resetea la velocidad vertical antes de saltar
-            _rigidbody.AddForce(new Vector2(0f, _jumpForce));
+            if (_inGround || _coyoteTimeCounter > 0f)
+            {
+                _inGround = false;
+                _coyoteTimeCounter = 0f;
+                _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, 0);
+                _rigidbody.AddForce(new Vector3(0f, _jumpForce), ForceMode.Impulse);
+            }
         }
     }
 
@@ -178,19 +264,19 @@ public class PlayerController : MonoBehaviour
         this.transform.parent = hangPoint.parent; // O el objeto que prefieras
         _rigidbody.velocity = Vector3.zero; // Detén cualquier movimiento
         _rigidbody.isKinematic = true;      // Desactiva la física
-        _sePuedeMover = false;
+        //_sePuedeMover = false;
+        StopState();
         OnHold?.Invoke();
     }
 
-    public void OnAction(InputAction.CallbackContext context)
+    public void GeneralAction(InputAction.CallbackContext context)
     { 
         if(_isHolding)
         {
-            Debug.Log("Drop ejecutandose");
             this.transform.parent = _mainParent;
             _animator.SetBool("HoldAir2", false);
-            //this.transform.parent = hangPoint.parent; // O el objeto que prefieras
-            _rigidbody.isKinematic = false;      // Desactiva la física
+            _rigidbody.isKinematic = false;
+            _isHolding = false;
             _sePuedeMover = true;
             OnDrop?.Invoke();
         }
@@ -202,6 +288,83 @@ public class PlayerController : MonoBehaviour
         Vector3 escala = transform.localScale;
         escala.x *= -1; //multiplica escala.x por menos uno
         transform.localScale = escala;
+    }
+
+    public void TriggerFloatingAcrossPath(Transform[] waypoints, float speed, float height)
+    {
+        if (_isFloating) return;
+        StartFloatingAcrossPath(waypoints, speed, height);
+    }
+
+    private void StartFloatingAcrossPath(Transform[] waypoints, float speed, float height)
+    {
+        StartCoroutine(FloatAlongPath(waypoints, speed, height));
+    }
+
+    private IEnumerator FloatAlongPath(Transform[] waypoints, float speed, float height)
+    {
+        if (_isFloating) yield break;
+
+        _isFloating = true;
+        yield return new WaitForSeconds(1f);
+
+        _rigidbody.isKinematic = true;
+        StopState();
+
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            Debug.LogWarning("No hay waypoints configurados");
+            yield break;
+        }
+
+        try
+        {
+            // Mover el player a través de cada waypoint
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                if (waypoints[i] == null) continue; // Saltar waypoints nulos
+
+                Vector3 targetPoint = waypoints[i].position;
+                targetPoint.y += height;
+
+                float timeout = 10f; // Timeout de 10 segundos por waypoint
+                float elapsed = 0f;
+
+                while (Vector3.Distance(transform.position, targetPoint) > 0.1f)
+                {
+                    if (elapsed > timeout)
+                    {
+                        Debug.LogWarning("Timeout alcanzado en waypoint " + i);
+                        break;
+                    }
+
+                    transform.position = Vector3.MoveTowards(
+                        transform.position,
+                        targetPoint,
+                        Time.deltaTime * speed
+                    );
+
+                    elapsed += Time.deltaTime;
+                }
+
+                transform.position = targetPoint;
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error en FloatAlongPath: " + e.Message);
+        }
+        finally
+        {
+            ResetFloatingState();
+        }
+    }
+
+    private void ResetFloatingState()
+    {
+        _rigidbody.isKinematic = false;
+        _sePuedeMover = true;
+        _isFloating = false;
     }
 
     private void Update()
@@ -217,23 +380,35 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetFloat("Horizontal", 0); // Asegura que la animación de caminar pare
         }
+        
+        // Coyote time simple
+        if (!_inGround)
+        {
+            _coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
+    public void Combat(InputAction.CallbackContext context)
+    {
+        if (_canCombat)
+        {
+            OnCombat?.Invoke();
+        }
     }
 
     private void FixedUpdate()
     {
         Collider[] colliders = Physics.OverlapBox(_groundController.position, _boxDimensions, Quaternion.identity, _whatIsGround);
         _inGround = colliders.Length > 0;
+        
         _animator.SetBool("InGround", _inGround);
         OnMove(_HorizontalMove);
 
+        // Gravedad mejorada
         if (!_inGround) 
         { 
-            _rigidbody.AddForce(Vector3.down * Physics.gravity.magnitude * _gravityMultiplier);
-            if (_rigidbody.velocity.y < 0)
-            {
-                Vector2 gravityModifier = Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.fixedDeltaTime * 2f;
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y + gravityModifier.y);
-            }
+            float gravityMultiplier = _rigidbody.velocity.y < 0 ? _fallMultiplier : _gravityMultiplier;
+            _rigidbody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier);
         }
     }
 

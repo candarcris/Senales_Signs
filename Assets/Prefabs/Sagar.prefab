@@ -138,9 +138,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1053555291
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -458242267, guid: f452be01ee2b84b4bb769d7e7d40b46a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   _movementVelocity: 3
   _moveSoftener: 0.2
   _velocity: {x: 0, y: 0, z: 0}
-  _jumpForce: 500
+  _jumpForce: 10
   _fallMultiplier: 2.5
   _whatIsGround:
     serializedVersion: 2
@@ -180,10 +180,14 @@ MonoBehaviour:
   _inGround: 0
   _extraGravityMultiplier: 5
   _gravityMultiplier: 2
+  _coyoteTime: 0.1
   _handPoint: {fileID: 393177229356060512}
+  _mainParent: {fileID: 0}
   _hudManager: {fileID: 0}
   _faithMaxAmount: 0
   _faithAmount: 0
+  _isHolding: 0
+  _canPray: 0
 --- !u!95 &2974393507116434772
 Animator:
   serializedVersion: 5
@@ -211,7 +215,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974393507116434773}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6edc8cba60a239c42a2b78ebd0792f54, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.635

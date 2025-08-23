@@ -51,13 +51,22 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""id"": ""0da9265c-9ac7-49ab-9718-731746c6f7e5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Action"",
                     ""type"": ""Button"",
                     ""id"": ""10a1f2b2-d258-43fb-a29e-ee32732c7efa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Combat"",
+                    ""type"": ""Button"",
+                    ""id"": ""c58f17c6-a41c-48f0-8aa9-a98e3665b9f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -145,7 +154,18 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6c6f6e7e-3e30-4322-8252-a54b461b0bb1"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pray"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cdd6736-6b2c-41fb-9e8b-2541f1baa77f"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -161,6 +181,39 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""119b8a9f-0042-4b11-aa70-b62519400c88"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ba30429-43e4-4db6-93bd-533751b72a0f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Combat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47a6bfbd-4245-4d95-93c5-66082f7ae4f0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Combat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -204,6 +257,45 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""EhyalControl"",
+            ""id"": ""df57be35-96cc-4023-b012-d31f79e0db16"",
+            ""actions"": [
+                {
+                    ""name"": ""EhyalAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""352972f7-b76c-4944-9915-29d85da9e49f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b4a1bde6-3c42-470f-b441-88fedff2f781"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EhyalAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c7f1b14-31a2-4be7-85c4-ceb1e49f0b8e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EhyalAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -214,9 +306,13 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_PlayerControl_Jump = m_PlayerControl.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControl_Pray = m_PlayerControl.FindAction("Pray", throwIfNotFound: true);
         m_PlayerControl_Action = m_PlayerControl.FindAction("Action", throwIfNotFound: true);
+        m_PlayerControl_Combat = m_PlayerControl.FindAction("Combat", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+        // EhyalControl
+        m_EhyalControl = asset.FindActionMap("EhyalControl", throwIfNotFound: true);
+        m_EhyalControl_EhyalAction = m_EhyalControl.FindAction("EhyalAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -280,6 +376,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControl_Jump;
     private readonly InputAction m_PlayerControl_Pray;
     private readonly InputAction m_PlayerControl_Action;
+    private readonly InputAction m_PlayerControl_Combat;
     public struct PlayerControlActions
     {
         private @InputActions m_Wrapper;
@@ -288,6 +385,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerControl_Jump;
         public InputAction @Pray => m_Wrapper.m_PlayerControl_Pray;
         public InputAction @Action => m_Wrapper.m_PlayerControl_Action;
+        public InputAction @Combat => m_Wrapper.m_PlayerControl_Combat;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -309,6 +407,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Action.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnAction;
+                @Combat.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCombat;
+                @Combat.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCombat;
+                @Combat.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCombat;
             }
             m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -325,6 +426,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
+                @Combat.started += instance.OnCombat;
+                @Combat.performed += instance.OnCombat;
+                @Combat.canceled += instance.OnCombat;
             }
         }
     }
@@ -362,15 +466,53 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // EhyalControl
+    private readonly InputActionMap m_EhyalControl;
+    private IEhyalControlActions m_EhyalControlActionsCallbackInterface;
+    private readonly InputAction m_EhyalControl_EhyalAction;
+    public struct EhyalControlActions
+    {
+        private @InputActions m_Wrapper;
+        public EhyalControlActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @EhyalAction => m_Wrapper.m_EhyalControl_EhyalAction;
+        public InputActionMap Get() { return m_Wrapper.m_EhyalControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EhyalControlActions set) { return set.Get(); }
+        public void SetCallbacks(IEhyalControlActions instance)
+        {
+            if (m_Wrapper.m_EhyalControlActionsCallbackInterface != null)
+            {
+                @EhyalAction.started -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
+                @EhyalAction.performed -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
+                @EhyalAction.canceled -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
+            }
+            m_Wrapper.m_EhyalControlActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @EhyalAction.started += instance.OnEhyalAction;
+                @EhyalAction.performed += instance.OnEhyalAction;
+                @EhyalAction.canceled += instance.OnEhyalAction;
+            }
+        }
+    }
+    public EhyalControlActions @EhyalControl => new EhyalControlActions(this);
     public interface IPlayerControlActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPray(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+        void OnCombat(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnSubmit(InputAction.CallbackContext context);
+    }
+    public interface IEhyalControlActions
+    {
+        void OnEhyalAction(InputAction.CallbackContext context);
     }
 }

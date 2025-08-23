@@ -27,19 +27,18 @@ public class GameOverPanelUI : UIElement
 
     public void Continuar()
     {
-        GameManager._sharedInstance.LoadScene(0);
+        GameManager._sharedInstance.LoadScene(1);
     }
 
     public IEnumerator ButtonAppear()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         _continuarButton.gameObject.SetActive(true);
         _exitButton.gameObject.SetActive(true);
     }
 
     public void ExitGame()
     {
-        Application.Quit();
-        Debug.Log("Bye bye");
+        GameManager._sharedInstance.LoadScene(0);
     }
 }

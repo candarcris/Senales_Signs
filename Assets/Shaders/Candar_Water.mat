@@ -52,19 +52,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DepthDistance: 0.33
+    - _DepthDistance: 0.8
     - _DepthStrength: 0.182
     - _FoamOffset: 0.5
-    - _Opacity: 1
+    - _Opacity: 0.887
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaterSize: 0.83
-    - _Wave: 0.8
+    - _WaterSize: 1.97
+    - _Wave: 1.18
     - _foeamOffset: 0
     - _wave: 1.97
     m_Colors:
     - _ColorBase: {r: 0, g: 0, b: 0, a: 1}
     - _ColorMainFoam: {r: 0.83137256, g: 0, b: 0.51843244, a: 1}
     - _ColorSecondFoam: {r: 0.27773708, g: 0, b: 0.3584906, a: 1}
-    - _Direction: {r: 0.001, g: 0.01, b: 0, a: 0}
+    - _Direction: {r: 0.001, g: 0.02, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -9,11 +9,6 @@ public class DialogTriggerEventFirstFall : TriggerEvent
     public ENUM_CharTypeDialogs _type;
     public PlayerController _playerController;
 
-    private void Start()
-    {
-
-    }
-
     public void SagarContinueFalling()
     {
         _playerController.SetFallingDrag(6);

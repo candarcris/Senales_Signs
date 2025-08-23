@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Ehyal
+  - SignalPray
+  - DeadZone
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Props
+  - Enemies
   - 
   - 
   - 
@@ -42,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: props
+    uniqueID: 3241412005
     locked: 0

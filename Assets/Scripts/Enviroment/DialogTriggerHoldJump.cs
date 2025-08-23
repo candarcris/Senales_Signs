@@ -12,16 +12,17 @@ public class DialogTriggerHoldJump : TriggerEvent
     public CinemachineVirtualCamera _cinemaCamera;
     [SerializeField] private Transform _enemyTarget;
     public LevelManager _levelManager;
+    public BoxCollider _boxCollider;
 
     private void Awake()
     {
         _levelManager.OnSetEnemies += SetTarget;
+        _boxCollider = GetComponent<BoxCollider>();
     }
 
     public void SagarContinueWalking()
     {
         _playerController.SetFallingDrag(0);
-        _playerController._sePuedeMover = true;
         _cinemaCamera.Follow = _playerController.transform;
     }
 
@@ -37,12 +38,13 @@ public class DialogTriggerHoldJump : TriggerEvent
 
     protected override void DoTriggerEvent()
     {
-        _playerController.StopState();
+        //_playerController.StopState();
         _cinemaCamera.Follow = _enemyTarget;
         ManagerLocator.GetDialogsManager().OnFinishDialog = null;
         ManagerLocator.GetDialogsManager().OnFinishDialog += SagarContinueWalking;
         ManagerLocator.GetDialogsManager().DoDialog(_type, _dialogs);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        _boxCollider.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

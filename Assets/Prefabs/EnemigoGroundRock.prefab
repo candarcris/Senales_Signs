@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 2913348739341628134}
   - component: {fileID: 8349789936677595669}
   - component: {fileID: 8767139856682578347}
-  m_Layer: 0
+  - component: {fileID: 3624126129221925397}
+  m_Layer: 7
   m_Name: EnemigoGroundRock
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,8 +156,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.67, y: 2.4390547, z: 0.55371237}
-  m_Center: {x: 0.031115055, y: 0.07314336, z: 0}
+  m_Size: {x: 2.6021247, y: 0.49132395, z: 0.55371237}
+  m_Center: {x: 0.013191104, y: -0.900722, z: 0}
 --- !u!65 &8767139856682578347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -168,8 +169,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8290062, y: 2.5128431, z: 0.55371237}
-  m_Center: {x: 0.031115055, y: 0.110037625, z: 0}
+  m_Size: {x: 1.1244407, y: 1.9047447, z: 0.55371237}
+  m_Center: {x: 0.0023488998, y: -0.1726945, z: 0}
+--- !u!65 &3624126129221925397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865774466233481018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5113609, y: 1.5072109, z: 0.2}
+  m_Center: {x: 0.009015441, y: -0.3897788, z: 0}
 --- !u!1 &4427888876034393238
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +195,7 @@ GameObject:
   - component: {fileID: 4427888876034393239}
   - component: {fileID: 4427888876034393237}
   - component: {fileID: 4427888876034393236}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: LifeLost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +271,7 @@ GameObject:
   - component: {fileID: 4427888876273972334}
   - component: {fileID: 718342055542542455}
   - component: {fileID: 5547595277350360246}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Colliders
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -317,7 +331,7 @@ GameObject:
   - component: {fileID: 4427888877108893738}
   - component: {fileID: 4427888877108893749}
   - component: {fileID: 4427888877108893748}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: BarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +432,7 @@ GameObject:
   - component: {fileID: 4427888877305507667}
   - component: {fileID: 4427888877305507665}
   - component: {fileID: 4427888877305507664}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: EnemyLife
   m_TagString: Untagged
   m_Icon: {fileID: 0}

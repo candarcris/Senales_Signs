@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class DialogsManager : MonoBehaviour
 {
+    private GameManager gameManager;
     private InputActions _inputActions;
     private InputAction _submitAction;
 
@@ -24,21 +25,52 @@ public class DialogsManager : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new InputActions();
+        _inputActions = ManagerLocator.GetInputActions();
 
+        // Si GameManager aï¿½n no estï¿½ inicializado, esperar
+        if (_inputActions == null)
+        {
+            StartCoroutine(WaitForGameManager());
+        }
     }
+    private IEnumerator WaitForGameManager()
+    {
+        while (GameManager._sharedInstance == null)
+        {
+            yield return null;
+        }
+        _inputActions = ManagerLocator.GetInputActions();
+
+        // Configurar las acciones una vez que tengamos la referencia
+        SetupInputActions();
+    }
+
+    private void SetupInputActions()
+    {
+        _submitAction = _inputActions.UI.Submit;
+        _submitAction.Enable();
+        _submitAction.performed += OnNextPhrase;
+    }
+
     private void Start()
     {
-        
+        gameManager = ManagerLocator.GetGameManager();
+
+        // Si ya tenemos la referencia, configurar las acciones
+        if (_inputActions != null)
+        {
+            SetupInputActions();
+        }
     }
 
     private void OnEnable()
     {
-        //InputSystem.onDeviceChange += OnDeviceChange;
-        _submitAction = _inputActions.UI.Submit;
-        _submitAction.Enable();
+        // Solo configurar si ya tenemos la referencia
+        if (_inputActions != null)
+        {
+            SetupInputActions();
+        }
         _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
-        _submitAction.performed += OnNextPhrase;
     }
 
     private void OnDisable()
@@ -48,24 +80,42 @@ public class DialogsManager : MonoBehaviour
         _submitAction.performed -= OnNextPhrase;
     }
 
+    private void OnDestroy()
+    {
+        // Limpiar todos los eventos al destruir el objeto
+        if (_submitAction != null)
+        {
+            _submitAction.performed -= OnNextPhrase;
+            _submitAction.Disable();
+        }
+
+        if (_dialogPanel != null && _dialogPanel._nextButton != null)
+        {
+            _dialogPanel._nextButton.onClick.RemoveListener(NextPhrase);
+        }
+
+        // Limpiar el evento personalizado
+        OnFinishDialog = null;
+    }
+
     //private void OnDeviceChange(InputDevice device, InputDeviceChange change)
     //{
     //    if (device is Keyboard)
     //    {
-    //        // Verifica si se presionó un botón del teclado
+    //        // Verifica si se presionï¿½ un botï¿½n del teclado
     //        var keyboard = (Keyboard)device;
     //        if (keyboard.anyKey.isPressed)
     //        {
-    //            Debug.Log("Se presionó un botón del teclado: " + device.name);
+    //            Debug.Log("Se presionï¿½ un botï¿½n del teclado: " + device.name);
     //        }
     //    }
     //    if (device is Gamepad)
     //    {
-    //        // Verifica si se presionó un botón del gamepad
+    //        // Verifica si se presionï¿½ un botï¿½n del gamepad
     //        var gamepad = (Gamepad)device;
     //        if (gamepad.IsPressed())
     //        {
-    //            Debug.Log("Se presionó un botón del gamepad: " + device.name);
+    //            Debug.Log("Se presionï¿½ un botï¿½n del gamepad: " + device.name);
     //        }
     //    }
     //}
@@ -85,17 +135,19 @@ public class DialogsManager : MonoBehaviour
     private void ShowDialogPanel()
     {
         // Deshabilita los controles del jugador y habilita los de UI
-        _inputActions.PlayerControl.Disable();
-        _inputActions.UI.Enable();
-        //FindObjectOfType<PlayerController>()._sePuedeMover = false;
+        gameManager.SetContext(Context.UI);
+        //_inputActions.PlayerControl.Disable();
+        //_inputActions.UI.Enable();
+        FindObjectOfType<PlayerController>().StopState();
         _dialogPanel.gameObject.SetActive(true);
     }
 
     private void HideDialogPanel()
     {
         // Habilita los controles del jugador y deshabilita los de UI
-        _inputActions.UI.Disable();
-        _inputActions.PlayerControl.Enable();
+        gameManager.SetContext(Context.Player);
+        //_inputActions.UI.Disable();
+        //_inputActions.PlayerControl.Enable();
         FindObjectOfType<PlayerController>()._sePuedeMover = true;
         _dialogPanel.gameObject.SetActive(false);
     }
@@ -134,7 +186,7 @@ public class DialogsManager : MonoBehaviour
     {
         if (_isAnimating)
         {
-            // Si la animación está corriendo, mostrar el texto completo inmediatamente
+            // Si la animaciï¿½n estï¿½ corriendo, mostrar el texto completo inmediatamente
             if (_currentCoroutine != null)
                 StopCoroutine(_currentCoroutine);
             _dialogPanel._screenText.text = _currentPhrase;
@@ -143,7 +195,7 @@ public class DialogsManager : MonoBehaviour
         }
         else
         {
-            // Si la animación terminó, pasar a la siguiente frase
+            // Si la animaciï¿½n terminï¿½, pasar a la siguiente frase
             _dialogPanel._nextButton.gameObject.SetActive(false);
             ShowNextPhrase();
         }
@@ -166,7 +218,7 @@ public class DialogsManager : MonoBehaviour
         {
             _dialogPanel._screenText.text += character;
             yield return new WaitForSeconds(_timeLettersAnim);
-            if (!_isAnimating) yield break; // Si se interrumpe la animación, salir
+            if (!_isAnimating) yield break; // Si se interrumpe la animaciï¿½n, salir
         }
 
         _isAnimating = false;

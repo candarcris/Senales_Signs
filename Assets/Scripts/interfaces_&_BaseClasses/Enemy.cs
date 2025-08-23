@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody _rigidbody;
     protected bool _isMoving = true;
 
+    public System.Action OnDeath;
+
     public Enemy(float damage, float lifeAmount)
     {
         _damage = damage;
@@ -43,6 +45,12 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Attack();
     public abstract void GetDamage(float amount);
+
+    protected virtual void OnEnemyDeath()
+    {
+        // Lógica base cuando muere cualquier enemigo
+        OnDeath?.Invoke();
+    }
 
     protected virtual void StopMovement()
     {
