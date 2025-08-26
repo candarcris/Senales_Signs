@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 7379186393901995284}
   - component: {fileID: 6704706087231155420}
   - component: {fileID: 2913348739341628134}
-  - component: {fileID: 8349789936677595669}
-  - component: {fileID: 8767139856682578347}
-  - component: {fileID: 3624126129221925397}
+  - component: {fileID: 2515780785163751159}
+  - component: {fileID: 6368089535607520927}
   m_Layer: 7
   m_Name: EnemigoGroundRock
   m_TagString: Enemy
@@ -125,8 +124,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeUI: {fileID: 4427888877305507664}
+  _rigidbody: {fileID: 0}
+  _isMoving: 0
   reEscaledDamageAmount: 0
   reEscaledLifeAmount: 0
+  _detectionRadius: 5
+  _attackRange: 3
   _moveSpeed: 1
   _patrolDistance: 3
 --- !u!54 &2913348739341628134
@@ -144,8 +147,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
---- !u!65 &8349789936677595669
+  m_CollisionDetection: 1
+--- !u!65 &2515780785163751159
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,9 +159,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6021247, y: 0.49132395, z: 0.55371237}
-  m_Center: {x: 0.013191104, y: -0.900722, z: 0}
---- !u!65 &8767139856682578347
+  m_Size: {x: 1.2561808, y: 2.2308903, z: 0.7453408}
+  m_Center: {x: 0, y: -0.06954813, z: 0}
+--- !u!65 &6368089535607520927
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,24 +169,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2865774466233481018}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1244407, y: 1.9047447, z: 0.55371237}
-  m_Center: {x: 0.0023488998, y: -0.1726945, z: 0}
---- !u!65 &3624126129221925397
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865774466233481018}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5113609, y: 1.5072109, z: 0.2}
-  m_Center: {x: 0.009015441, y: -0.3897788, z: 0}
+  m_Size: {x: 1.96274, y: 1.4612464, z: 0.7453408}
+  m_Center: {x: -0.075986505, y: -0.4193769, z: 0}
 --- !u!1 &4427888876034393238
 GameObject:
   m_ObjectHideFlags: 0

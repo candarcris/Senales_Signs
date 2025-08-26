@@ -8,6 +8,7 @@ TagManager:
   - Ehyal
   - SignalPray
   - DeadZone
+  - EhyalPower
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - Props
   - Enemies
-  - 
-  - 
+  - Player
+  - Powers
   - 
   - 
   - 

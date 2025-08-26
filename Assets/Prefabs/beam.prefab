@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1447510638345537858}
   - component: {fileID: 6742785736422514121}
   - component: {fileID: 6136918409965715015}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: beam
-  m_TagString: Player
+  m_TagString: EhyalPower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1053555291
   m_SortingLayer: 1
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_Sprite: {fileID: -346909503, guid: 01971c4ab6296954888d706a46198ac2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   ehyalTransform: {fileID: 0}
+  maxLifetime: 3
 --- !u!54 &1447510638345537858
 Rigidbody:
   m_ObjectHideFlags: 0

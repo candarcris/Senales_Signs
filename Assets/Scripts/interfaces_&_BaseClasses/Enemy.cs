@@ -10,8 +10,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public Image _lifeUI;
 
     protected Animator _animator;
-    protected Rigidbody _rigidbody;
-    protected bool _isMoving = true;
+    [SerializeField] protected Rigidbody _rigidbody;
+    [SerializeField] protected bool _isMoving = true;
 
     public System.Action OnDeath;
 
@@ -25,13 +25,6 @@ public abstract class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-
-        if (_rigidbody != null)
-        {
-            _rigidbody.useGravity = true;
-            _rigidbody.isKinematic = false;
-            // Congela todas las rotaciones para evitar inclinaciones
-        }
     }
 
     protected virtual void Start()

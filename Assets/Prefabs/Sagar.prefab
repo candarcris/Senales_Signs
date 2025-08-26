@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393177229356060512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2974393506194969221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2974393507116434772}
   - component: {fileID: 2974393507116434760}
   - component: {fileID: 2974393507116434761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sagar
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -164,12 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13ed84731e686240833db48b9821593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   _sePuedeMover: 0
   _isLookingRight: 1
   _HorizontalMove: 0
   _movementVelocity: 3
   _moveSoftener: 0.2
-  _velocity: {x: 0, y: 0, z: 0}
   _jumpForce: 10
   _fallMultiplier: 2.5
   _whatIsGround:
@@ -183,11 +183,18 @@ MonoBehaviour:
   _coyoteTime: 0.1
   _handPoint: {fileID: 393177229356060512}
   _mainParent: {fileID: 0}
+  _isFloating: 0
+  _maxLife: 100
+  _currentLife: 0
+  _lifeUI: {fileID: 0}
+  reEscaledDamageAmount: 0
+  reEscaledLifeAmount: 0
   _hudManager: {fileID: 0}
   _faithMaxAmount: 0
   _faithAmount: 0
   _isHolding: 0
   _canPray: 0
+  _canCombat: 0
 --- !u!95 &2974393507116434772
 Animator:
   serializedVersion: 5
@@ -237,4 +244,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Level Interactives")]
     public GameObject triggerCombatEnemies;
+    public GameObject triggerWormAppear;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
         if (_enemySpawnerTransformList.Count > 0)
         {
             SetEnemies(_enemySpawnerTransformList[0]);
+            SetEnemies(_enemySpawnerTransformList[4]);
         }
         else
         {

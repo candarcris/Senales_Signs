@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
-    public float speed;
+    public float speed = 8f;
     public Transform target;
     private Animator anim;
     private BeamPool beamPool;
     private SphereCollider sphereCollider;
     
     [Header("Targeting")]
-    public float detectionRadius = 10f; // Radio de detección de enemigos
-    public LayerMask enemyLayerMask = 1; // Capa de enemigos
-    public Transform ehyalTransform; // Referencia a Ehyal para dirección de disparo
+    public float detectionRadius = 2f;
+    public LayerMask enemyLayerMask = 1;
+    public Transform ehyalTransform;
     
-    private Vector3 lastKnownDirection; // Última dirección conocida
+    [Header("Lifetime")]
+    public float maxLifetime = 3f;
+    
+    private Vector3 lastKnownDirection;
     private bool hasTarget = false;
+    private float lifetimeTimer = 0f;
+    private bool isDisappearing = false;
 
     private void Awake()
     {
@@ -26,26 +31,35 @@ public class Beam : MonoBehaviour
 
     public void ShootToTarget()
     {
-        // Buscar enemigo más cercano
-        Transform nearestEnemy = FindNearestEnemy();
-        
-        if (nearestEnemy != null && nearestEnemy.gameObject.activeInHierarchy)
+        // Si está desapareciendo, no hacer nada
+        if (isDisappearing) return;
+
+        // NO buscar enemigos aquí, solo usar el target ya asignado
+        // Transform nearestEnemy = FindNearestEnemy(); // ❌ ELIMINAR ESTA LÍNEA
+
+        if (target != null && target.gameObject.activeInHierarchy)
         {
             // Tener enemigo como objetivo
-            target = nearestEnemy;
             hasTarget = true;
-            lastKnownDirection = (target.position - transform.position).normalized;
+            // NO recalcular lastKnownDirection aquí, mantener la que se configuró
         }
         else
         {
-            // No hay enemigos, disparar en la dirección de Ehyal
+            // No hay enemigos, disparar en la dirección configurada
             hasTarget = false;
-            if (ehyalTransform != null)
+
+            // Incrementar timer para beams sin target
+            lifetimeTimer += Time.deltaTime;
+
+            // Verificar si debe desaparecer
+            if (lifetimeTimer >= maxLifetime && !isDisappearing)
             {
-                lastKnownDirection = GetEhyalDirection();
+                StartCoroutine(DisappearBeam());
+                return;
             }
         }
-        
+
+        // MOVER LA BALA
         if (hasTarget && target != null)
         {
             // Mover hacia el enemigo
@@ -89,17 +103,6 @@ public class Beam : MonoBehaviour
         return nearestEnemy;
     }
 
-    private Vector3 GetEhyalDirection()
-    {
-        if (ehyalTransform == null) return Vector3.right;
-        
-        // Obtener la dirección hacia donde mira Ehyal
-        // Asumiendo que Ehyal tiene un componente que indica su dirección
-        Vector3 ehyalDirection = ehyalTransform.right; // O la propiedad que uses para dirección
-        
-        return ehyalDirection;
-    }
-
     private void RotateBeam()
     {
         if (lastKnownDirection != Vector3.zero)
@@ -135,6 +138,12 @@ public class Beam : MonoBehaviour
         beamPool = pool;
         ehyalTransform = ehyal;
         
+        // Resetear valores IMPORTANTE
+        lifetimeTimer = 0f;
+        isDisappearing = false;
+        speed = 8f; // Resetear velocidad
+        sphereCollider.enabled = true;
+        
         // Resetear posición y otros valores
         if (target != null)
         {
@@ -144,24 +153,62 @@ public class Beam : MonoBehaviour
         else
         {
             hasTarget = false;
-            if (ehyalTransform != null)
-            {
-                lastKnownDirection = GetEhyalDirection();
-            }
-            else
-            {
-                lastKnownDirection = Vector3.right; // Dirección por defecto
-            }
+            //if (ehyalTransform != null)
+            //{
+            //    lastKnownDirection = GetEhyalDirection();
+            //}
+            //else
+            //{
+            //    lastKnownDirection = Vector3.right;
+            //}
+            lastKnownDirection = Vector3.right;
         }
+    }
+
+    // Método para disparo direccional (sin target)
+    public void SetupBeamDirectional(BeamPool pool, Transform ehyal, Vector3 direction)
+    {
+        target = null;
+        beamPool = pool;
+        ehyalTransform = ehyal;
         
-        // Resetear otros valores
-        speed = 8f; // O el valor que tengas configurado
+        // Resetear valores
+        lifetimeTimer = 0f;
+        isDisappearing = false;
+        speed = 8f;
         sphereCollider.enabled = true;
+        
+        // Configurar dirección específica
+        hasTarget = false;
+        lastKnownDirection = direction.normalized;
     }
 
     public void ReturnInAnimation()
     {
         beamPool.ReturnBeam(gameObject);
+    }
+    
+    // Método para desaparecer sin impacto
+    private IEnumerator DisappearBeam()
+    {
+        isDisappearing = true;
+        speed = 0;
+        sphereCollider.enabled = false;
+        
+        // Reproducir animación de desaparecer
+        if (anim != null)
+        {
+            anim.SetTrigger("Dissapear");
+        }
+        
+        // Esperar a que termine la animación
+        yield return new WaitForSeconds(0.5f);
+        
+        // Retornar al pool
+        if (beamPool != null)
+        {
+            beamPool.ReturnBeam(gameObject);
+        }
     }
     
     IEnumerator ReturnToPool()
@@ -196,3 +243,4 @@ public class Beam : MonoBehaviour
         }
     }
 }
+

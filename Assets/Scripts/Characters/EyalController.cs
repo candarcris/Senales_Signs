@@ -29,6 +29,11 @@ public class EyalController : MonoBehaviour, IHangable
     [SerializeField] private BeamPool beamPool;
     [SerializeField] private Transform enemyTarget; // Nueva variable para el objetivo
 
+    [Header("Attack Cooldown")]
+    [SerializeField] private float attackCooldown = 1f; // 1 segundo de cooldown
+    private float lastAttackTime = 0f; // Tiempo del último ataque
+    private bool canAttack = true; // Si puede atacar
+
 
     private void Awake()
     {
@@ -203,6 +208,12 @@ public class EyalController : MonoBehaviour, IHangable
 
     public void ShootAttack()
     {
+        // Verificar cooldown
+        if (!canAttack)
+        {
+            return; // No puede atacar aún
+        }
+
         // Verificar que el beamPool esté asignado
         if (beamPool == null)
         {
@@ -210,30 +221,123 @@ public class EyalController : MonoBehaviour, IHangable
             return;
         }
 
-        FindClosestEnemy();
+        // Verificar si se puede disparar (límite de beams activos)
+        if (!beamPool.CanShoot())
+        {
+            return;
+        }
+
+        // Ejecutar ataque
+        ExecuteAttack();
+
+        // Activar cooldown
+        StartCooldown();
+    }
+
+    private void ExecuteAttack()
+    {
+        // Buscar enemigo cercano ANTES de disparar
+        Transform nearbyEnemy = FindNearbyEnemy();
 
         GameObject beamObj;
-        
-        if (enemyTarget != null)
+
+        if (nearbyEnemy != null)
         {
-            // Disparar hacia enemigo
-            beamObj = beamPool.GetBeam(enemyTarget, transform);
+            // Disparar hacia enemigo cercano
+            beamObj = beamPool.GetBeam(nearbyEnemy, transform);
         }
         else
         {
-            // Disparar en dirección de Ehyal cuando no hay enemigos
-            beamObj = beamPool.GetBeam(null, transform);
+            // Disparar en dirección de Ehyal cuando no hay enemigos cercanos
+            Vector3 shootDirection;
+
+            if (_spriteRenderer.flipX)
+            {
+                shootDirection = Vector3.left; // Disparar hacia la izquierda
+            }
+            else
+            {
+                shootDirection = Vector3.right; // Disparar hacia la derecha
+            }
+
+            beamObj = beamPool.GetBeam(null, transform, shootDirection);
         }
-        
+
         if (beamObj != null)
         {
             // Posicionar la bala en la posición de Ehyal
-            beamObj.transform.position = transform.position;
+            if (_spriteRenderer.flipX)
+            {
+                beamObj.transform.position = transform.position + Vector3.left * 1.2f;
+            }
+            else
+            {
+                beamObj.transform.position = transform.position + Vector3.right * 1.2f;
+            }
         }
         else
         {
-            Debug.LogError("No se pudo obtener un beam del pool");
+            Debug.Log("No se pudo obtener un beam del pool");
         }
+    }
+
+    private void StartCooldown()
+    {
+        canAttack = false;
+        lastAttackTime = Time.time;
+
+        // Iniciar corrutina para resetear el cooldown
+        StartCoroutine(ResetCooldown());
+    }
+
+    private IEnumerator ResetCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
+
+    // Método para verificar si puede atacar (útil para UI o feedback visual)
+    public bool CanAttack()
+    {
+        return canAttack;
+    }
+
+    // Método para obtener el progreso del cooldown (0.0 a 1.0)
+    public float GetCooldownProgress()
+    {
+        if (canAttack) return 1f;
+
+        float elapsed = Time.time - lastAttackTime;
+        return Mathf.Clamp01(elapsed / attackCooldown);
+    }
+
+    private Transform FindNearbyEnemy()
+    {
+        if (levelManager != null && levelManager._enemyList.Count > 0)
+        {
+            Transform closestEnemy = null;
+            float closestDistance = float.MaxValue;
+            float maxDetectionDistance = 5f; // Radio de detección al disparar
+
+            foreach (Enemy enemy in levelManager._enemyList)
+            {
+                if (enemy != null && enemy.gameObject.activeInHierarchy)
+                {
+                    float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                    // Solo considerar enemigos dentro del radio de detección
+                    if (distance <= maxDetectionDistance && distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = enemy.transform;
+                    }
+                }
+            }
+
+            return closestEnemy;
+        }
+
+        return null;
     }
 
     private void FindClosestEnemy()

@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [System.Serializable]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     private InputActions inputActions;
     private InputAction jumpAction;
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private InputAction actionAction;
     private InputAction combatAction;
 
+    [SerializeField] private GameManager gameManager;
+
     [Header("Movimiento")]
     [Space]
     public bool _sePuedeMover;
@@ -25,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _HorizontalMove = 0f;
     [SerializeField] private float _movementVelocity;
     [SerializeField] private float _moveSoftener;
-    [SerializeField] private Vector3 _velocity = Vector3.zero;
 
     [Header("Salto")]
     [Space]
@@ -47,6 +50,28 @@ public class PlayerController : MonoBehaviour
     public Transform _handPoint;
     public Transform _mainParent;
     [SerializeField] private bool _isFloating;
+
+
+
+    [Header("Vida")]
+    [Space]
+
+    [SerializeField] private float _maxLife = 100f;
+    [SerializeField] private float _currentLife;
+    public float CurrentLife => _currentLife;
+    public float MaxLife => _maxLife;
+    public float LifePercentage => _currentLife / _maxLife;
+    public float _damage { get; set; }
+    public float _lifeAmount { get; set; }
+    public Image _lifeUI;
+    public float reEscaledDamageAmount = 0;
+    public float reEscaledLifeAmount = 0;
+
+    // Eventos para el sistema de suscripción
+    public static event Action<float> OnLifeChanged;
+    public static event Action<float> OnDamageReceived;
+    public static event Action OnPlayerDeath;
+
 
     [Header("Skills")]
     [Space]
@@ -70,6 +95,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = ManagerLocator.GetInputActions();
+        gameManager = ManagerLocator.GetGameManager();
 
         if (inputActions == null)
         {
@@ -93,6 +119,17 @@ public class PlayerController : MonoBehaviour
     {
         _hudManager = ManagerLocator.GetHUDManager();
         _faithMaxAmount = ReEscale.Normalize(100, 0, 100, 0, 1);
+        // Inicializar vida
+        _currentLife = _maxLife;
+        _lifeAmount = _maxLife;
+        reEscaledDamageAmount = ReEscale.Normalize(20, 0, _maxLife, 0, 1);
+        reEscaledLifeAmount = ReEscale.Normalize(_currentLife, 0, _maxLife, 0, 1);
+
+        // Actualizar UI inicial
+        if (_lifeUI != null)
+        {
+            _lifeUI.fillAmount = LifePercentage;
+        }
         _hudManager.SetFaithAmount(0);
 
         // Si ya tenemos la referencia, configurar las acciones
@@ -167,6 +204,121 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(stateName, stateValue);
         }
     }
+
+    public void TakeDamage(int amount, Vector3 direction, Vector3 position)
+    {
+        if (_currentLife <= 0) return; // Ya está muerto
+
+        _currentLife = Mathf.Max(0, _currentLife - amount);
+        reEscaledLifeAmount = ReEscale.Normalize(_currentLife, 0, _maxLife, 0, 1);
+
+        // Actualizar UI
+        if (_lifeUI != null)
+        {
+            _lifeUI.fillAmount = LifePercentage;
+        }
+
+        // Disparar eventos para el sistema de suscripción
+        OnLifeChanged?.Invoke(LifePercentage);
+        OnDamageReceived?.Invoke(amount);
+
+        // Animación de daño
+        if (_animator != null)
+        {
+            _sePuedeMover = false;
+            _HorizontalMove = 0;
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0); // Detiene movimiento horizontal
+
+            Vector3 knockbackDir = direction.normalized;
+            //transform.position += -knockbackDir * 0.8f;
+            //StartCoroutine(Knockback(knockbackDir, 5f, 1f));
+            transform.position = Vector3.Lerp(
+                transform.position,
+                transform.position + (-knockbackDir * 5f),
+                Time.deltaTime * 8f // factor de interpolación
+            );
+
+            _animator.SetBool("InDamage", true);
+        }
+
+        // Verificar muerte
+        if (_currentLife <= 0)
+        {
+            OnPlayerDeath?.Invoke();
+            Die();
+        }
+    }
+
+    IEnumerator Knockback(Vector3 knockbackDir, float distance, float duration)
+    {
+        Vector3 start = transform.position;
+        Vector3 end = start + (-knockbackDir * distance);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.position = Vector3.Lerp(start, end, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = end; // asegurar la posición final
+    }
+
+    public IEnumerator GetingDamage()
+    {
+        //StopState();
+
+
+        yield return new WaitForSeconds(1f);
+
+        _animator.SetBool("InDamage", false);
+        _sePuedeMover = true;
+    }
+
+    private void Die()
+    {
+        Debug.Log("Player muerto");
+        StopState();
+        gameManager.GameOver();
+
+        // Aquí puedes agregar lógica adicional de muerte
+        // Por ejemplo, cambiar animación, desactivar colisiones, etc.
+    }
+
+    // Método para curar al jugador
+    //public void Heal(float amount)
+    //{
+    //    if (_currentLife <= 0) return; // No curar si está muerto
+    //
+    //    _currentLife = Mathf.Min(_maxLife, _currentLife + amount);
+    //    reEscaledLifeAmount = ReEscale.Normalize(_currentLife, 0, _maxLife, 0, 1);
+    //
+    //    // Actualizar UI
+    //    if (_lifeUI != null)
+    //    {
+    //        _lifeUI.fillAmount = LifePercentage;
+    //    }
+    //
+    //    // Disparar evento
+    //    OnLifeChanged?.Invoke(LifePercentage);
+    //}
+    //
+    //// Método para establecer vida específica
+    //public void SetLife(float newLife)
+    //{
+    //    _currentLife = Mathf.Clamp(newLife, 0, _maxLife);
+    //    reEscaledLifeAmount = ReEscale.Normalize(_currentLife, 0, _maxLife, 0, 1);
+    //
+    //    // Actualizar UI
+    //    if (_lifeUI != null)
+    //    {
+    //        _lifeUI.fillAmount = LifePercentage;
+    //    }
+    //
+    //    // Disparar evento
+    //    OnLifeChanged?.Invoke(LifePercentage);
+    //}
 
     public void Pray(InputAction.CallbackContext context)
     {

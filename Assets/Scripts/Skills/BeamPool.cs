@@ -35,7 +35,7 @@ public class BeamPool : MonoBehaviour
         availableBeams.Enqueue(beam);
     }
     
-    public GameObject GetBeam()
+    public GameObject GetBeamBase()
     {
         GameObject beam;
         
@@ -80,19 +80,40 @@ public class BeamPool : MonoBehaviour
         available = availableBeams.Count;
         active = activeBeams.Count;
     }
+    
+    // Método para verificar si se puede disparar
+    public bool CanShoot()
+    {
+        return activeBeams.Count < poolSize;
+    }
 
     // Nuevo método para obtener beam con configuración completa
-    public GameObject GetBeam(Transform target, Transform ehyalTransform = null)
+    public GameObject GetBeam(Transform target, Transform ehyalTransform = null, Vector3? direction = null)
     {
-        GameObject beam = GetBeam();
+        // Verificar si ya hay demasiados beams activos
+        if (activeBeams.Count >= poolSize)
+        {
+            Debug.LogWarning($"Demasiados beams activos ({activeBeams.Count}). Retornando todos al pool.");
+            ReturnAllBeams();
+            return null; // No disparar hasta que se limpien
+        }
+        
+        GameObject beam = GetBeamBase();
         
         if (beam != null)
         {
             Beam beamComponent = beam.GetComponent<Beam>();
             if (beamComponent != null)
             {
-                // Configurar la bala con el nuevo método SetupBeam
-                beamComponent.SetupBeam(target, this, ehyalTransform);
+                // Si no hay target pero hay dirección, configurar para disparo direccional
+                if (target == null && direction.HasValue)
+                {
+                    beamComponent.SetupBeamDirectional(this, ehyalTransform, direction.Value);
+                }
+                else
+                {
+                    beamComponent.SetupBeam(target, this, ehyalTransform);
+                }
             }
         }
         

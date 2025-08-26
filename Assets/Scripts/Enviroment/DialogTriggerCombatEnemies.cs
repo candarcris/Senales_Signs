@@ -26,7 +26,7 @@ public class DialogTriggerCombatEnemies : TriggerEvent
         _boxCollider.enabled = false;
         //_levelManager.SetMultipleEnemies(_levelManager._enemySpawnerTransformList[2], 6, 2f);
 
-        for(var i = 2; i <= 6; i++)
+        for(var i = 2; i <= 3; i++)
         {
             if (_levelManager._enemySpawnerTransformList.Count > 0)
             {
