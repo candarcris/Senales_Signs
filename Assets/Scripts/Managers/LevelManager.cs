@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     public Action OnSetEnemies;
 
     [Header("Level Interactives")]
+    public GameObject triggerFirstDialog;
     public GameObject triggerCombatEnemies;
     public GameObject triggerWormAppear;
 
@@ -30,6 +31,7 @@ public class LevelManager : MonoBehaviour
     {
         _sagarController.SetFallingDrag(50);
         _sagarController.SetAnimation("FirstFall", true, true);
+        StartCoroutine(SetFirstFall());
         if (_enemySpawnerTransformList.Count > 0)
         {
             SetEnemies(_enemySpawnerTransformList[0]);
@@ -40,6 +42,13 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("No hay spawners de enemigos configurados");
         }
     }
+
+    IEnumerator SetFirstFall()
+    {
+        yield return new WaitForSeconds(5);
+        triggerFirstDialog.SetActive(true);
+    }
+
     public void SetEnemies(Transform spawner)
     {
         GroundEnemy newEnemy = new GroundEnemy(10f, 100f);

@@ -11,13 +11,11 @@ public class UIController : MonoBehaviour
     public Dictionary<string, UIElement> _UIList = new();
     public List<UIData> _UIElementList = new();
 
-
     /// <summary>
     /// Registers and instantiate the window to display
     /// </summary>
     /// <param name="content"></param>
-
-
+    /// 
     public void InitElementBase(string key, Transform parent)
     {
         if(!_UIList.ContainsKey(key))

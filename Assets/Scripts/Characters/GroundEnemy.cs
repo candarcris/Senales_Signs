@@ -55,8 +55,11 @@ public class GroundEnemy : Enemy
 
         if (target != null)
         {
-            // Si encuentra jugador en el radio -> cambiar a persecución
-            _currentState = EnemyState.Chase;
+            if(transform.position.y >= target.position.y)
+            {
+                // Si encuentra jugador en el radio -> cambiar a persecución
+                _currentState = EnemyState.Chase;
+            }
         }
         else
         {
@@ -153,18 +156,6 @@ public class GroundEnemy : Enemy
 
                 // Dirección de empuje (normal del impacto)
                 Vector3 pushDir = contact.normal;
-                Debug.Log("pushDir: " + pushDir);
-
-                // Ignorar knockback vertical si viene desde arriba
-                if (pushDir.y < 0.5f)
-                {
-                    collision.collider.enabled = false;
-                }
-                else
-                {
-                    // Caso normal, eliminar componente vertical si es menor
-                    pushDir.y = 0f;
-                }
 
                 pushDir.Normalize();
                 damageable.TakeDamage(2, pushDir);

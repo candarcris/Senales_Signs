@@ -26,11 +26,19 @@ public class ManagerLocator : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Limpiar referencias cuando se destruya el ManagerLocator
+        if (instance == this)
+        {
+            instance = null;
         }
     }
 

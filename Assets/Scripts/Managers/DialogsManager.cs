@@ -47,6 +47,15 @@ public class DialogsManager : MonoBehaviour
 
     private void SetupInputActions()
     {
+        if (_inputActions == null) return;
+
+        // Limpiar suscripción anterior si existe
+        if (_submitAction != null)
+        {
+            _submitAction.performed -= OnNextPhrase;
+            _submitAction.Disable();
+        }
+
         _submitAction = _inputActions.UI.Submit;
         _submitAction.Enable();
         _submitAction.performed += OnNextPhrase;
@@ -70,7 +79,25 @@ public class DialogsManager : MonoBehaviour
         {
             SetupInputActions();
         }
+        else
+        {
+            // Si no tenemos la referencia, esperar a que esté disponible
+            StartCoroutine(WaitForInputActionsAndSetup());
+        }
         _dialogPanel._nextButton.onClick.AddListener(NextPhrase);
+    }
+
+    private IEnumerator WaitForInputActionsAndSetup()
+    {
+        // Esperar hasta que tengamos la referencia a InputActions
+        while (_inputActions == null)
+        {
+            _inputActions = ManagerLocator.GetInputActions();
+            yield return null;
+        }
+
+        // Una vez que tenemos la referencia, configurar los inputs
+        SetupInputActions();
     }
 
     private void OnDisable()
@@ -121,6 +148,12 @@ public class DialogsManager : MonoBehaviour
     //}
     public void DoDialog(ENUM_CharTypeDialogs characterImportance, Dialogs dialogs)
     {
+        // Asegurar que los inputs estén configurados antes de iniciar el diálogo
+        if (_inputActions == null)
+        {
+            _inputActions = ManagerLocator.GetInputActions();
+            SetupInputActions();
+        }
         SetDialog(ChangeDialogColor(characterImportance), dialogs);
     }
 
@@ -134,10 +167,15 @@ public class DialogsManager : MonoBehaviour
 
     private void ShowDialogPanel()
     {
+        // Asegurar que los inputs estén configurados antes de cambiar el contexto
+        if (_inputActions == null)
+        {
+            _inputActions = ManagerLocator.GetInputActions();
+            SetupInputActions();
+        }
+
         // Deshabilita los controles del jugador y habilita los de UI
         gameManager.SetContext(Context.UI);
-        //_inputActions.PlayerControl.Disable();
-        //_inputActions.UI.Enable();
         FindObjectOfType<PlayerController>().StopState();
         _dialogPanel.gameObject.SetActive(true);
     }

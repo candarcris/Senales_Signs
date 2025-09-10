@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     private InputAction actionAction;
     private InputAction combatAction;
 
-    [SerializeField] private GameManager gameManager;
-
     [Header("Movimiento")]
     [Space]
     public bool _sePuedeMover;
@@ -95,12 +93,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         inputActions = ManagerLocator.GetInputActions();
-        gameManager = ManagerLocator.GetGameManager();
 
-        if (inputActions == null)
-        {
+        if (inputActions != null)
+            SetupInputActions();
+        else
             StartCoroutine(WaitForGameManager());
-        }
     }
 
     private IEnumerator WaitForGameManager()
@@ -110,8 +107,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             yield return null;
         }
         inputActions = ManagerLocator.GetInputActions();
-
-        // Configurar las acciones una vez que tengamos la referencia
         SetupInputActions();
     }
 
@@ -131,16 +126,13 @@ public class PlayerController : MonoBehaviour, IDamageable
             _lifeUI.fillAmount = LifePercentage;
         }
         _hudManager.SetFaithAmount(0);
-
-        // Si ya tenemos la referencia, configurar las acciones
-        if (inputActions != null)
-        {
-            SetupInputActions();
-        }
     }
 
     private void SetupInputActions()
     {
+        // Limpiar suscripciones anteriores
+        DeactiveInputs();
+
         jumpAction = inputActions.PlayerControl.Jump;
         jumpAction.Enable();
         jumpAction.performed += Jump;
@@ -172,24 +164,26 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void OnDisable()
     {
-        // Desuscribirse de los eventos
-        if (jumpAction != null)
-            jumpAction.performed -= Jump;
+        DeactiveInputs();
+    }
+
+    private void OnDestroy()
+    {
+        DeactiveInputs();
+    }
+
+    public void DeactiveInputs()
+    {
+        if (jumpAction != null) { jumpAction.performed -= Jump; jumpAction.Disable(); }
+        if (moveAction != null) moveAction.Disable();
         if (prayAction != null)
+        {
             prayAction.performed -= Pray;
-        if (prayAction != null)
             prayAction.canceled -= Pray;
-        if (actionAction != null)
-            actionAction.performed -= GeneralAction;
-        if (combatAction != null)
-            combatAction.performed -= Combat;
-
-
-        jumpAction.Disable();
-        moveAction.Disable();
-        prayAction.Disable();
-        actionAction.Disable();
-        combatAction.Disable();
+            prayAction.Disable();
+        }
+        if (actionAction != null) { actionAction.performed -= GeneralAction; actionAction.Disable(); }
+        if (combatAction != null) { combatAction.performed -= Combat; combatAction.Disable(); }
     }
 
     public void SetFallingDrag(float falling)
@@ -234,7 +228,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             //StartCoroutine(Knockback(knockbackDir, 5f, 1f));
             transform.position = Vector3.Lerp(
                 transform.position,
-                transform.position + (-knockbackDir * 5f),
+                transform.position + (-knockbackDir * 6f),
                 Time.deltaTime * 8f // factor de interpolación
             );
 
@@ -247,22 +241,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             OnPlayerDeath?.Invoke();
             Die();
         }
-    }
-
-    IEnumerator Knockback(Vector3 knockbackDir, float distance, float duration)
-    {
-        Vector3 start = transform.position;
-        Vector3 end = start + (-knockbackDir * distance);
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            transform.position = Vector3.Lerp(start, end, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = end; // asegurar la posición final
     }
 
     public IEnumerator GetingDamage()
@@ -278,6 +256,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        GameManager gameManager = ManagerLocator.GetGameManager();
         Debug.Log("Player muerto");
         StopState();
         gameManager.GameOver();
@@ -423,7 +402,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void GeneralAction(InputAction.CallbackContext context)
     { 
-        if(_isHolding)
+        if(_isHolding && context.performed)
         {
             this.transform.parent = _mainParent;
             _animator.SetBool("HoldAir2", false);
@@ -521,7 +500,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        _HorizontalMove = moveAction.ReadValue<float>();
+        _HorizontalMove = moveAction != null ? moveAction.ReadValue<float>() : 0;
 
         if (_sePuedeMover) 
         { 

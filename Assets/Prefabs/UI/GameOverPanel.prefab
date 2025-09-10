@@ -811,6 +811,7 @@ MonoBehaviour:
   id: gameOver
   _continuarButton: {fileID: 3661467673136157798}
   _exitButton: {fileID: 1762470589067804382}
+  _navigationCooldown: 0.2
 --- !u!223 &4519266621627767753
 Canvas:
   m_ObjectHideFlags: 0

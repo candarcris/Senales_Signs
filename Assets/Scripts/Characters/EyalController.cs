@@ -19,8 +19,6 @@ public class EyalController : MonoBehaviour, IHangable
     [SerializeField] private Transform hangPoint;
     public Transform HangPoint => hangPoint;
 
-    private InputActions _inputActions;
-    private InputAction _eyalAction;
 
     private bool _sagarPraying = false;
 
@@ -37,20 +35,10 @@ public class EyalController : MonoBehaviour, IHangable
 
     private void Awake()
     {
-        _inputActions = ManagerLocator.GetInputActions();
         levelManager = ManagerLocator.GetLevelManager();
 
         // Si GameManager a�n no est� inicializado, esperar
-        if (_inputActions == null)
-        {
-            StartCoroutine(WaitForGameManager());
-        }
-
-        PlayerController.OnHold += HoldSagarAir;
-        PlayerController.OnDrop += DropSagar;
-        PlayerController.OnPray += FollowSagar;
-        PlayerController.OnPrayEnd += StopFollowingSagar;
-        PlayerController.OnCombat += ShootAttack;
+        StartCoroutine(WaitForGameManager());
 
         _sagarTransform = FindObjectOfType<PlayerController>().transform;
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -62,21 +50,22 @@ public class EyalController : MonoBehaviour, IHangable
         {
             yield return null;
         }
-        _inputActions = ManagerLocator.GetInputActions();
+
+        SetupInputActions();
     }
 
     private void OnEnable()
     {
-        if (_inputActions != null)
-        {
-            SetupInputActions();
-        }
+        SetupInputActions();
     }
 
     private void SetupInputActions()
     {
-        _eyalAction = _inputActions.EhyalControl.EhyalAction;
-        _eyalAction.Enable();
+        PlayerController.OnHold += HoldSagarAir;
+        PlayerController.OnDrop += DropSagar;
+        PlayerController.OnPray += FollowSagar;
+        PlayerController.OnPrayEnd += StopFollowingSagar;
+        PlayerController.OnCombat += ShootAttack;
     }
 
     private void OnDisable()
@@ -88,10 +77,38 @@ public class EyalController : MonoBehaviour, IHangable
         PlayerController.OnCombat -= ShootAttack;
     }
 
+    private void OnDestroy()
+    {
+        // Limpiar suscripciones de eventos
+        PlayerController.OnHold -= HoldSagarAir;
+        PlayerController.OnDrop -= DropSagar;
+        PlayerController.OnPray -= FollowSagar;
+        PlayerController.OnPrayEnd -= StopFollowingSagar;
+        PlayerController.OnCombat -= ShootAttack;
+    }
+
     private void Start()
     {
         gameManager = ManagerLocator.GetGameManager();
+        // Forzar reconexión de eventos después de cambiar de escena
+        StartCoroutine(ForceReconnectEvents());
         Movement(false);
+    }
+
+    private IEnumerator ForceReconnectEvents()
+    {
+        // Esperar un frame
+        yield return null;
+
+        // Limpiar suscripciones anteriores
+        PlayerController.OnHold -= HoldSagarAir;
+        PlayerController.OnDrop -= DropSagar;
+        PlayerController.OnPray -= FollowSagar;
+        PlayerController.OnPrayEnd -= StopFollowingSagar;
+        PlayerController.OnCombat -= ShootAttack;
+
+        // Reconfigurar suscripciones
+        SetupInputActions();
     }
 
     public void Movement(bool activeCollider)

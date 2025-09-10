@@ -21,7 +21,6 @@ public enum Context
 
 public class GameManager : MonoBehaviour
 {
-    UIController _uiController;
     public static GameManager _sharedInstance;// singleton
     public ENUM_GameState _currentGameState = ENUM_GameState.menu;
     public List<GameObject> _uiContentsList = new();
@@ -31,17 +30,30 @@ public class GameManager : MonoBehaviour
     // Referencia al InputActions
     private InputActions _inputActions;
 
+    // Propiedad con lazy initialization
+    public InputActions InputActions
+    {
+        get
+        {
+            if (_inputActions == null)
+            {
+                _inputActions = new InputActions();
+            }
+            return _inputActions;
+        }
+    }
+
     private void Awake()
     {
         if(_sharedInstance == null)
         {
             _sharedInstance = this;
+            //DontDestroyOnLoad(gameObject);
         }
-
-        _uiController = this.GetComponent<UIController>();
-        
-        // Inicializar InputActions
-        _inputActions = new InputActions();
+        else if (_sharedInstance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -54,6 +66,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        SetContext(Context.Player);
         SetGamState(ENUM_GameState.inGame);
     }
 
@@ -62,6 +75,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
+        UIController _uiController = FindObjectOfType<UIController>();
         SetGamState(ENUM_GameState.gameOver);
         _uiController.InitElementBase("gameOver", _uiController._UIWindowsParentTransform);
         _uiController.GetUIElementWindow("gameOver").GetComponent<GameOverPanelUI>().FadeIn();
@@ -104,28 +118,27 @@ public class GameManager : MonoBehaviour
     /// <param name="context">El contexto a activar (Player, UI, o Ehyal)</param>
     public void SetContext(Context context)
     {
+        // Usar la propiedad que maneja la inicialización automáticamente
+        var inputActions = InputActions;
+
         // Deshabilitar todos los Action Maps
-        foreach(var action in _inputActions)
+        foreach (var action in inputActions)
         {
             action.Disable();
         }
-        //_inputActions.PlayerControl.Disable();
-        //_inputActions.UI.Disable();
-        //_inputActions.EhyalControl.Disable();
 
         // Habilitar solo el Action Map especificado
         switch (context)
         {
             case Context.Player:
-                _inputActions.PlayerControl.Enable();
+                inputActions.PlayerControl.Enable();
                 _context = Context.Player;
                 break;
             case Context.UI:
-                _inputActions.UI.Enable();
+                inputActions.UI.Enable();
                 _context = Context.UI;
                 break;
             case Context.Ehyal:
-                _inputActions.EhyalControl.Enable();
                 _context = Context.Ehyal;
                 break;
         }
@@ -137,12 +150,14 @@ public class GameManager : MonoBehaviour
     /// <returns>La instancia de InputActions</returns>
     public InputActions GetInputActions()
     {
-        return _inputActions;
+        return InputActions;
     }
 
     private void OnDestroy()
     {
-        // Limpiar recursos de InputActions
-        _inputActions?.Dispose();
+        if (_sharedInstance == this)
+        {
+            _inputActions?.Dispose();
+        }
     }
 }

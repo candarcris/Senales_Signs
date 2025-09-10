@@ -165,7 +165,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1cdd6736-6b2c-41fb-9e8b-2541f1baa77f"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -176,7 +176,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7743c5fe-53b2-446e-a2c5-ad74765c7f13"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -187,7 +187,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""119b8a9f-0042-4b11-aa70-b62519400c88"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -209,7 +209,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""47a6bfbd-4245-4d95-93c5-66082f7ae4f0"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -225,12 +225,21 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Submit"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""281b1ae4-cf78-4a27-962e-2654e70683ae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Navigate"",
+                    ""type"": ""Value"",
+                    ""id"": ""8fdfb977-ff72-42da-a094-f5a5ed79a974"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -255,45 +264,61 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""EhyalControl"",
-            ""id"": ""df57be35-96cc-4023-b012-d31f79e0db16"",
-            ""actions"": [
+                },
                 {
-                    ""name"": ""EhyalAction"",
-                    ""type"": ""Button"",
-                    ""id"": ""352972f7-b76c-4944-9915-29d85da9e49f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b4a1bde6-3c42-470f-b441-88fedff2f781"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""56665d5d-a252-4508-b6ec-3bac4e657613"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EhyalAction"",
-                    ""isComposite"": false,
+                    ""action"": ""Navigate"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""0c7f1b14-31a2-4be7-85c4-ceb1e49f0b8e"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""name"": ""negative"",
+                    ""id"": ""4ac39d32-f5b6-4ac5-8e08-a314184bdd02"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EhyalAction"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b099a1b2-68dd-44a8-be72-89e5dfff8a9f"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2b30393f-df4d-412e-95ae-770426990de1"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ba5ad025-ba2e-44ae-b29a-6c4c34b7bf85"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -310,9 +335,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-        // EhyalControl
-        m_EhyalControl = asset.FindActionMap("EhyalControl", throwIfNotFound: true);
-        m_EhyalControl_EhyalAction = m_EhyalControl.FindAction("EhyalAction", throwIfNotFound: true);
+        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,11 +461,13 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Submit;
+    private readonly InputAction m_UI_Navigate;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
         public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
+        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -455,6 +480,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Submit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                 @Submit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                 @Submit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
+                @Navigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -462,43 +490,13 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
+                @Navigate.started += instance.OnNavigate;
+                @Navigate.performed += instance.OnNavigate;
+                @Navigate.canceled += instance.OnNavigate;
             }
         }
     }
     public UIActions @UI => new UIActions(this);
-
-    // EhyalControl
-    private readonly InputActionMap m_EhyalControl;
-    private IEhyalControlActions m_EhyalControlActionsCallbackInterface;
-    private readonly InputAction m_EhyalControl_EhyalAction;
-    public struct EhyalControlActions
-    {
-        private @InputActions m_Wrapper;
-        public EhyalControlActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @EhyalAction => m_Wrapper.m_EhyalControl_EhyalAction;
-        public InputActionMap Get() { return m_Wrapper.m_EhyalControl; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(EhyalControlActions set) { return set.Get(); }
-        public void SetCallbacks(IEhyalControlActions instance)
-        {
-            if (m_Wrapper.m_EhyalControlActionsCallbackInterface != null)
-            {
-                @EhyalAction.started -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
-                @EhyalAction.performed -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
-                @EhyalAction.canceled -= m_Wrapper.m_EhyalControlActionsCallbackInterface.OnEhyalAction;
-            }
-            m_Wrapper.m_EhyalControlActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @EhyalAction.started += instance.OnEhyalAction;
-                @EhyalAction.performed += instance.OnEhyalAction;
-                @EhyalAction.canceled += instance.OnEhyalAction;
-            }
-        }
-    }
-    public EhyalControlActions @EhyalControl => new EhyalControlActions(this);
     public interface IPlayerControlActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -510,9 +508,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnSubmit(InputAction.CallbackContext context);
-    }
-    public interface IEhyalControlActions
-    {
-        void OnEhyalAction(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
     }
 }
