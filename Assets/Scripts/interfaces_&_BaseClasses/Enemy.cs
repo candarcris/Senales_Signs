@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] public float _damage { get; set; }
-    [SerializeField] public float _lifeAmount { get; set; }
-    [SerializeField] public Image _lifeUI;
+    public float _damage { get; set; }
+    public float _lifeAmount { get; set; }
+    public Image _lifeUI;
 
     protected Animator _animator;
     [SerializeField] protected Rigidbody _rigidbody;
@@ -41,7 +41,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnEnemyDeath()
     {
-        // Lógica base cuando muere cualquier enemigo
+        // Lï¿½gica base cuando muere cualquier enemigo
         OnDeath?.Invoke();
     }
 
@@ -54,7 +54,7 @@ public abstract class Enemy : MonoBehaviour
         }
         if (_rigidbody != null)
         {
-            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.linearVelocity = Vector3.zero;
         }
     }
 }

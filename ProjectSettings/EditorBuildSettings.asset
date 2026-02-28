@@ -5,12 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: fe4f73ddc4ab8004e93d711466cc577c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SagarDream.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Sandbox.unity
+    guid: fef77d09a2bafc643bdb469d300cea9d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 92707d58872433c41ac7dbe255ce2b6c,
       type: 2}
+  m_UseUCBPForAssetBundles: 0

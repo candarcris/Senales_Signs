@@ -19,7 +19,6 @@ public class EyalController : MonoBehaviour, IHangable
     [SerializeField] private Transform hangPoint;
     public Transform HangPoint => hangPoint;
 
-
     private bool _sagarPraying = false;
 
     [Header("Skills")]
@@ -31,6 +30,7 @@ public class EyalController : MonoBehaviour, IHangable
     [SerializeField] private float attackCooldown = 1f; // 1 segundo de cooldown
     private float lastAttackTime = 0f; // Tiempo del último ataque
     private bool canAttack = true; // Si puede atacar
+
 
 
     private void Awake()
@@ -94,6 +94,7 @@ public class EyalController : MonoBehaviour, IHangable
         StartCoroutine(ForceReconnectEvents());
         Movement(false);
     }
+
 
     private IEnumerator ForceReconnectEvents()
     {

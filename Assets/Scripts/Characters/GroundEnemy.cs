@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -57,7 +56,7 @@ public class GroundEnemy : Enemy
         {
             if(transform.position.y >= target.position.y)
             {
-                // Si encuentra jugador en el radio -> cambiar a persecución
+                // Si encuentra jugador en el radio -> cambiar a persecuciï¿½n
                 _currentState = EnemyState.Chase;
             }
         }
@@ -97,7 +96,7 @@ public class GroundEnemy : Enemy
     {
         float distanceFromStart = transform.position.x - _startPosition.x;
 
-        // Cambia de dirección al llegar a los extremos
+        // Cambia de direcciï¿½n al llegar a los extremos
         if (_movingRight && distanceFromStart >= _patrolDistance)
         {
             _movingRight = false;
@@ -109,14 +108,14 @@ public class GroundEnemy : Enemy
             FlipEnemy();
         }
 
-        // Movimiento físico: solo cambia la velocidad en X
+        // Movimiento fï¿½sico: solo cambia la velocidad en X
         float direction = _movingRight ? 1f : -1f;
         if (_rigidbody != null)
         {
-            _rigidbody.velocity = new Vector3(direction * _moveSpeed, _rigidbody.velocity.y, 0);
+            _rigidbody.linearVelocity = new Vector3(direction * _moveSpeed, _rigidbody.linearVelocity.y, 0);
         }
 
-        // Animación
+        // Animaciï¿½n
         if (_animator != null)
         {
             _animator.SetBool("IsMoving", true);
@@ -154,7 +153,7 @@ public class GroundEnemy : Enemy
             {
                 ContactPoint contact = collision.contacts[0];
 
-                // Dirección de empuje (normal del impacto)
+                // Direcciï¿½n de empuje (normal del impacto)
                 Vector3 pushDir = contact.normal;
 
                 pushDir.Normalize();
@@ -177,7 +176,7 @@ public class GroundEnemy : Enemy
 
     private Transform FindNearestPlayer()
     {
-        // Buscar enemigos en el radio de detección
+        // Buscar enemigos en el radio de detecciï¿½n
         Collider[] playersInRange = Physics.OverlapSphere(transform.position, _detectionRadius);
 
         Transform nearestPlayer = null;
@@ -209,9 +208,9 @@ public class GroundEnemy : Enemy
 
         if (distanceToTarget > _attackRange)
         {
-            // Si está lejos todavía -> moverse hacia él
+            // Si estï¿½ lejos todavï¿½a -> moverse hacia ï¿½l
             Vector3 direction = (target.position - transform.position).normalized;
-            _rigidbody.velocity = new Vector3(direction.x * _moveSpeed, _rigidbody.velocity.y, 0);
+            _rigidbody.linearVelocity = new Vector3(direction.x * _moveSpeed, _rigidbody.linearVelocity.y, 0);
 
             if (_animator != null)
             {
@@ -221,7 +220,7 @@ public class GroundEnemy : Enemy
         }
         else
         {
-            // Si está lo suficientemente cerca -> atacar
+            // Si estï¿½ lo suficientemente cerca -> atacar
             //_rigidbody.velocity = Vector3.zero; // parar movimiento al atacar
 
             if (_animator != null)
@@ -229,7 +228,7 @@ public class GroundEnemy : Enemy
                 _animator.SetBool("IsMoving", false);
             }
 
-            Attack(); // lanzar animación / lógica de ataque
+            Attack(); // lanzar animaciï¿½n / lï¿½gica de ataque
         }
     }
 
@@ -254,9 +253,9 @@ public class GroundEnemy : Enemy
 
     public override void GetDamage(float amount)
     {
-        if (reEscaledLifeAmount <= 0) return; // Ya está muerto
+        if (reEscaledLifeAmount <= 0) return; // Ya estï¿½ muerto
 
-        // Usar el amount recibido en lugar del daño fijo
+        // Usar el amount recibido en lugar del daï¿½o fijo
         float damageToApply = ReEscale.Normalize(amount, 0, _lifeAmount, 0, 1);
         reEscaledLifeAmount -= damageToApply;
 
@@ -273,7 +272,7 @@ public class GroundEnemy : Enemy
 
         StopMovement();
 
-        // Animación de daño
+        // Animaciï¿½n de daï¿½o
         if (_animator != null)
         {
             _animator.SetTrigger("GetDamage");
