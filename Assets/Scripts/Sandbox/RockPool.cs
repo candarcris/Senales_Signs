@@ -1,16 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RockPool : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static RockPool Instance;
+    public GameObject rockPrefab;
+    public int poolSize = 10;
+    private List<GameObject> pool = new List<GameObject>();
+
+    void Awake() { Instance = this; }
+
     void Start()
     {
-        
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject obj = Instantiate(rockPrefab);
+            obj.SetActive(false);
+            pool.Add(obj);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject GetRock()
     {
-        
+        foreach (GameObject rock in pool)
+        {
+            if (!rock.activeInHierarchy) return rock;
+        }
+        return null;
     }
 }

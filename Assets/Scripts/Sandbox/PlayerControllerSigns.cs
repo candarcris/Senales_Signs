@@ -9,13 +9,88 @@ public class PlayerControllerSigns : MonoBehaviour
     private Vector3 velocity;
     private Transform cam;
 
+    [Header("Componentes Visuales")]
+    // Ahora guardaremos TODOS los pedazos del cuerpo
+    private SpriteRenderer[] todasLasPartes;
+    private MaterialPropertyBlock propertyBlock;
+    private bool puedeMoverse = true;     // Controla si recibe inputs
+
     void Start()
     {
         cam = Camera.main.transform;
+        // 1. Busca todos los SpriteRenderers en este objeto y en sus hijos (el PSD completo)
+        todasLasPartes = GetComponentsInChildren<SpriteRenderer>();
+
+        // 2. Inicializamos el bloque de propiedades (súper optimizado)
+        propertyBlock = new MaterialPropertyBlock();
+    }
+
+    public void RecibirImpacto()
+    {
+        if (puedeMoverse) // Evita que se reinicie el contador si le pegan 2 rocas a la vez
+        {
+            StartCoroutine(RutinaDeImpacto());
+        }
+    }
+
+    private System.Collections.IEnumerator RutinaDeImpacto()
+    {
+        // 1. Pierde el control
+        puedeMoverse = false;
+
+        // 2. Truco Ninja: Le quitamos el Tag "Player" para que los enemigos no lo reconozcan
+        gameObject.tag = "Untagged";
+
+        // Definimos los colores (asumiendo que el color base es blanco/normal)
+        Color colorOriginal = Color.white;
+        Color colorDanio = new Color(1f, 0.3f, 0.3f, 0f);
+
+        // El nombre de la variable de color en URP suele ser "_BaseColor"
+        string nombrePropiedad = "_BaseColor";
+        // Nota: Si tus sprites se ponen negros en vez de titilar, cambia la línea de arriba a "_Color"
+
+        // 3. Espacio para futura animación
+        // animator.SetTrigger("Hit");
+
+        // 4. Bucle de Titileo (Dura 2 segundos)
+        float tiempoTotal = 2f;
+        float tiempoPasado = 0f;
+        bool mostrarDanio = true;
+
+        while (tiempoPasado < tiempoTotal)
+        {
+            // Elegimos qué color toca en este frame
+            Color colorActual = mostrarDanio ? colorDanio : colorOriginal;
+
+            // Le metemos el color al bloque de propiedades
+            propertyBlock.SetColor(nombrePropiedad, colorActual);
+
+            // Se lo aplicamos a CADA pedazo del cuerpo al mismo tiempo
+            foreach (SpriteRenderer parte in todasLasPartes)
+            {
+                parte.SetPropertyBlock(propertyBlock);
+            }
+
+            mostrarDanio = !mostrarDanio;
+            yield return new WaitForSeconds(0.15f);
+            tiempoPasado += 0.15f;
+        }
+
+        // Restaurar todo a la normalidad
+        propertyBlock.SetColor(nombrePropiedad, colorOriginal);
+        foreach (SpriteRenderer parte in todasLasPartes)
+        {
+            parte.SetPropertyBlock(propertyBlock);
+        }
+
+        gameObject.tag = "Player";
+        puedeMoverse = true;
     }
 
     void Update()
     {
+        if (!puedeMoverse) return;
+
         // 1. Obtener inputs
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");

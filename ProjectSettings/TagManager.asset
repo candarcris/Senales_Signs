@@ -10,6 +10,7 @@ TagManager:
   - DeadZone
   - EhyalPower
   - GroundEnemySmallAttackRange
+  - Floor
   layers:
   - Default
   - TransparentFX
