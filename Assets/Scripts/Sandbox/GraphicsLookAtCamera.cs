@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [ExecuteInEditMode] // Para verlo en la escena sin dar Play
-public class GraphicSagarLookAtCamera : MonoBehaviour
+public class GraphicsLookAtCamera : MonoBehaviour
 {
     void LateUpdate()
     {
