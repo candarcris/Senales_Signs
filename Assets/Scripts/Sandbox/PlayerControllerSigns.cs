@@ -5,6 +5,15 @@ public class PlayerControllerSigns : MonoBehaviour
     public CharacterController controller;
     public float speed = 5f;
     public float gravity = -9.81f;
+    [Header("Salto y Físicas")]
+    public float jumpHeight = 3f;
+    [Tooltip("Tiempo de gracia para saltar tras caer de una orilla")]
+    public float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+    
+    [Tooltip("Tiempo que el juego recuerda que presionaste el botón de salto antes de tocar el suelo")]
+    public float jumpBufferTime = 0.2f;
+    private float jumpBufferCounter;
 
     private Vector3 velocity;
     private Transform cam;
@@ -15,13 +24,16 @@ public class PlayerControllerSigns : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private bool puedeMoverse = true;     // Controla si recibe inputs
 
+    float horizontal;
+    float vertical;
+
     void Start()
     {
         cam = Camera.main.transform;
         // 1. Busca todos los SpriteRenderers en este objeto y en sus hijos (el PSD completo)
         todasLasPartes = GetComponentsInChildren<SpriteRenderer>();
 
-        // 2. Inicializamos el bloque de propiedades (s�per optimizado)
+        // 2. Inicializamos el bloque de propiedades (súper optimizado)
         propertyBlock = new MaterialPropertyBlock();
     }
 
@@ -47,9 +59,9 @@ public class PlayerControllerSigns : MonoBehaviour
 
         // El nombre de la variable de color en URP suele ser "_BaseColor"
         string nombrePropiedad = "_BaseColor";
-        // Nota: Si tus sprites se ponen negros en vez de titilar, cambia la l�nea de arriba a "_Color"
+        // Nota: Si tus sprites se ponen negros en vez de titilar, cambia la línea de arriba a "_Color"
 
-        // 3. Espacio para futura animaci�n
+        // 3. Espacio para futura animación
         // animator.SetTrigger("Hit");
 
         // 4. Bucle de Titileo (Dura 2 segundos)
@@ -59,7 +71,7 @@ public class PlayerControllerSigns : MonoBehaviour
 
         while (tiempoPasado < tiempoTotal)
         {
-            // Elegimos qu� color toca en este frame
+            // Elegimos qué color toca en este frame
             Color colorActual = mostrarDanio ? colorDanio : colorOriginal;
 
             // Le metemos el color al bloque de propiedades
@@ -91,21 +103,42 @@ public class PlayerControllerSigns : MonoBehaviour
     {
         if (!puedeMoverse) return;
 
-        // 1. Obtener inputs
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        // --- SISTEMAS DE SALTO MEJORADO ---
+        // 1. Coyote Time
+        if (controller.isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // 2. Jump Buffer
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        // 1. Obtener inputs de movimiento
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
-            // 2. Calcular �ngulo de movimiento relativo a la c�mara
+            // 2. Calcular ángulo de movimiento relativo a la cámara
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            // 3. Mover al personaje
+            // 3. Mover al personaje en X/Z
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
-            // 4. L�gica de "Giro" Visual (Flip)
+            // 4. Lógica de "Giro" Visual (Flip)
             // Usamos el input horizontal para decidir si el sprite mira a la izq o der
             if (horizontal != 0)
             {
@@ -114,8 +147,40 @@ public class PlayerControllerSigns : MonoBehaviour
             }
         }
 
-        // Gravedad simple
+        // Gravedad simple: Resetear si toca el suelo
+        if (controller.isGrounded && velocity.y < 0)
+        {
+            // Ojo: un valor de -2f en el suelo nos mantiene pegados al CharacterController
+            velocity.y = -2f;
+        }
+
+        // --- LÓGICA DE SALTO ---
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        {
+            // Ecuación física para el salto. Invertimos gravedad porque es negativa
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            
+            // Consumimos el buffer y el coyote time para no hacer doble saltos accidentales
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
+        }
+
+        // Cancelación de salto (si suelta el botón antes de tiempo, cae más rápido)
+        if (Input.GetButtonUp("Jump") && velocity.y > 0f)
+        {
+            velocity.y *= 0.5f; 
+            coyoteTimeCounter = 0f;
+        }
+
         velocity.y += gravity * Time.deltaTime;
+
+        // Limite de velocidad maxima de caida
+        if (velocity.y < -120f)
+        {
+            velocity.y = -120f;
+        }
+
+        // Aplicamos el movimiento en Y (gravedad/salto)
         controller.Move(velocity * Time.deltaTime);
     }
 }

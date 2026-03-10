@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class ElementoOculto : MonoBehaviour
 {
@@ -65,7 +66,6 @@ public class ElementoOculto : MonoBehaviour
     // --- EFECTO VISUAL SUAVE ---
     private IEnumerator TransicionVisibilidad(bool aparecer)
     {
-        Debug.Log("apareciendo " + aparecer);
         // Si aparece, activamos la colisión inmediatamente para que el jugador no caiga
         if (aparecer) miCollider.enabled = true;
 
