@@ -5,8 +5,10 @@ public class PlayerControllerSigns : MonoBehaviour
     public CharacterController controller;
     public float speed = 5f;
     public float gravity = -9.81f;
+
     [Header("Salto y Físicas")]
     public float jumpHeight = 3f;
+
     [Tooltip("Tiempo de gracia para saltar tras caer de una orilla")]
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
@@ -16,16 +18,18 @@ public class PlayerControllerSigns : MonoBehaviour
     private float jumpBufferCounter;
 
     private Vector3 velocity;
+    public void FrenarEnSeco()
+    {
+        velocity = Vector3.zero;
+    }
     private Transform cam;
 
     [Header("Componentes Visuales")]
     // Ahora guardaremos TODOS los pedazos del cuerpo
     private SpriteRenderer[] todasLasPartes;
     private MaterialPropertyBlock propertyBlock;
-    private bool puedeMoverse = true;     // Controla si recibe inputs
 
-    float horizontal;
-    float vertical;
+    public bool puedeMoverse = true;     // Controla si recibe inputs
 
     void Start()
     {
@@ -125,8 +129,8 @@ public class PlayerControllerSigns : MonoBehaviour
         }
 
         // 1. Obtener inputs de movimiento
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)

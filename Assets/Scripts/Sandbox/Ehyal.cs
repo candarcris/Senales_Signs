@@ -1,20 +1,33 @@
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Ehyal : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool isControlledByPlayer = false;
+    public Transform playerTarget;
+    public Vector3 hangingOffset = new Vector3(0, 1.3f, 0);
+
     void Start()
     {
-
+        if (playerTarget == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) playerTarget = player.transform;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        if (isControlledByPlayer)
+        {
+            // Ehyal se posiciona arriba de Sagar
+            if (playerTarget != null)
+            {
+                transform.position = Vector3.Lerp(transform.position, playerTarget.position + hangingOffset, Time.deltaTime * 15f);
+            }
+        }
 
+        // Escucha inputs para girar (independientemente si es controlado o si solo estÃ¡ flotando)
+        float horizontal = Input.GetAxisRaw("Horizontal");
         if (horizontal != 0)
         {
             float flip = (horizontal > 0) ? 0.5f : -0.5f;
