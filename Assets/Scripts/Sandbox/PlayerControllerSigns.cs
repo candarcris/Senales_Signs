@@ -55,7 +55,7 @@ public class PlayerControllerSigns : MonoBehaviour
         puedeMoverse = false;
 
         // 2. Truco Ninja: Le quitamos el Tag "Player" para que los enemigos no lo reconozcan
-        gameObject.tag = "Untagged";
+        //gameObject.tag = "Untagged";
 
         // Definimos los colores (asumiendo que el color base es blanco/normal)
         Color colorOriginal = Color.white;

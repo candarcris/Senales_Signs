@@ -1,37 +1,26 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class ElementoOculto : MonoBehaviour
 {
-    [Header("ConfiguraciÛn")]
+    [Header("Configuraci√≥n")]
     public float velocidadAparicion = 2f;
     public bool seVuelveOcultar = true; // Si es false, se queda visible para siempre al descubrirlo
 
-    [SerializeField] private Collider miCollider;
-    [SerializeField] private Renderer miRenderer;
-    [SerializeField] private Color colorTransparente;
+    public Collider miCollider;
+    public Renderer miRenderer;
+
+    [Header("Efecto Pop-up")]
     [SerializeField] private Color colorVisible;
+    [SerializeField] private Color colorDestello = Color.white; // Color del flash inicial
+    [SerializeField] private Vector3 escalaVisible;
     private Coroutine rutinaFading;
 
     void Start()
     {
-        miRenderer = GetComponent<Renderer>();
-
-        Collider[] colliders = GetComponents<Collider>();
-        foreach (Collider col in colliders)
-        {
-            if (!col.isTrigger)
-            {
-                miCollider = col;
-                break; // Lo encontramos y dejamos de buscar
-            }
-        }
-
-        // Guardamos el color original del material
+        // Guardamos las propiedades originales
         colorVisible = miRenderer.material.color;
-        // Creamos la versiÛn invisible (Alpha = 0)
-        colorTransparente = new Color(colorVisible.r, colorVisible.g, colorVisible.b, 0f);
+        escalaVisible = miRenderer.transform.localScale;
 
         // Estado inicial: Oculto e Intangible
         OcultarInstantaneo();
@@ -39,14 +28,15 @@ public class ElementoOculto : MonoBehaviour
 
     void OcultarInstantaneo()
     {
-        miRenderer.material.color = colorTransparente;
+        miRenderer.enabled = false; // Lo ocultamos apagando el renderer
+        miRenderer.transform.localScale = Vector3.zero; // Y lo encogemos
         if (miCollider != null) miCollider.enabled = false; // No se puede chocar/pisar
     }
 
-    // --- DETECCI”N DEL AURA DE EHYAL ---
+    // --- DETECCI√ìN DEL AURA DE EHYAL ---
     private void OnTriggerEnter(Collider other)
     {
-        // Si el objeto que entrÛ tiene el Layer "AuraDivina"
+        // Si el objeto que entr√≥ tiene el Layer "AuraDivina"
         if (other.gameObject.layer == LayerMask.NameToLayer("AuraDivina"))
         {
             if (rutinaFading != null) StopCoroutine(rutinaFading);
@@ -63,24 +53,52 @@ public class ElementoOculto : MonoBehaviour
         }
     }
 
-    // --- EFECTO VISUAL SUAVE ---
+    // --- EFECTO POP-UP M√ÅGICO ---
     private IEnumerator TransicionVisibilidad(bool aparecer)
     {
-        // Si aparece, activamos la colisiÛn inmediatamente para que el jugador no caiga
-        if (aparecer) miCollider.enabled = true;
+        if (!aparecer)
+        {
+            yield return new WaitForSeconds(1f);
+        }
 
-        Color colorObjetivo = aparecer ? colorVisible : colorTransparente;
-        Color colorActual = miRenderer.material.color;
+        // Si aparece, encendemos renderer y compa√±√≠a
+        if (aparecer)
+        {
+            if (miCollider != null) miCollider.enabled = true;
+            miRenderer.enabled = true;
+        }
+
+        Vector3 escalaInicial = miRenderer.transform.localScale;
+        Vector3 escalaObjetivo = aparecer ? escalaVisible : Vector3.zero;
+        
+        // Al aparecer, empujamos el color hacia el destello para que se note instant√°neo
+        Color colorInicial = aparecer ? colorDestello : miRenderer.material.color;
+        Color colorObjetivo = aparecer ? colorVisible : colorVisible; // Al desaparecer no importa el color final, solo la escala
+
         float t = 0;
 
         while (t < 1)
         {
             t += Time.deltaTime * velocidadAparicion;
-            miRenderer.material.color = Color.Lerp(colorActual, colorObjetivo, t);
+            
+            // Funci√≥n curva simple (Ease-Out) para que la aparici√≥n se sienta m√°s pulida
+            float tSuavizado = 1f - Mathf.Pow(1f - t, 3f);
+
+            miRenderer.transform.localScale = Vector3.Lerp(escalaInicial, escalaObjetivo, tSuavizado);
+            miRenderer.material.color = Color.Lerp(colorInicial, colorObjetivo, t);
+            
             yield return null;
         }
 
-        // Si desaparece, quitamos la colisiÛn al terminar de desvanecerse
-        if (!aparecer && miCollider != null) miCollider.enabled = false;
+        // Aseguramos valores exactos al terminar
+        miRenderer.transform.localScale = escalaObjetivo;
+        miRenderer.material.color = colorObjetivo;
+
+        // Si desaparece, lo ocultamos por completo
+        if (!aparecer)
+        {
+            miRenderer.enabled = false;
+            if (miCollider != null) miCollider.enabled = false;
+        }
     }
 }

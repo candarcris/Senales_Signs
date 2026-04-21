@@ -49,6 +49,7 @@ public class SkyBoundMechanic : MonoBehaviour
         if (isHangingFromEhyal)
         {
             // Movimiento 3D libre sin gravedad
+            characterController.Move(Vector3.up * 0.05f);
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;

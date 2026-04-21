@@ -11,30 +11,34 @@ public class EnemyPatrol : MonoBehaviour
 
     public Transform[] waypoints;
     public Transform shootPoint;
-    [SerializeField] private float attackRange = 5f; // Rango del ataque (reemplaza a la esfera pequeÒa)
+    [SerializeField] private float attackRange = 5f; // Rango del ataque (reemplaza a la esfera peque√±a)
 
     private NavMeshAgent agent;
     private Transform player;
     private float nextAttackTime;
     private int currentPoint = 0;
-    private float baseSpeed; // Guardaremos la velocidad original aquÌ
+    private float baseSpeed; // Guardaremos la velocidad original aqu√≠
 
     [Header("Fuerza del Lanzamiento")]
-    public float fuerzaAdelante = 15f; // Sube este valor para m·s velocidad directa
-    public float fuerzaArriba = 5f;    // Sube este valor para un arco m·s alto
+    public float fuerzaAdelante = 15f; // Sube este valor para m√°s velocidad directa
+    public float fuerzaArriba = 5f;    // Sube este valor para un arco m√°s alto
 
     [Header("Gizmos")]
     public Vector3 centroOffset = new Vector3(0, 4.1f, 0); // Ajusta la "Y" para subirlo al pecho
 
-    void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+    void Start()
+    {
         baseSpeed = agent.speed; // Guardamos la velocidad normal de patrulla
         GoToNextPoint();
     }
 
     void Update()
     {
+        if (!agent.isActiveAndEnabled) return;
         if (player == null || !player.CompareTag("Player"))
         {
             player = null; // Lo olvidamos
@@ -76,7 +80,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ComportamientoPatrulla()
     {
-        // TransiciÛn: Si ve al jugador, cambia a persecuciÛn
+        // Transici√≥n: Si ve al jugador, cambia a persecuci√≥n
         if (player != null)
         {
             CambiarEstado(EstadoEnemigo.Persiguiendo);
@@ -94,14 +98,14 @@ public class EnemyPatrol : MonoBehaviour
 
     void ComportamientoPersecucion()
     {
-        // TransiciÛn: Si pierde al jugador, vuelve a patrullar
+        // Transici√≥n: Si pierde al jugador, vuelve a patrullar
         if (player == null)
         {
             CambiarEstado(EstadoEnemigo.Patrullando);
             return;
         }
 
-        // TransiciÛn: Si est· lo suficientemente cerca, ataca
+        // Transici√≥n: Si est√° lo suficientemente cerca, ataca
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer <= attackRange)
         {
@@ -110,20 +114,20 @@ public class EnemyPatrol : MonoBehaviour
         }
 
         agent.isStopped = false;
-        agent.speed = baseSpeed + 5f; // Corre un poco m·s r·pido
+        agent.speed = baseSpeed + 5f; // Corre un poco m√°s r√°pido
         agent.SetDestination(player.position);
     }
 
     void ComportamientoAtaque()
     {
-        // TransiciÛn: Si el jugador desaparece, vuelve a patrullar
+        // Transici√≥n: Si el jugador desaparece, vuelve a patrullar
         if (player == null)
         {
             CambiarEstado(EstadoEnemigo.Patrullando);
             return;
         }
 
-        // TransiciÛn: Si el jugador se aleja, vuelve a perseguirlo
+        // Transici√≥n: Si el jugador se aleja, vuelve a perseguirlo
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer > attackRange)
         {
@@ -144,7 +148,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         estadoActual = nuevoEstado;
 
-        // °AQUÕ ES DONDE CONECTAREMOS EL ANIMATOR LUEGO!
+        // ¬°AQU√ç ES DONDE CONECTAREMOS EL ANIMATOR LUEGO!
         // Ejemplo: animator.SetInteger("Estado", (int)estadoActual);
     }
 
@@ -156,27 +160,27 @@ public class EnemyPatrol : MonoBehaviour
             rock.transform.position = shootPoint.position;
             rock.SetActive(true);
 
-            // C·lculo de Tiro ParabÛlico simple
+            // C√°lculo de Tiro Parab√≥lico simple
             Rigidbody rb = rock.GetComponent<Rigidbody>();
             Vector3 direction = (player.position - shootPoint.position);
             Vector3 dirXZ = new Vector3(direction.x, 0, direction.z);
 
             rb.linearVelocity = Vector3.zero; // Limpiar velocidad previa
 
-            // Usamos las variables en lugar de los n˙meros fijos
+            // Usamos las variables en lugar de los n√∫meros fijos
             rb.AddForce(dirXZ.normalized * fuerzaAdelante + Vector3.up * fuerzaArriba, ForceMode.Impulse);
         }
     }
 
     void GoToNextPoint()
     {
-        if (waypoints.Length == 0) return;
+        if (waypoints.Length == 0 || !agent.isActiveAndEnabled) return;
 
         agent.destination = waypoints[currentPoint].position;
         currentPoint = (currentPoint + 1) % waypoints.Length;
     }
 
-    // DETECCI”N
+    // DETECCI√ìN
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -200,12 +204,12 @@ public class EnemyPatrol : MonoBehaviour
         Vector3 centroReal = transform.position + centroOffset;
 
 #if UNITY_EDITOR
-        // 2. Usamos Handles para dibujar un cÌrculo perfecto
+        // 2. Usamos Handles para dibujar un c√≠rculo perfecto
         Handles.color = Color.red;
 
-        // DrawWireDisc necesita: PosiciÛn, DirecciÛn hacia donde mira, y Radio.
-        // Vector3.up dibuja el cÌrculo "acostado" paralelo al suelo.
-        // Si lo quisieras "de pie" (como un escudo), usarÌas Vector3.forward
+        // DrawWireDisc necesita: Posici√≥n, Direcci√≥n hacia donde mira, y Radio.
+        // Vector3.up dibuja el c√≠rculo "acostado" paralelo al suelo.
+        // Si lo quisieras "de pie" (como un escudo), usar√≠as Vector3.forward
         Handles.DrawWireDisc(centroReal, Vector3.up, attackRange);
 #endif
     }
