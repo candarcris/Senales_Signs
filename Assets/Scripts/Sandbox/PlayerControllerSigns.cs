@@ -4,6 +4,7 @@ public class PlayerControllerSigns : MonoBehaviour
 {
     public CharacterController controller;
     public float speed = 5f;
+    private float initialSpeed;
     public float gravity = -9.81f;
 
     [Header("Salto y Físicas")]
@@ -31,14 +32,21 @@ public class PlayerControllerSigns : MonoBehaviour
 
     public bool puedeMoverse = true;     // Controla si recibe inputs
 
-    void Start()
+    private void Awake()
     {
+        initialSpeed = speed;
         cam = Camera.main.transform;
+
         // 1. Busca todos los SpriteRenderers en este objeto y en sus hijos (el PSD completo)
         todasLasPartes = GetComponentsInChildren<SpriteRenderer>();
 
         // 2. Inicializamos el bloque de propiedades (súper optimizado)
         propertyBlock = new MaterialPropertyBlock();
+    }
+
+    void Start()
+    {
+        
     }
 
     public void RecibirImpacto()
@@ -135,6 +143,14 @@ public class PlayerControllerSigns : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                speed = initialSpeed * 2;
+            }
+            if(Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                speed = initialSpeed;
+            }
             // 2. Calcular ángulo de movimiento relativo a la cámara
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;

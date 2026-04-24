@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class SpiritWarMechanic : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] Rigidbody rb;
     [SerializeField] float repelRadius = 5f;
     [SerializeField] float repelForce = 10f;
 

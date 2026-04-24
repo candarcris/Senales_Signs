@@ -9,6 +9,7 @@ public class SkyBoundMechanic : MonoBehaviour
     public Ehyal ehyal;
     public float flySpeed = 8f;
     private bool isHangingFromEhyal = false;
+    [SerializeField] private bool canHang = false;
 
     private Transform cam;
 
@@ -22,7 +23,7 @@ public class SkyBoundMechanic : MonoBehaviour
     void Update()
     {
         // --- LOGICA DE COLGARSE DE EHYAL ---
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && canHang)
         {
             if (ehyal != null)
             {

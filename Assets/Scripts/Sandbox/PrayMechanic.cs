@@ -8,10 +8,11 @@ public class PrayMechanic : MonoBehaviour
     public Transform ehyalTransform; // Arrastra a Ehyal aquí
     public Transform puntoDeDescansoEhyal; // Un objeto vacío flotando sobre el hombro de tu player
     [SerializeField] private bool enOracion = false;
+    [SerializeField] private bool puedeOrar = false;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && puedeOrar)
         {
             enOracion = !enOracion;
 
