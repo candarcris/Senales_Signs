@@ -19,6 +19,8 @@ public class PlayerControllerSigns : MonoBehaviour
     private float jumpBufferCounter;
 
     private Vector3 velocity;
+    public Transform targetLockOn;
+
     public void FrenarEnSeco()
     {
         velocity = Vector3.zero;
@@ -31,6 +33,7 @@ public class PlayerControllerSigns : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
 
     public bool puedeMoverse = true;     // Controla si recibe inputs
+    private float lastLockOnAngle;
 
     private void Awake()
     {
@@ -139,29 +142,46 @@ public class PlayerControllerSigns : MonoBehaviour
         // 1. Obtener inputs de movimiento
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+
+        if (targetLockOn != null)
+        {
+            // Opcional: Podrías reducir un poco la velocidad de strafing aquí multiplicando horizontal o vertical,
+            // pero por ahora lo dejamos libre.
+        }
+
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f || targetLockOn != null)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            // --- MOVIMIENTO ---
+            if (direction.magnitude >= 0.1f)
             {
-                speed = initialSpeed * 2;
-            }
-            if(Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                speed = initialSpeed;
-            }
-            // 2. Calcular ángulo de movimiento relativo a la cámara
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                if (Input.GetKeyDown(KeyCode.LeftShift)) speed = initialSpeed * 2;
+                if (Input.GetKeyUp(KeyCode.LeftShift)) speed = initialSpeed;
 
-            // 3. Mover al personaje en X/Z
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+                // Movimiento libre normal relativo a la cámara
+                // Como la cámara tiene un "LookAt" hacia el enemigo, "W" siempre será hacia el enemigo
+                // "S" siempre será hacia la cámara, y "A"/"D" harán strafing lateral naturalmente.
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-            // 4. Lógica de "Giro" Visual (Flip)
-            // Usamos el input horizontal para decidir si el sprite mira a la izq o der
-            if (horizontal != 0)
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            }
+
+            // --- GIRO (FLIP VISUAL) ---
+            if (targetLockOn != null)
             {
+                // Sprite bloqueado mirando hacia el enemigo
+                float dirHaciaObjetivo = targetLockOn.position.x - transform.position.x;
+                if (Mathf.Abs(dirHaciaObjetivo) > 0.05f) 
+                {
+                    float flip = (dirHaciaObjetivo > 0) ? 1f : -1f;
+                    transform.localScale = new Vector3(flip, 1f, 1f);
+                }
+            }
+            else if (horizontal != 0)
+            {
+                // Usamos el input horizontal libre si no hay objetivo
                 float flip = (horizontal > 0) ? 1f : -1f;
                 transform.localScale = new Vector3(flip, 1f, 1f);
             }

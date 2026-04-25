@@ -1,6 +1,7 @@
 using Signs;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class EhyalStrikeMechanic : MonoBehaviour
 {
@@ -23,6 +24,24 @@ public class EhyalStrikeMechanic : MonoBehaviour
     private float lastAttackTime;
     [SerializeField] Vector3 slashEffectPos;
     
+    [Header("Configuración Lock-On")]
+    [Tooltip("Si es verdadero, el sistema de fijación está encendido por el usuario")]
+    public bool isLockOnActive = false;
+
+    [Header("Referencias Opcionales")]
+    public PlayerControllerSigns playerController;
+    public CinemachineVirtualCamera vcam;
+    private Transform originalLookAt;
+    private Transform originalFollow;
+    
+    // Variables para el sistema de cámara ancla
+    private GameObject cameraAnchor;
+    private CinemachineOrbitalTransposer orbitalTransposer;
+    private CinemachineOrbitalTransposer.Heading.HeadingDefinition originalHeading;
+    private float originalMaxSpeed = -1f;
+    private bool originalRecenterEnabled;
+    private MonoBehaviour cinemachineInputProvider;
+    
     [Header("Objetivos en Rango")]
     [SerializeField] private EnemyPatrol currentTarget;
     [SerializeField] private List<EnemyPatrol> enemiesInRange = new List<EnemyPatrol>();
@@ -35,6 +54,43 @@ public class EhyalStrikeMechanic : MonoBehaviour
             if (ehyal != null) ehyalTransform = ehyal.transform;
         }
 
+        if (playerController == null)
+        {
+            playerController = FindAnyObjectByType<PlayerControllerSigns>();
+        }
+
+        if (vcam == null)
+        {
+            CamerasManager camManager = FindAnyObjectByType<CamerasManager>();
+            if (camManager != null) 
+            {
+                vcam = camManager._cinemachineCam;
+            }
+            else
+            {
+                vcam = FindAnyObjectByType<CinemachineVirtualCamera>();
+            }
+        }
+
+        if (vcam != null)
+        {
+            originalLookAt = vcam.LookAt;
+            originalFollow = vcam.Follow;
+            
+            orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+            if (orbitalTransposer != null)
+            {
+                originalHeading = orbitalTransposer.m_Heading.m_Definition;
+                originalMaxSpeed = orbitalTransposer.m_XAxis.m_MaxSpeed;
+                originalRecenterEnabled = orbitalTransposer.m_RecenterToTargetHeading.m_enabled;
+            }
+
+            cinemachineInputProvider = vcam.GetComponent("CinemachineInputProvider") as MonoBehaviour;
+        }
+
+        // Crear el ancla invisible para la cámara
+        cameraAnchor = new GameObject("LockOnCameraAnchor");
+
         if (lockOnIndicator != null)
         {
             lockOnIndicator.SetActive(false); // Ocultar al inicio
@@ -46,8 +102,55 @@ public class EhyalStrikeMechanic : MonoBehaviour
         if (ehyalTransform == null) return;
 
         UpdateEnemiesInRange();
-        HandleLockOn();
+
+        // Control de encendido/apagado manual con Click Derecho
+        if (Input.GetMouseButtonDown(1)) // 1 es el botón derecho del mouse
+        {
+            isLockOnActive = !isLockOnActive;
+            
+            // Si lo acabamos de apagar, soltamos todo inmediatamente
+            if (!isLockOnActive)
+            {
+                ClearLockOn();
+            }
+        }
+
+        // Solo procesamos la fijación y el ciclo si está activo
+        if (isLockOnActive)
+        {
+            HandleLockOn();
+
+            // Cambiar objetivo con Control Derecho mientras esté activo
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                CycleTarget();
+            }
+        }
+
         HandleAttack();
+    }
+
+    private void ClearLockOn()
+    {
+        currentTarget = null;
+        if (lockOnIndicator != null) lockOnIndicator.SetActive(false);
+        if (playerController != null) playerController.targetLockOn = null;
+        
+        if (vcam != null) 
+        {
+            vcam.LookAt = originalLookAt;
+            vcam.Follow = originalFollow;
+        }
+
+        if (orbitalTransposer != null) 
+        {
+            orbitalTransposer.m_XAxis.m_InputAxisName = "Horizontal";
+            if (originalMaxSpeed >= 0) orbitalTransposer.m_XAxis.m_MaxSpeed = originalMaxSpeed;
+            orbitalTransposer.m_RecenterToTargetHeading.m_enabled = originalRecenterEnabled;
+            orbitalTransposer.m_Heading.m_Definition = originalHeading;
+        }
+        
+        if (cinemachineInputProvider != null) cinemachineInputProvider.enabled = true;
     }
 
     private void UpdateEnemiesInRange()
@@ -76,7 +179,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
         // Si el objetivo actual salió del rango o fue destruido, perderlo
         if (currentTarget != null && !enemiesInRange.Contains(currentTarget))
         {
-            currentTarget = null;
+            ClearLockOn();
         }
     }
 
@@ -84,8 +187,9 @@ public class EhyalStrikeMechanic : MonoBehaviour
     {
         if (enemiesInRange.Count == 0)
         {
-            currentTarget = null;
-            if (lockOnIndicator != null) lockOnIndicator.SetActive(false);
+            // No hay enemigos para fijar, pero no apagamos el 'isLockOnActive' 
+            // por si un enemigo entra en rango después. Solo limpiamos el objetivo actual.
+            ClearLockOn();
             return;
         }
 
@@ -95,18 +199,64 @@ public class EhyalStrikeMechanic : MonoBehaviour
             currentTarget = GetClosestEnemy();
         }
 
-        // Cambiar objetivo con Control Derecho
-        if (Input.GetKeyDown(KeyCode.RightControl))
-        {
-            CycleTarget();
-        }
-
         // Actualizar la posición del indicador visual
         if (currentTarget != null && lockOnIndicator != null)
         {
             lockOnIndicator.SetActive(true);
             // Posicionar el indicador un poco más arriba del enemigo (puedes ajustar el offset)
             lockOnIndicator.transform.position = currentTarget.transform.position + Vector3.up * 8f;
+        }
+
+        // Informar al controlador del jugador cuál es el objetivo
+        if (playerController != null)
+        {
+            playerController.targetLockOn = currentTarget != null ? currentTarget.transform : null;
+        }
+
+        // Girar la cámara de Cinemachine hacia el enemigo y usar el Ancla
+        if (vcam != null)
+        {
+            if (currentTarget != null)
+            {
+                // Posicionar el ancla exactamente en Sagar
+                cameraAnchor.transform.position = playerController.transform.position;
+
+                // Rotar el ancla para mirar al enemigo
+                Vector3 lookDir = currentTarget.transform.position - playerController.transform.position;
+                lookDir.y = 0;
+                if (lookDir != Vector3.zero)
+                {
+                    // Podemos usar Slerp si queremos que la cámara se mueva suave al inicio del lock on
+                    Quaternion targetRot = Quaternion.LookRotation(lookDir);
+                    cameraAnchor.transform.rotation = Quaternion.Slerp(cameraAnchor.transform.rotation, targetRot, Time.deltaTime * 10f);
+                }
+
+                // Asignar el ancla como objetivo de la cámara
+                vcam.Follow = cameraAnchor.transform;
+                vcam.LookAt = currentTarget.transform;
+
+                if (orbitalTransposer != null)
+                {
+                    if (cinemachineInputProvider != null) cinemachineInputProvider.enabled = false;
+
+                    // Apagar motores internos de Cinemachine
+                    orbitalTransposer.m_XAxis.m_InputAxisName = "";
+                    orbitalTransposer.m_XAxis.m_InputAxisValue = 0f;
+                    orbitalTransposer.m_XAxis.m_MaxSpeed = 0f;
+                    orbitalTransposer.m_RecenterToTargetHeading.m_enabled = false;
+
+                    // El secreto: Usar TargetForward significa que usará la rotación de "cameraAnchor"
+                    // Al forzar el eje X a 0, la cámara se pondrá exactamente detrás del ancla!
+                    orbitalTransposer.m_Heading.m_Definition = CinemachineOrbitalTransposer.Heading.HeadingDefinition.TargetForward;
+                    
+                    // Interpolar hacia 0 suavemente por si veníamos de otro ángulo al explorar
+                    orbitalTransposer.m_XAxis.Value = Mathf.LerpAngle(orbitalTransposer.m_XAxis.Value, 0f, Time.deltaTime * 5f);
+                }
+            }
+            else
+            {
+                ClearLockOn();
+            }
         }
     }
 

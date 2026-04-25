@@ -23993,6 +23993,7 @@ MonoBehaviour:
   jumpHeight: 5
   coyoteTime: 0.2
   jumpBufferTime: 0.2
+  targetLockOn: {fileID: 0}
   puedeMoverse: 1
 --- !u!114 &7499459827748290906
 MonoBehaviour:
@@ -24009,7 +24010,7 @@ MonoBehaviour:
   ehyalTransform: {fileID: 4071676266972538703}
   puntoDeDescansoEhyal: {fileID: 664500860}
   enOracion: 0
-  puedeOrar: 0
+  puedeOrar: 1
 --- !u!210 &7499459827748290907
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -24061,6 +24062,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   slashEffectPos: {x: 0, y: 5, z: 0}
+  playerController: {fileID: 0}
+  vcam: {fileID: 0}
   currentTarget: {fileID: 0}
   enemiesInRange: []
 --- !u!1 &7505098019175961809
