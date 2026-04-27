@@ -46,6 +46,8 @@ public class EhyalStrikeMechanic : MonoBehaviour
     [SerializeField] private EnemyPatrol currentTarget;
     [SerializeField] private List<EnemyPatrol> enemiesInRange = new List<EnemyPatrol>();
 
+    public Vector3 posiciontesteo;
+
     void Start()
     {
         if (ehyalTransform == null)
@@ -179,6 +181,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
         // Si el objetivo actual salió del rango o fue destruido, perderlo
         if (currentTarget != null && !enemiesInRange.Contains(currentTarget))
         {
+            isLockOnActive = false;
             ClearLockOn();
         }
     }
