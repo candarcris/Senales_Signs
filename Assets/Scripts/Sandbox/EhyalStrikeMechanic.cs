@@ -36,6 +36,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
     
     // Variables para el sistema de cámara ancla
     private GameObject cameraAnchor;
+    private GameObject cameraLookTarget; // Punto focal para mantener a ambos en pantalla
     private CinemachineOrbitalTransposer orbitalTransposer;
     private CinemachineOrbitalTransposer.Heading.HeadingDefinition originalHeading;
     private float originalMaxSpeed = -1f;
@@ -45,8 +46,6 @@ public class EhyalStrikeMechanic : MonoBehaviour
     [Header("Objetivos en Rango")]
     [SerializeField] private EnemyPatrol currentTarget;
     [SerializeField] private List<EnemyPatrol> enemiesInRange = new List<EnemyPatrol>();
-
-    public Vector3 posiciontesteo;
 
     void Start()
     {
@@ -85,13 +84,24 @@ public class EhyalStrikeMechanic : MonoBehaviour
                 originalHeading = orbitalTransposer.m_Heading.m_Definition;
                 originalMaxSpeed = orbitalTransposer.m_XAxis.m_MaxSpeed;
                 originalRecenterEnabled = orbitalTransposer.m_RecenterToTargetHeading.m_enabled;
+                
+                // Aplicar configuraciones iniciales forzadas para exploración libre
+                orbitalTransposer.m_XAxis.m_InputAxisName = "Mouse X";
+                orbitalTransposer.m_Heading.m_Definition = CinemachineOrbitalTransposer.Heading.HeadingDefinition.WorldForward;
+                orbitalTransposer.m_RecenterToTargetHeading.m_enabled = false;
             }
 
             cinemachineInputProvider = vcam.GetComponent("CinemachineInputProvider") as MonoBehaviour;
+            if (cinemachineInputProvider != null) 
+            {
+                // Si tienes el New Input System, ESTO es lo que probablemente causa el giro
+                cinemachineInputProvider.enabled = false; 
+            }
         }
 
         // Crear el ancla invisible para la cámara
         cameraAnchor = new GameObject("LockOnCameraAnchor");
+        cameraLookTarget = new GameObject("LockOnLookTarget");
 
         if (lockOnIndicator != null)
         {
@@ -106,7 +116,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
         UpdateEnemiesInRange();
 
         // Control de encendido/apagado manual con Click Derecho
-        if (Input.GetMouseButtonDown(1)) // 1 es el botón derecho del mouse
+        if (Input.GetMouseButtonDown(2))
         {
             isLockOnActive = !isLockOnActive;
             
@@ -122,8 +132,9 @@ public class EhyalStrikeMechanic : MonoBehaviour
         {
             HandleLockOn();
 
-            // Cambiar objetivo con Control Derecho mientras esté activo
-            if (Input.GetKeyDown(KeyCode.RightControl))
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+            if (scroll != 0f) // Si la rueda se movió algo (hacia arriba o hacia abajo)
             {
                 CycleTarget();
             }
@@ -146,10 +157,14 @@ public class EhyalStrikeMechanic : MonoBehaviour
 
         if (orbitalTransposer != null) 
         {
-            orbitalTransposer.m_XAxis.m_InputAxisName = "Horizontal";
+            // Usamos "Mouse X" para que el ratón controle el giro libre, separándolo del movimiento A/D.
+            orbitalTransposer.m_XAxis.m_InputAxisName = "Mouse X";
             if (originalMaxSpeed >= 0) orbitalTransposer.m_XAxis.m_MaxSpeed = originalMaxSpeed;
-            orbitalTransposer.m_RecenterToTargetHeading.m_enabled = originalRecenterEnabled;
-            orbitalTransposer.m_Heading.m_Definition = originalHeading;
+            orbitalTransposer.m_RecenterToTargetHeading.m_enabled = false;
+            // "WorldForward" garantiza que la rotación base de la cámara es estática al mundo.
+            // Si el jugador o cualquier hijo invisible gira al presionar A/D, la cámara lo IGNORARÁ por completo,
+            // rotando ÚNICAMENTE cuando el ratón modifique el X Axis.
+            orbitalTransposer.m_Heading.m_Definition = CinemachineOrbitalTransposer.Heading.HeadingDefinition.WorldForward;
         }
         
         if (cinemachineInputProvider != null) cinemachineInputProvider.enabled = true;
@@ -221,11 +236,11 @@ public class EhyalStrikeMechanic : MonoBehaviour
         {
             if (currentTarget != null)
             {
-                // Posicionar el ancla exactamente en Sagar
-                cameraAnchor.transform.position = playerController.transform.position;
+                // Posicionar el ancla exactamente en Sagar usando ehyalTransform (el centro visual real)
+                cameraAnchor.transform.position = ehyalTransform.position;
 
                 // Rotar el ancla para mirar al enemigo
-                Vector3 lookDir = currentTarget.transform.position - playerController.transform.position;
+                Vector3 lookDir = currentTarget.transform.position - ehyalTransform.position;
                 lookDir.y = 0;
                 if (lookDir != Vector3.zero)
                 {
@@ -234,9 +249,16 @@ public class EhyalStrikeMechanic : MonoBehaviour
                     cameraAnchor.transform.rotation = Quaternion.Slerp(cameraAnchor.transform.rotation, targetRot, Time.deltaTime * 10f);
                 }
 
+                // Posicionar el punto de LookAt exactamente a la mitad entre Sagar y el Enemigo
+                // Esto asegura que la cámara enfoque el centro del combate y no pierda a ninguno de los dos.
+                // Ajustamos un poco en Y para no mirar al piso.
+                Vector3 midPoint = Vector3.Lerp(ehyalTransform.position, currentTarget.transform.position, 0.5f);
+                midPoint.y = (ehyalTransform.position.y + currentTarget.transform.position.y) / 2f + 1.5f;
+                cameraLookTarget.transform.position = midPoint;
+
                 // Asignar el ancla como objetivo de la cámara
                 vcam.Follow = cameraAnchor.transform;
-                vcam.LookAt = currentTarget.transform;
+                vcam.LookAt = cameraLookTarget.transform;
 
                 if (orbitalTransposer != null)
                 {
