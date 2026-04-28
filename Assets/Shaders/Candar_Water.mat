@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Candar_Water
-  m_Shader: {fileID: 10600, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: ce1e1c14d0ffbe24f9b23b22ab2cf848,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -69,14 +70,14 @@ Material:
     m_Floats:
     - _DepthDistance: 0.8
     - _DepthStrength: 0.182
-    - _FoamOffset: 0.5
-    - _Opacity: 0.887
+    - _FoamOffset: 4.47
+    - _Opacity: 0.744
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Shininess: 0.078125
     - _SquashAmount: 1
-    - _WaterSize: 1.97
-    - _Wave: 1.18
+    - _WaterSize: 2
+    - _Wave: 0.13
     - _foeamOffset: 0
     - _wave: 1.97
     m_Colors:
@@ -84,7 +85,7 @@ Material:
     - _ColorBase: {r: 0, g: 0, b: 0, a: 1}
     - _ColorMainFoam: {r: 0.83137256, g: 0, b: 0.51843244, a: 1}
     - _ColorSecondFoam: {r: 0.27773708, g: 0, b: 0.3584906, a: 1}
-    - _Direction: {r: 0.001, g: 0.02, b: 0, a: 0}
+    - _Direction: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}

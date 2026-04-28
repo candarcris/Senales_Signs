@@ -12,6 +12,8 @@ public class EnemyPatrol : MonoBehaviour
     public Transform[] waypoints;
     public Transform shootPoint;
     [SerializeField] private float attackRange = 5f; // Rango del ataque (reemplaza a la esfera pequeña)
+    [SerializeField] private Vector3 charScale;
+
 
     private NavMeshAgent agent;
     private Transform player;
@@ -25,11 +27,12 @@ public class EnemyPatrol : MonoBehaviour
     public float fuerzaArriba = 5f;    // Sube este valor para un arco más alto
 
     [Header("Gizmos")]
-    public Vector3 centroOffset = new Vector3(0, 4.1f, 0); // Ajusta la "Y" para subirlo al pecho
+    public Vector3 centroOffset; // Ajusta la "Y" para subirlo al pecho
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        charScale = transform.localScale;
     }
     void Start()
     {
@@ -80,8 +83,8 @@ public class EnemyPatrol : MonoBehaviour
 
     void FlipSprite()
     {
-        if (agent.velocity.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-        else if (agent.velocity.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+        if (agent.velocity.x > 0.1f) transform.localScale = new Vector3(-charScale.x, charScale.y, charScale.z);
+        else if (agent.velocity.x < -0.1f) transform.localScale = new Vector3(charScale.x, charScale.y, charScale.z);
     }
 
     void ComportamientoPatrulla()
