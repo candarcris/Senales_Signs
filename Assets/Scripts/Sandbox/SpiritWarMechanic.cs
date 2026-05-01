@@ -64,7 +64,7 @@ public class SpiritWarMechanic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && enemiesNearbyCount > 0)
+        if (Input.GetMouseButtonDown(1) && enemiesNearbyCount > 0)
         {
             Shock();
         }

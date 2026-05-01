@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Candar_Water
+  m_Name: Candar_Water 1
   m_Shader: {fileID: -6465566751694194690, guid: ce1e1c14d0ffbe24f9b23b22ab2cf848,
     type: 3}
   m_Parent: {fileID: 0}
@@ -76,7 +76,7 @@ Material:
     - _QueueOffset: 0
     - _Shininess: 0.078125
     - _SquashAmount: 1
-    - _WaterSize: 1.5
+    - _WaterSize: 10
     - _Wave: 0.02
     - _foeamOffset: 0
     - _wave: 1.97

@@ -23,7 +23,7 @@ public class SkyBoundMechanic : MonoBehaviour
     void Update()
     {
         // --- LOGICA DE COLGARSE DE EHYAL ---
-        if (Input.GetKeyDown(KeyCode.L) && canHang)
+        if (Input.GetKeyDown(KeyCode.V) && canHang)
         {
             if (ehyal != null)
             {

@@ -115,7 +115,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
 
         UpdateEnemiesInRange();
 
-        // Control de encendido/apagado manual con Click Derecho
+        // Control de encendido/apagado manual
         if (Input.GetMouseButtonDown(2))
         {
             isLockOnActive = !isLockOnActive;

@@ -12,7 +12,7 @@ public class PrayMechanic : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && puedeOrar)
+        if (Input.GetKeyDown(KeyCode.C) && puedeOrar)
         {
             enOracion = !enOracion;
 
