@@ -12,6 +12,7 @@ public class Rock : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            ///TODO
             PlayerControllerSigns playerScript = other.gameObject.GetComponent<PlayerControllerSigns>();
             if (playerScript != null)
             {
