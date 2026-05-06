@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerControllerSigns : MonoBehaviour
@@ -47,9 +48,16 @@ public class PlayerControllerSigns : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
     }
 
-    void Start()
+    private void OnEnable()
     {
-        
+        // Sagar se suscribe a la señal de cualquier roca que golpee
+        Rock.OnRockHitPlayer += RecibirImpacto;
+    }
+
+    private void OnDisable()
+    {
+        // Muy importante: siempre desvincularse al destruir o desactivar el objeto
+        Rock.OnRockHitPlayer -= RecibirImpacto;
     }
 
     public void RecibirImpacto()
