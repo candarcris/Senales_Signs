@@ -9,13 +9,7 @@ public class Rock : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //PlayerControllerSigns playerScript = other.gameObject.GetComponent<PlayerControllerSigns>();
             OnRockHitPlayer?.Invoke();
-
-            //if (playerScript != null)
-            //{
-            //    playerScript.RecibirImpacto();
-            //}
             RockPool.Instance.ReturnRock(this.gameObject);
         }
         else if (other.CompareTag("Floor"))
