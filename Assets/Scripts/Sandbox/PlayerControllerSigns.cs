@@ -68,6 +68,11 @@ public class PlayerControllerSigns : MonoBehaviour
         }
     }
 
+    public void PuedeMoverse(bool valor)
+    {
+        puedeMoverse = valor;
+    }
+
     private System.Collections.IEnumerator RutinaDeImpacto()
     {
         // 1. Pierde el control

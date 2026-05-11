@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475b16ffba264d64eb8f24b1ebac72fa, type: 3}
+  m_Name: DialogueSequence
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.DialogueSequence
+  lines:
+  - nombrePj: Ehyal
+    text: "Hola Sagar, este es un texto de prueba y cuando se activ\xF3 este di\xE1logo,
+      desapareci\xF3 la vida y la energ\xEDa"
+    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
+    actionName: 
+  - nombrePj: Otro nombre mas largo
+    text: Segundo texto de prueba
+    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
+    actionName: 
+  - nombrePj: El tercer nombre que es el mas largo de todos
+    text: "Ultimo texto de prueba que muestra si se pone correctamente un nombre
+      muy largo y adem\xE1s, cuando se reproduzca este texto mi personaje va a recibir
+      da\xF1o"
+    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
+    actionName: "da\xF1o"
