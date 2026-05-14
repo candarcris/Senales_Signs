@@ -7,7 +7,7 @@ namespace Signs
     public class DialogueManager : MonoBehaviour
     {
         public UIScreenSpaceDialogue screenSpaceUI;
-        GameObject worldSpacePrefab;
+        [SerializeField] GameObject worldSpacePrefab;
 
         private Queue<DialogueLine> currentLines = new Queue<DialogueLine>();
         private bool isDialogueActive = false;
@@ -32,21 +32,33 @@ namespace Signs
             // 3. TODO: Congela al jugador. (Pista: Busca tu PlayerControllerSigns y pon puedeMoverse en false)
 
             // 4. TODO: Llama a un método (ej. DisplayNextLine()) para mostrar la primera frase
-            DisplayNextLine();
             isDialogueActive = true;
+            DisplayNextLine();
         }
 
-        public void StartWorldSpaceDialogue(DialogueSequence sequence, Transform anchorPoint)
+        public GameObject StartWorldSpaceDialogue(WorldDialogueSequence worldSequence, Transform anchorPoint)
         {
             // A diferencia del Screen Space, aquí no congelamos al jugador ni usamos la Cola central.
             // TODO: Instancia el prefab de World Space en la posición del anchorPoint.
-            Instantiate(worldSpacePrefab, anchorPoint);
+            GameObject nuevoWorldUI = Instantiate(worldSpacePrefab, anchorPoint.position, Quaternion.identity, null);
             // TODO: Pásale el 'sequence' a ese objeto recién creado para que él mismo se gestione de forma independiente.
+            nuevoWorldUI.TryGetComponent(out UIWorldSpaceDialogue worldSpaceUI);
+
+            if(worldSpaceUI != null)
+            {
+                worldSpaceUI.Initialize(worldSequence, anchorPoint);
+            }
+
+            return nuevoWorldUI;
         }
 
         public void DisplayNextLine()
         {
-            if (currentLines.Count == 0) { EndDialogue(); return; }
+            if (currentLines.Count == 0) 
+            { 
+                EndDialogue(); 
+                return;
+            }
             DialogueLine dequeLine = currentLines.Dequeue();
 
             // ¡Magia aquí! Le decimos al Trigger que ejecute la acción si es que existe
@@ -58,9 +70,19 @@ namespace Signs
         }
         private void EndDialogue()
         {
+            isDialogueActive = false;
+
             // TODO: Descongela al jugador, oculta el Canvas de pantalla.
             screenSpaceUI.gameObject.SetActive(false);
-            isDialogueActive = false;
+
+            // Si tenemos un trigger guardado, le decimos que dispare su evento final
+            if (currentTrigger != null)
+            {
+                currentTrigger.onDialogueFinish?.Invoke();
+
+                // Lo limpiamos por seguridad, ya que el diálogo ya terminó
+                currentTrigger = null;
+            }
         }
         void Update()
         {

@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: DialogueSequence
   m_EditorClassIdentifier: Assembly-CSharp::Signs.DialogueSequence
   lines:
-  - nombrePj: Ehyal
-    text: "Hola Sagar, este es un texto de prueba y cuando se activ\xF3 este di\xE1logo,
-      desapareci\xF3 la vida y la energ\xEDa"
-    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
+  - nombrePj: ???
+    text: snif, snif...
+    portraitImage: {fileID: 21300000, guid: 12e103111238e4a459de80d9d2ce8e8b, type: 3}
+    buttonImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    fuente: {fileID: 11400000, guid: c287ba57edb0f3c409f115fdf4118c28, type: 2}
+    fontColor: {r: 1, g: 1, b: 1, a: 1}
+    actionName: ayuda
+  - nombrePj: ???
+    text: "Porqu\xE9 a mi?.. todos comieron un pedazo de este gran animal... \nme
+      apartaban y no pude tomar ni siquiera un peque\xF1o trozo..."
+    portraitImage: {fileID: 21300000, guid: 12e103111238e4a459de80d9d2ce8e8b, type: 3}
+    buttonImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    fuente: {fileID: 11400000, guid: c287ba57edb0f3c409f115fdf4118c28, type: 2}
+    fontColor: {r: 1, g: 1, b: 1, a: 1}
     actionName: 
-  - nombrePj: Otro nombre mas largo
-    text: Segundo texto de prueba
-    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
-    actionName: 
-  - nombrePj: El tercer nombre que es el mas largo de todos
-    text: "Ultimo texto de prueba que muestra si se pone correctamente un nombre
-      muy largo y adem\xE1s, cuando se reproduzca este texto mi personaje va a recibir
-      da\xF1o"
-    portraitImage: {fileID: 21300000, guid: e68c983987f22d143bbac48985c2c258, type: 3}
-    actionName: "da\xF1o"

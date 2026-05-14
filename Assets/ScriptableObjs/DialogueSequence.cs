@@ -13,6 +13,10 @@ namespace Signs
         public string text;
 
         public Sprite portraitImage; // Opcional: Imagen de quien habla o icono a mostrar
+        public Sprite buttonImage;
+
+        public TMP_FontAsset fuente;
+        public Color fontColor;
 
         [Tooltip("Escribe una palabra clave si esta línea activa algo (ej: 'AbrirPuerta')")]
         public string actionName; // <-- ¡Esto es lo nuevo!

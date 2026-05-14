@@ -34,7 +34,6 @@ public class PlayerControllerSigns : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
 
     public bool puedeMoverse = true;     // Controla si recibe inputs
-    private float lastLockOnAngle;
 
     private void Awake()
     {
@@ -187,23 +186,6 @@ public class PlayerControllerSigns : MonoBehaviour
                 float flip = (horizontal > 0) ? 1f : -1f;
                 transform.localScale = new Vector3(flip, 1f, 1f);
             }
-
-            //if (targetLockOn != null)
-            //{
-            //    // Sprite bloqueado mirando hacia el enemigo
-            //    float dirHaciaObjetivo = targetLockOn.position.x - transform.position.x;
-            //    if (Mathf.Abs(dirHaciaObjetivo) > 0.05f) 
-            //    {
-            //        float flip = (dirHaciaObjetivo > 0) ? 1f : -1f;
-            //        transform.localScale = new Vector3(flip, 1f, 1f);
-            //    }
-            //}
-            //else if (horizontal != 0)
-            //{
-            //    // Usamos el input horizontal libre si no hay objetivo
-            //    float flip = (horizontal > 0) ? 1f : -1f;
-            //    transform.localScale = new Vector3(flip, 1f, 1f);
-            //}
         }
 
         // Gravedad simple: Resetear si toca el suelo

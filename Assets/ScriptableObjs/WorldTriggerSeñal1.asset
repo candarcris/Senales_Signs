@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4d1bd307d8cf14781c5effd8dc13de, type: 3}
+  m_Name: "WorldTriggerSe\xF1al1"
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueSequence
+  lines:
+  - text: Here!
+    contextualImg: {fileID: -1225375495, guid: 01971c4ab6296954888d706a46198ac2, type: 3}
+    extra3DModel: {fileID: 2848773775317210300, guid: c34e0f7b84250764c9aa79a3375f1dd4,
+      type: 3}
+    showBg: 0
+    activeTime: 3
+    fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
+    fontColor: {r: 0.32156864, g: 1, b: 0.8078432, a: 1}

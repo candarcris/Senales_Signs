@@ -14,9 +14,11 @@ namespace Signs
     public class DialogueTrigger : MonoBehaviour
     {
         public DialogueSequence dialogueSequence;
+        
         public DialogueManager dialogueManager;
 
         public UnityEvent onDialogueStart; // 2. Declaramos el evento para verlo en el Inspector
+        public UnityEvent onDialogueFinish; 
 
         [Header("Acciones del Diálogo")]
         public DialogueAction[] lineActions; // <-- Esto se verá HERMOSO y claro en el Inspector

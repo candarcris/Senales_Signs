@@ -11,8 +11,11 @@ namespace Signs
         public TMP_Text nombreTxt;
         public TMP_Text dialogoTxt;
         public Image buttonImg;
+        public Image illustrationImg;
         float velocidadEscritura = 0.05f;
         private Coroutine corrutinaEscritura;
+        public TMP_FontAsset fuente;
+        public Color fontColor;
 
         public bool isTyping = false;
         private string lineaActualCompleta = "";
@@ -26,7 +29,8 @@ namespace Signs
         public void ShowLine(DialogueLine line)
         {
             nombreTxt.text = line.nombrePj;
-            buttonImg.sprite = line.portraitImage;
+            buttonImg.sprite = line.buttonImage;
+            illustrationImg.sprite = line.portraitImage;
 
             if (corrutinaEscritura != null)
             {
@@ -40,6 +44,10 @@ namespace Signs
             isTyping = true; // Empieza a escribir
             lineaActualCompleta = line.text; // Guardamos el texto completo por si el jugador lo corta
             dialogoTxt.text = "";
+            fuente = line.fuente;
+            fontColor = line.fontColor;
+            dialogoTxt.color = fontColor;
+            dialogoTxt.font = fuente;
 
             foreach (var letra in line.text)
             {
