@@ -2,13 +2,13 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Rendering.MaterialUpgrader;
 
 namespace Signs
 {
     public class UIWorldSpaceDialogue : MonoBehaviour
     {
         [SerializeField] private Transform targetAnchor; // A quién debe perseguir
+        [SerializeField] private Transform target3DObjectAnchor; // A quién debe perseguir
 
         public TMP_Text dialogoTxt;
         // Opcional: Si quieres mostrar una imagen encima del NPC (ej. un signo de exclamación)
@@ -21,9 +21,10 @@ namespace Signs
 
         [Tooltip("Segundos que se queda cada frase en pantalla antes de pasar a la siguiente")]
         // El Manager llamará a este método justo después de instanciar el prefab
-        public void Initialize(WorldDialogueSequence sequence, Transform anchor)
+        public void Initialize(WorldDialogueSequence sequence, Transform anchor, Transform anchor3DObj)
         {
             targetAnchor = anchor;
+            target3DObjectAnchor = anchor3DObj;
             // Iniciamos la rutina que leerá el diálogo sola
             StartCoroutine(ReproducirDialogoAutomatico(sequence));
         }
@@ -43,18 +44,18 @@ namespace Signs
                 dialogoTxt.color = fontColor;
                 dialogoTxt.font = fuente;
                 dialogoTxt.text = line.text;
+
                 if (line.extra3DModel != null) 
-                { 
-                    objeto3D = Instantiate(line.extra3DModel, targetAnchor.position, targetAnchor.rotation, targetAnchor);
+                {
+                    objeto3D = Instantiate(line.extra3DModel, target3DObjectAnchor.position, target3DObjectAnchor.rotation);
                 }
-                //if (line.extra3DModel != null) { objeto3D.SetActive(true); }
 
                 // TODO: Usa 'yield return new WaitForSeconds(tiempoPorFrase);' para esperar antes de pasar a la siguiente frase.
-                yield return new WaitForSeconds(activeTime);
+                yield return new WaitForSeconds(line.activeTime);
             }
             // TODO: Cuando el foreach termine (se acaben las frases), destruye este objeto para que no quede basura en la escena.
-            Destroy(gameObject);
             if (objeto3D != null) { Destroy(objeto3D); }
+            Destroy(gameObject);
         }
 
         private void Update()
@@ -65,6 +66,7 @@ namespace Signs
             }
             else
             {
+                if (objeto3D != null) Destroy(objeto3D);
                 Destroy(gameObject);
             }
         }

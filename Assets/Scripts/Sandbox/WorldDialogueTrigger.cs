@@ -7,6 +7,7 @@ namespace Signs
     {
         [Tooltip("De dónde saldrá el globo de texto (ej. un objeto vacío sobre la cabeza del NPC)")]
         public Transform worldSpaceAnchor;
+        public Transform anchor3DObject;
         public WorldDialogueSequence worldialogueSequence;
         public DialogueManager dialogueManager;
 
@@ -19,7 +20,7 @@ namespace Signs
                 return;
             }
 
-            dialogueManager.StartWorldSpaceDialogue(worldialogueSequence, worldSpaceAnchor);
+            dialogueManager.StartWorldSpaceDialogue(worldialogueSequence, worldSpaceAnchor, anchor3DObject);
         }
 
         private void OnTriggerEnter(Collider other)

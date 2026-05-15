@@ -7682,6 +7682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 1825486236}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -8294,6 +8295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 930738634}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -9147,6 +9149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 281576839}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -12580,6 +12583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 1283454191}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -19914,6 +19918,96 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692139604}
   m_Mesh: {fileID: -3541629673168548286, guid: 1d32ca2b52065df46ae8e6ee81176314, type: 3}
+--- !u!1 &1694439491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1694439492}
+  - component: {fileID: 1694439494}
+  - component: {fileID: 1694439493}
+  m_Layer: 0
+  m_Name: Raiz_15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1694439492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694439491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.602669, y: -0.15653981, z: -0.21499085, w: 0.7523725}
+  m_LocalPosition: {x: 39.9, y: -0.1, z: 187.6}
+  m_LocalScale: {x: 1.1606436, y: 1.1606436, z: 1.1606431}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1793315889}
+  m_LocalEulerAnglesHint: {x: 57.093, y: -65.584, z: -70.524}
+--- !u!23 &1694439493
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694439491}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1694439494
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694439491}
+  m_Mesh: {fileID: -5731547941117289742, guid: 1d32ca2b52065df46ae8e6ee81176314, type: 3}
 --- !u!1 &1701092502
 GameObject:
   m_ObjectHideFlags: 0
@@ -20401,6 +20495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 2006088295}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -20479,6 +20574,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706227944}
   m_CullTransparentMesh: 1
+--- !u!1 &1709030095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709030096}
+  m_Layer: 0
+  m_Name: 3dObjTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1709030096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709030095}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.23, y: 0, z: 0.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2069369817}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1727229228
 GameObject:
   m_ObjectHideFlags: 0
@@ -20569,6 +20695,96 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727229228}
   m_Mesh: {fileID: -5731547941117289742, guid: 1d32ca2b52065df46ae8e6ee81176314, type: 3}
+--- !u!1 &1741521020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1741521021}
+  - component: {fileID: 1741521023}
+  - component: {fileID: 1741521022}
+  m_Layer: 0
+  m_Name: Raiz_14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1741521021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741521020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.46346536, y: 0.5368647, z: -0.55133253, w: 0.43932748}
+  m_LocalPosition: {x: 72.2, y: -5, z: 216.5}
+  m_LocalScale: {x: 1.8811384, y: 1.8811386, z: 1.8811377}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1793315889}
+  m_LocalEulerAnglesHint: {x: 87.72, y: -98.742, z: -199.382}
+--- !u!23 &1741521022
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741521020}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1741521023
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741521020}
+  m_Mesh: {fileID: -5731547941117289742, guid: 1d32ca2b52065df46ae8e6ee81176314, type: 3}
 --- !u!1 &1745740417 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1489093971330115329, guid: 18c85b03843c45546807a8d2381aea21,
@@ -20628,6 +20844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 88502018}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -20993,6 +21210,8 @@ Transform:
   - {fileID: 833983009}
   - {fileID: 1760530808}
   - {fileID: 4196123700921534741}
+  - {fileID: 1741521021}
+  - {fileID: 1694439492}
   - {fileID: 1727229229}
   - {fileID: 1564095243}
   - {fileID: 1332206230}
@@ -23065,6 +23284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 1757616438}
+  anchor3DObject: {fileID: 0}
   worldialogueSequence: {fileID: 11400000, guid: dc30fd10ab3c5df40acd794a396143bc,
     type: 2}
   dialogueManager: {fileID: 1463923706}
@@ -23365,6 +23585,7 @@ Transform:
   m_LocalScale: {x: 7.0698314, y: 8.518499, z: 17.037888}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1709030096}
   - {fileID: 287246631}
   m_Father: {fileID: 1922874566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23402,6 +23623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 287246631}
+  anchor3DObject: {fileID: 1709030096}
   worldialogueSequence: {fileID: 11400000, guid: c69bbc4deed86594aa3d26559fa74732,
     type: 2}
   dialogueManager: {fileID: 1463923706}

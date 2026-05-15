@@ -36,7 +36,7 @@ namespace Signs
             DisplayNextLine();
         }
 
-        public GameObject StartWorldSpaceDialogue(WorldDialogueSequence worldSequence, Transform anchorPoint)
+        public GameObject StartWorldSpaceDialogue(WorldDialogueSequence worldSequence, Transform anchorPoint, Transform anchor3Dobj)
         {
             // A diferencia del Screen Space, aquí no congelamos al jugador ni usamos la Cola central.
             // TODO: Instancia el prefab de World Space en la posición del anchorPoint.
@@ -46,7 +46,7 @@ namespace Signs
 
             if(worldSpaceUI != null)
             {
-                worldSpaceUI.Initialize(worldSequence, anchorPoint);
+                worldSpaceUI.Initialize(worldSequence, anchorPoint, anchor3Dobj);
             }
 
             return nuevoWorldUI;

@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.UIWorldSpaceDialogue
   targetAnchor: {fileID: 0}
+  target3DObjectAnchor: {fileID: 0}
   dialogoTxt: {fileID: 3939366026385706025}
   dialogoImg: {fileID: 1731417140212730852}
   backGroundImg: {fileID: 611746356976301962}
@@ -405,7 +406,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6730282815428950198
 MonoBehaviour:
   m_ObjectHideFlags: 0
