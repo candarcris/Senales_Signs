@@ -7,23 +7,23 @@ public class PrayMechanic : MonoBehaviour
     [Header("Mecánica Ehyal")]
     public Transform ehyalTransform; // Arrastra a Ehyal aquí
     public Transform puntoDeDescansoEhyal; // Un objeto vacío flotando sobre el hombro de tu player
-    [SerializeField] private bool enOracion = false;
-    [SerializeField] private bool puedeOrar = false;
+    [SerializeField] private bool isEhyalWith = false;
+    [SerializeField] private bool canPray = false;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C) && puedeOrar)
+        if (Input.GetKeyDown(KeyCode.C) && canPray)
         {
-            enOracion = !enOracion;
+            isEhyalWith = !isEhyalWith;
 
-            if(enOracion)
+            if(isEhyalWith)
             {
                 StartCoroutine(RutinaOracion());
             }
         }
 
         // Si Ehyal fue llamado, hacemos que siga al jugador suavemente
-        if (enOracion)
+        if (isEhyalWith)
         {
             // Lerp hace un movimiento fluido de persecución
             ehyalTransform.position = Vector3.Lerp(ehyalTransform.position, puntoDeDescansoEhyal.position, Time.deltaTime * 5f);
