@@ -1,7 +1,8 @@
+using Signs;
 using System;
 using UnityEngine;
 
-public class PlayerControllerSigns : MonoBehaviour
+public class PlayerControllerSigns : MonoBehaviour, IDamage
 {
     public CharacterController controller;
     public float speed = 5f;
@@ -47,18 +48,6 @@ public class PlayerControllerSigns : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
     }
 
-    private void OnEnable()
-    {
-        // Sagar se suscribe a la señal de cualquier roca que golpee
-        Rock.OnRockHitPlayer += RecibirImpacto;
-    }
-
-    private void OnDisable()
-    {
-        // Muy importante: siempre desvincularse al destruir o desactivar el objeto
-        Rock.OnRockHitPlayer -= RecibirImpacto;
-    }
-
     public void RecibirImpacto()
     {
         if (puedeMoverse) // Evita que se reinicie el contador si le pegan 2 rocas a la vez
@@ -75,7 +64,7 @@ public class PlayerControllerSigns : MonoBehaviour
     private System.Collections.IEnumerator RutinaDeImpacto()
     {
         // 1. Pierde el control
-        puedeMoverse = false;
+        //puedeMoverse = false;
 
         // 2. Truco Ninja: Le quitamos el Tag "Player" para que los enemigos no lo reconozcan
         //gameObject.tag = "Untagged";
@@ -123,7 +112,7 @@ public class PlayerControllerSigns : MonoBehaviour
         }
 
         gameObject.tag = "Player";
-        puedeMoverse = true;
+        //puedeMoverse = true;
     }
 
     void Update()

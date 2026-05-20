@@ -4,24 +4,12 @@ namespace Signs
 {
     public class DeadZone : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-            
-        }
-
         private void OnTriggerEnter(Collider other)
         {
-            if (other != null && other.CompareTag("Player")) 
+            if (other.TryGetComponent<IDamage>(out IDamage damage))
             {
-                Debug.Log("Game Over");
+                damage.RecibirImpacto();
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }

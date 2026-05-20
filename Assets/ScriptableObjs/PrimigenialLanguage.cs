@@ -9,14 +9,19 @@ namespace Signs
         [Tooltip("Lista de letras que Sagar ya ha descubierto")]
         public List<char> letrasDescubiertas = new List<char>();
         // Método para agregar una letra nueva cuando completas un mensaje
-        public void DescubrirLetra(char nuevaLetra)
+        public void DescubrirLetra(string nuevaLetraString)
         {
-            char letraMayuscula = char.ToUpper(nuevaLetra);
+            // Verificamos que el string no esté vacío por seguridad
+            if (string.IsNullOrEmpty(nuevaLetraString)) return;
+            // Tomamos el primer carácter del string y lo hacemos mayúscula
+            char letraMayuscula = char.ToUpper(nuevaLetraString[0]);
+
             if (!letrasDescubiertas.Contains(letraMayuscula))
             {
                 letrasDescubiertas.Add(letraMayuscula);
             }
         }
+
         // Método para que el DialogueManager pregunte si entendemos esta letra
         public bool ConoceLetra(char letra)
         {

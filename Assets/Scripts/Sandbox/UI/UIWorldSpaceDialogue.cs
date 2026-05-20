@@ -36,9 +36,18 @@ namespace Signs
             {
                 // TODO: Cambia el texto (y la imagen si existe) por los de la línea.
                 // (Puedes usar tu efecto de máquina de escribir aquí si quieres, o solo poner el texto de golpe).
-                dialogoImg.sprite = line.contextualImg;
+                dialogoImg.enabled = line.contextualImg != null ? true : false;
+                dialogoImg.sprite = dialogoImg.enabled ? line.contextualImg : null;
+                //if (line.contextualImg != null) 
+                //{ 
+                //    dialogoImg.sprite = line.contextualImg;
+                //}
+                //else
+                //{
+                //    dialogoImg.enabled = false;
+                //}
                 backGroundImg.enabled = line.showBg;
-                activeTime = line.activeTime;
+                activeTime = line.activeTime > 0 ? line.activeTime : 0;
                 fuente = line.fuente;
                 fontColor = line.fontColor;
                 dialogoTxt.color = fontColor;

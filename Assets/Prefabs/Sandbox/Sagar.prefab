@@ -6041,6 +6041,37 @@ MonoBehaviour:
     m_Extent: {x: 0.06999993, y: 0.03886509, z: 0}
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
+--- !u!1 &8183469548450493295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857225920207311235}
+  m_Layer: 8
+  m_Name: WorldUITransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1857225920207311235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183469548450493295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 11.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4232917431330690654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8305790958943761162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6283,6 +6314,8 @@ GameObject:
   - component: {fileID: 4118685106432383875}
   - component: {fileID: 7809224091133934005}
   - component: {fileID: 7976459132806912263}
+  - component: {fileID: 5127210709370682534}
+  - component: {fileID: 7770798418096713670}
   - component: {fileID: 7769819259833095661}
   - component: {fileID: 2990861625425359003}
   m_Layer: 8
@@ -6300,11 +6333,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8432274580666445117}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.2935681, z: -0, w: 0.95593816}
+  m_LocalRotation: {x: 0, y: -0.29356483, z: 0, w: 0.9559392}
   m_LocalPosition: {x: 123.6, y: 3.6, z: -9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1857225920207311235}
   - {fileID: 7794588013257036342}
   - {fileID: 4929116194684150280}
   - {fileID: 1639452504551300981}
@@ -6316,7 +6350,7 @@ Transform:
   - {fileID: 2750086478557553892}
   - {fileID: 6208818401021982968}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -34.143, z: 0}
 --- !u!95 &5509586889340593315
 Animator:
   serializedVersion: 7
@@ -6386,8 +6420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrayMechanic
   ehyalTransform: {fileID: 0}
   puntoDeDescansoEhyal: {fileID: 7794588013257036342}
-  enOracion: 0
-  puedeOrar: 1
+  isEhyalWith: 0
+  canPray: 0
 --- !u!114 &7809224091133934005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6431,6 +6465,35 @@ MonoBehaviour:
   vcam: {fileID: 0}
   currentTarget: {fileID: 0}
   enemiesInRange: []
+--- !u!114 &5127210709370682534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432274580666445117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d96b4296418b9d44a8c670be2d14668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.PrimigenialLanguageMechanic
+--- !u!114 &7770798418096713670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432274580666445117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6aeee6e5c450946a22f8f1c72c5b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
+  worldSpaceAnchor: {fileID: 1857225920207311235}
+  anchor3DObject: {fileID: 0}
+  worldialogueSequence: {fileID: 11400000, guid: 531d1a02d5cc3394d80ddbdea441d131,
+    type: 2}
+  dialogueManager: {fileID: 0}
 --- !u!143 &7769819259833095661
 CharacterController:
   m_ObjectHideFlags: 0
