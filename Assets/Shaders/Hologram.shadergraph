@@ -956,13 +956,13 @@
     },
     "m_PreviewData": {
         "serializedMesh": {
-            "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
+            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10202,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
             "m_Guid": ""
         },
         "preventRotation": false
     },
     "m_Path": "Candar",
-    "m_GraphPrecision": 1,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -2609,7 +2609,7 @@
     "m_Title": "Glitch",
     "m_Position": {
         "x": -2310.666748046875,
-        "y": 610.666748046875
+        "y": 610.6666259765625
     }
 }
 
@@ -3500,7 +3500,7 @@
     "m_ObjectId": "77f14012850a43caa74cc5accee33995",
     "m_Title": "Fresnel",
     "m_Position": {
-        "x": -848.6666259765625,
+        "x": -848.6666870117188,
         "y": -8.0
     }
 }
@@ -4601,8 +4601,8 @@
     "m_ObjectId": "a9c1ee628dc9458c8a4028c3e6e37329",
     "m_Title": "Hologram",
     "m_Position": {
-        "x": -2720.666748046875,
-        "y": -1.33331298828125
+        "x": -2720.66650390625,
+        "y": -1.3333282470703126
     }
 }
 
@@ -6492,8 +6492,8 @@
     "m_ObjectId": "fe452ec0c9134ca4887a902789418164",
     "m_Title": "Glitch",
     "m_Position": {
-        "x": -1817.3333740234375,
-        "y": -701.9999389648438
+        "x": -1817.33349609375,
+        "y": -702.0
     }
 }
 

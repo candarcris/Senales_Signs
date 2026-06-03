@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3591096774700821823}
   - component: {fileID: 360411733065125617}
   - component: {fileID: 5365987281377997668}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Roca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 5127544278253032392}
   - component: {fileID: 5983412124916606672}
   - component: {fileID: 5211711116281116916}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RocaPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

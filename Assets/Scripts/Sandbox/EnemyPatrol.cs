@@ -1,9 +1,9 @@
+using Signs;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyPatrol : MonoBehaviour, IKnockBack
 {
     // 1. Definimos los estados posibles
     public enum EstadoEnemigo { Patrullando, Persiguiendo, Atacando, Golpeado }
@@ -225,12 +225,24 @@ public class EnemyPatrol : MonoBehaviour
 #endif
     }
 
+
     // MECANICA DE GOLPE EHYAL
-    public void RecibirGolpe(Vector3 direccionRetroceso, float fuerzaRetroceso)
+    public void RecibirKnockback(Vector3 direccionRetroceso, float fuerzaRetroceso)
     {
+        if (!gameObject.activeInHierarchy) return;
         CambiarEstado(EstadoEnemigo.Golpeado);
         StartCoroutine(RutinaGolpeCinematico(direccionRetroceso, fuerzaRetroceso));
     }
+
+    //public void RecibirImpacto(int cantidadDaño)
+    //{
+    //    health -= cantidadDaño;
+    //    if (health <= 0)
+    //    {
+    //        // Lógica temporal de muerte
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 
     private System.Collections.IEnumerator RutinaGolpeCinematico(Vector3 dir, float fuerza)
     {

@@ -8,7 +8,7 @@ public class Rock : MonoBehaviour
     {
         if(other.TryGetComponent<IDamage>(out IDamage damage))
         {
-            damage.RecibirImpacto();
+            damage.RecibirImpacto(25);
             RockPool.Instance.ReturnRock(this.gameObject);
         }
 

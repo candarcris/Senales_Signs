@@ -4,6 +4,6 @@ namespace Signs
 {
     public interface IDamage
     {
-        void RecibirImpacto();
+        void RecibirImpacto(int cantidadDaño);
     }
 }

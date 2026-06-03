@@ -1,8 +1,6 @@
-using Signs;
-using System;
 using UnityEngine;
 
-public class PlayerControllerSigns : MonoBehaviour, IDamage
+public class PlayerControllerSigns : MonoBehaviour
 {
     public CharacterController controller;
     public float speed = 5f;
@@ -48,11 +46,11 @@ public class PlayerControllerSigns : MonoBehaviour, IDamage
         propertyBlock = new MaterialPropertyBlock();
     }
 
-    public void RecibirImpacto()
+    public void OnDamage(int cantidadDaño)
     {
         if (puedeMoverse) // Evita que se reinicie el contador si le pegan 2 rocas a la vez
         {
-            StartCoroutine(RutinaDeImpacto());
+            StartCoroutine(DamageRoutine());
         }
     }
 
@@ -61,7 +59,7 @@ public class PlayerControllerSigns : MonoBehaviour, IDamage
         puedeMoverse = valor;
     }
 
-    private System.Collections.IEnumerator RutinaDeImpacto()
+    private System.Collections.IEnumerator DamageRoutine()
     {
         // 1. Pierde el control
         //puedeMoverse = false;

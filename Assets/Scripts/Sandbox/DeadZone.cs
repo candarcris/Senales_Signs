@@ -8,7 +8,7 @@ namespace Signs
         {
             if (other.TryGetComponent<IDamage>(out IDamage damage))
             {
-                damage.RecibirImpacto();
+                damage.RecibirImpacto(50);
             }
         }
     }

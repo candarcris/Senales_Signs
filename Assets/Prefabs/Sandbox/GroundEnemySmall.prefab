@@ -904,6 +904,7 @@ GameObject:
   - component: {fileID: 2495109550368994576}
   - component: {fileID: 2487109547948940369}
   - component: {fileID: 4844852698564900766}
+  - component: {fileID: 6515556751680339035}
   - component: {fileID: 780400195123451080}
   - component: {fileID: 2096986604163963726}
   - component: {fileID: 7585935711844580706}
@@ -922,7 +923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489093971330115329}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.90034777, z: 0, w: -0.43517125}
   m_LocalPosition: {x: -5.1, y: -1.9, z: -47.1}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -965,6 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76943cca5fd947a4280819df9ce151fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraphicSagarLookAtCamera
+  lockYAxis: 1
 --- !u!114 &4844852698564900766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,9 +987,41 @@ MonoBehaviour:
   - {fileID: 0}
   shootPoint: {fileID: 2575012987706258070}
   attackRange: 10
+  charScale: {x: 0, y: 0, z: 0}
   fuerzaAdelante: 15
   fuerzaArriba: 5
   centroOffset: {x: 0, y: 4.1, z: 0}
+--- !u!114 &6515556751680339035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489093971330115329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b66042b7af1e8048b887209d8e68fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.EveryEntityHealth
+  maxHealth: 100
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1489093971330115329}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!195 &780400195123451080
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1480,6 +1480,37 @@ Transform:
   - {fileID: 1135856135577655633}
   m_Father: {fileID: 4232917431330690654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1768659923887615821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2693643701855212111}
+  m_Layer: 8
+  m_Name: 3DObjAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2693643701855212111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768659923887615821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 13.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4232917431330690654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854536732802062912
 GameObject:
   m_ObjectHideFlags: 0
@@ -6311,6 +6342,7 @@ GameObject:
   - component: {fileID: 5509586889340593315}
   - component: {fileID: 9115905870718708031}
   - component: {fileID: 4458814031287105055}
+  - component: {fileID: 1975026020682348687}
   - component: {fileID: 4118685106432383875}
   - component: {fileID: 7809224091133934005}
   - component: {fileID: 7976459132806912263}
@@ -6339,6 +6371,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1857225920207311235}
+  - {fileID: 2693643701855212111}
   - {fileID: 7794588013257036342}
   - {fileID: 4929116194684150280}
   - {fileID: 1639452504551300981}
@@ -6406,6 +6439,18 @@ MonoBehaviour:
   jumpBufferTime: 0.2
   targetLockOn: {fileID: 0}
   puedeMoverse: 1
+--- !u!114 &1975026020682348687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432274580666445117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2e8d4cf1224714da345ba33495466d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.SagarHealth
 --- !u!114 &4118685106432383875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6490,9 +6535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueTrigger
   worldSpaceAnchor: {fileID: 1857225920207311235}
-  anchor3DObject: {fileID: 0}
-  worldialogueSequence: {fileID: 11400000, guid: 531d1a02d5cc3394d80ddbdea441d131,
-    type: 2}
+  anchor3DObject: {fileID: 2693643701855212111}
+  worldialogueSequence: {fileID: 0}
   dialogueManager: {fileID: 0}
 --- !u!143 &7769819259833095661
 CharacterController:

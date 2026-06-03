@@ -44,8 +44,8 @@ public class EhyalStrikeMechanic : MonoBehaviour
     private MonoBehaviour cinemachineInputProvider;
     
     [Header("Objetivos en Rango")]
-    [SerializeField] private EnemyPatrol currentTarget;
-    [SerializeField] private List<EnemyPatrol> enemiesInRange = new List<EnemyPatrol>();
+    [SerializeField] private Transform currentTarget;
+    [SerializeField] private List<Transform> targetsInRange = new List<Transform>();
 
     void Start()
     {
@@ -173,16 +173,16 @@ public class EhyalStrikeMechanic : MonoBehaviour
     private void UpdateEnemiesInRange()
     {
         Collider[] hits = Physics.OverlapSphere(ehyalTransform.position, attackRange, enemyLayer);
-        enemiesInRange.Clear();
+        targetsInRange.Clear();
 
         foreach (Collider hit in hits)
         {
-            if (hit.TryGetComponent(out EnemyPatrol enemy))
+            if (hit.TryGetComponent(out IDamage objetivoDañable))
             {
                 // Solo agregar si está vivo/activo y evitar duplicados si tiene varios colliders
-                if (enemy.gameObject.activeInHierarchy && !enemiesInRange.Contains(enemy))
+                if (hit.gameObject.activeInHierarchy && !targetsInRange.Contains(hit.transform))
                 {
-                    enemiesInRange.Add(enemy);
+                    targetsInRange.Add(hit.transform);
                 }
             }
         }
@@ -191,10 +191,10 @@ public class EhyalStrikeMechanic : MonoBehaviour
         // Physics.OverlapSphere no garantiza el mismo orden de los objetos en cada frame.
         // Si el orden salta aleatoriamente, el "CycleTarget" falla porque el índice del objetivo actual
         // y el siguiente cambian de lugar. Ordenar la lista por su ID estabiliza este orden.
-        enemiesInRange.Sort((a, b) => a.gameObject.GetInstanceID().CompareTo(b.gameObject.GetInstanceID()));
+        targetsInRange.Sort((a, b) => a.gameObject.GetInstanceID().CompareTo(b.gameObject.GetInstanceID()));
 
         // Si el objetivo actual salió del rango o fue destruido, perderlo
-        if (currentTarget != null && !enemiesInRange.Contains(currentTarget))
+        if (currentTarget != null && !targetsInRange.Contains(currentTarget))
         {
             isLockOnActive = false;
             ClearLockOn();
@@ -203,7 +203,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
 
     private void HandleLockOn()
     {
-        if (enemiesInRange.Count == 0)
+        if (targetsInRange.Count == 0)
         {
             // No hay enemigos para fijar, pero no apagamos el 'isLockOnActive' 
             // por si un enemigo entra en rango después. Solo limpiamos el objetivo actual.
@@ -214,7 +214,7 @@ public class EhyalStrikeMechanic : MonoBehaviour
         // Si no hay objetivo, o si el actual se perdió, asignar el más cercano
         if (currentTarget == null)
         {
-            currentTarget = GetClosestEnemy();
+            currentTarget = GetClosestTarget();
         }
 
         // Actualizar la posición del indicador visual
@@ -285,18 +285,18 @@ public class EhyalStrikeMechanic : MonoBehaviour
         }
     }
 
-    private EnemyPatrol GetClosestEnemy()
+    private Transform GetClosestTarget()
     {
-        EnemyPatrol closest = null;
+        Transform closest = null;
         float minDistance = float.MaxValue;
 
-        foreach (EnemyPatrol enemy in enemiesInRange)
+        foreach (Transform target in targetsInRange)
         {
-            float dist = Vector3.Distance(ehyalTransform.position, enemy.transform.position);
+            float dist = Vector3.Distance(ehyalTransform.position, target.position);
             if (dist < minDistance)
             {
                 minDistance = dist;
-                closest = enemy;
+                closest = target;
             }
         }
 
@@ -305,11 +305,11 @@ public class EhyalStrikeMechanic : MonoBehaviour
 
     private void CycleTarget()
     {
-        if (enemiesInRange.Count <= 1) return; // No hay necesidad de cambiar
+        if (targetsInRange.Count <= 1) return; // No hay necesidad de cambiar
 
-        int currentIndex = enemiesInRange.IndexOf(currentTarget);
-        int nextIndex = (currentIndex + 1) % enemiesInRange.Count;
-        currentTarget = enemiesInRange[nextIndex];
+        int currentIndex = targetsInRange.IndexOf(currentTarget);
+        int nextIndex = (currentIndex + 1) % targetsInRange.Count;
+        currentTarget = targetsInRange[nextIndex];
     }
 
     private void HandleAttack()
@@ -342,8 +342,18 @@ public class EhyalStrikeMechanic : MonoBehaviour
         Vector3 knockbackDir = (currentTarget.transform.position - ehyalTransform.position).normalized;
         knockbackDir.y = 0; // Mantenerlo horizontal
         
-        // 3. Aplicar daño / retroceso al enemigo
-        currentTarget.RecibirGolpe(knockbackDir, knockbackForce);
+        //currentTarget.RecibirKnockback(knockbackDir, knockbackForce);
+
+        if (currentTarget.TryGetComponent(out IDamage objetivoDañable))
+        {
+            int attackDamage = 25; // Puedes volver esta variable pública luego
+            objetivoDañable.RecibirImpacto(attackDamage);
+        }
+        // 2. Si el objetivo reacciona a los empujes, lo empujamos
+        if (currentTarget.gameObject.activeInHierarchy && currentTarget.TryGetComponent(out IKnockBack objetivoEmpujable))
+        {
+            objetivoEmpujable.RecibirKnockback(knockbackDir, knockbackForce);
+        }
     }
 
     private void OnDrawGizmosSelected()
