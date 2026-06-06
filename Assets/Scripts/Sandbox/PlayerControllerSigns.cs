@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerControllerSigns : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class PlayerControllerSigns : MonoBehaviour
     private SpriteRenderer[] todasLasPartes;
     private MaterialPropertyBlock propertyBlock;
 
-    public bool puedeMoverse = true;     // Controla si recibe inputs
+    public bool puedeMoverse = true;
 
     private void Awake()
     {
@@ -59,7 +60,7 @@ public class PlayerControllerSigns : MonoBehaviour
         puedeMoverse = valor;
     }
 
-    private System.Collections.IEnumerator DamageRoutine()
+    private IEnumerator DamageRoutine()
     {
         // 1. Pierde el control
         //puedeMoverse = false;

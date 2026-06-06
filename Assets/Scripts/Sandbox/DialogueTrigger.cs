@@ -43,6 +43,11 @@ namespace Signs
             }
         }
 
+        public void SwapDialogue(DialogueSequence newSequence)
+        {
+            dialogueSequence = newSequence;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if(other.CompareTag("Player"))

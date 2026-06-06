@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d4d1bd307d8cf14781c5effd8dc13de, type: 3}
-  m_Name: G
+  m_Name: WorldMonolito
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueSequence
   lines:
-  - text: ??
+  - text: rhiul
     contextualImg: {fileID: 0}
     extra3DModel: {fileID: 0}
     showBg: 0
-    activeTime: 5
+    activeTime: 3
     fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
-    fontColor: {r: 1, g: 1, b: 1, a: 1}
+    fontColor: {r: 0.054901965, g: 0.9960785, b: 0.77647066, a: 1}

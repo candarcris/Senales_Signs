@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d4d1bd307d8cf14781c5effd8dc13de, type: 3}
-  m_Name: WorldDialogueSequence
+  m_Name: WorldEnemyDie
   m_EditorClassIdentifier: Assembly-CSharp::Signs.WorldDialogueSequence
   lines:
-  - text: 
-    contextualImg: {fileID: 21300000, guid: 851aed9f207c86941a34a8794b99366d, type: 3}
+  - text: X
+    contextualImg: {fileID: 0}
     extra3DModel: {fileID: 0}
     showBg: 0
-    activeTime: 3
+    activeTime: 2
     fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
-    fontColor: {r: 0.81761, g: 0, b: 0.5899617, a: 1}
+    fontColor: {r: 1, g: 0, b: 0, a: 1}

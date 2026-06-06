@@ -6,7 +6,7 @@ namespace Signs
     public class EveryEntityHealth : MonoBehaviour, IDamage
     {
         public int maxHealth = 100;
-        private int currentHealth;
+        [SerializeField] private int currentHealth;
         // Estos son eventos que puedes configurar directamente en el Inspector de Unity
         public UnityEvent<int> OnTakeDamage;
         public UnityEvent<int> OnHealthChanged;

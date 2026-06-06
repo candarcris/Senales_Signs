@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475b16ffba264d64eb8f24b1ebac72fa, type: 3}
+  m_Name: EstebanSequence
+  m_EditorClassIdentifier: Assembly-CSharp::Signs.DialogueSequence
+  lines:
+  - nombrePj: Esteban
+    text: Oh!... hola
+    portraitImage: {fileID: 0}
+    buttonImage: {fileID: 0}
+    fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
+    fontColor: {r: 1, g: 1, b: 1, a: 1}
+    actionName: 
+  - nombrePj: Esteban
+    text: 'Hace mucho que estoy recorriendo este lugar, no importa lo que haga no
+      puedo salir '
+    portraitImage: {fileID: 0}
+    buttonImage: {fileID: 0}
+    fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
+    fontColor: {r: 1, g: 1, b: 1, a: 1}
+    actionName: 
+  - nombrePj: Esteban
+    text: "Recuerdo que alguien me acompa\xF1aba... pero ya no escucho su voz"
+    portraitImage: {fileID: 0}
+    buttonImage: {fileID: 0}
+    fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
+    fontColor: {r: 1, g: 1, b: 1, a: 1}
+    actionName: 

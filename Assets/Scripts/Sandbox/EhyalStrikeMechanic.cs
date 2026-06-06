@@ -148,7 +148,24 @@ public class EhyalStrikeMechanic : MonoBehaviour
         currentTarget = null;
         if (lockOnIndicator != null) lockOnIndicator.SetActive(false);
         if (playerController != null) playerController.targetLockOn = null;
-        
+
+        if (cameraLookTarget != null && originalLookAt != null)
+        {
+            // Regresamos el punto de visión al jugador
+            cameraLookTarget.transform.position = originalLookAt.position;
+        }
+        if (cameraAnchor != null && Camera.main != null)
+        {
+            // Hacemos que el ancla mire hacia donde está mirando la cámara actual.
+            // Así, al volver a hacer Lock-On, el giro empezará desde donde tú estás viendo.
+            Vector3 camForward = Camera.main.transform.forward;
+            camForward.y = 0;
+            if (camForward != Vector3.zero)
+            {
+                cameraAnchor.transform.rotation = Quaternion.LookRotation(camForward);
+            }
+        }
+
         if (vcam != null) 
         {
             vcam.LookAt = originalLookAt;
@@ -240,21 +257,22 @@ public class EhyalStrikeMechanic : MonoBehaviour
                 cameraAnchor.transform.position = ehyalTransform.position;
 
                 // Rotar el ancla para mirar al enemigo
-                Vector3 lookDir = currentTarget.transform.position - ehyalTransform.position;
+                Vector3 lookDir = currentTarget.position - ehyalTransform.position;
                 lookDir.y = 0;
                 if (lookDir != Vector3.zero)
                 {
                     // Podemos usar Slerp si queremos que la cámara se mueva suave al inicio del lock on
                     Quaternion targetRot = Quaternion.LookRotation(lookDir);
-                    cameraAnchor.transform.rotation = Quaternion.Slerp(cameraAnchor.transform.rotation, targetRot, Time.deltaTime * 10f);
+                    cameraAnchor.transform.rotation = Quaternion.Slerp(cameraAnchor.transform.rotation, targetRot, Time.deltaTime * 1f);
                 }
 
                 // Posicionar el punto de LookAt exactamente a la mitad entre Sagar y el Enemigo
                 // Esto asegura que la cámara enfoque el centro del combate y no pierda a ninguno de los dos.
                 // Ajustamos un poco en Y para no mirar al piso.
                 Vector3 midPoint = Vector3.Lerp(ehyalTransform.position, currentTarget.transform.position, 0.5f);
-                midPoint.y = (ehyalTransform.position.y + currentTarget.transform.position.y) / 2f + 1.5f;
-                cameraLookTarget.transform.position = midPoint;
+                midPoint.y = (ehyalTransform.position.y + currentTarget.position.y) / 2f + 1.5f;
+                //cameraLookTarget.transform.position = midPoint;
+                cameraLookTarget.transform.position = Vector3.Lerp(cameraLookTarget.transform.position, midPoint, Time.deltaTime * 5f);
 
                 // Asignar el ancla como objetivo de la cámara
                 vcam.Follow = cameraAnchor.transform;

@@ -46,6 +46,8 @@ namespace Signs
             dialogoTxt.text = "";
             fuente = line.fuente;
             fontColor = line.fontColor;
+            nombreTxt.color = fontColor;
+            nombreTxt.font = fuente;
             dialogoTxt.color = fontColor;
             dialogoTxt.font = fuente;
 
