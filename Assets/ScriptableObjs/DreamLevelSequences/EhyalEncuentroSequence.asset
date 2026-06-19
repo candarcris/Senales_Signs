@@ -28,7 +28,7 @@ MonoBehaviour:
     fontColor: {r: 0.40784317, g: 0.93725497, b: 0.6901961, a: 1}
     actionName: mirar escenario
   - nombrePj: Ehyal
-    text: 'Es la ciudad de Hus, la ciudad '
+    text: 'Es la ciudad de Hus '
     portraitImage: {fileID: 0}
     buttonImage: {fileID: 0}
     fuente: {fileID: 11400000, guid: 953292b6807ea2f4d9acff13c2ecd824, type: 2}
