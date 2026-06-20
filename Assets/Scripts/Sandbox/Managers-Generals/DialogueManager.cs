@@ -1,5 +1,6 @@
 using Signs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Signs
@@ -23,6 +24,7 @@ namespace Signs
             currentLines.Clear();
 
             screenSpaceUI.gameObject.SetActive(true);
+
             // 2. TODO: Llena la cola (currentLines) con las líneas (lines) que vienen dentro del 'sequence'
             // Pista: puedes usar un foreach.
             foreach (DialogueLine line in sequence.lines)
@@ -54,17 +56,18 @@ namespace Signs
 
         public void DisplayNextLine()
         {
-            if (currentLines.Count == 0) 
+            if (currentLines.Count == 0 && screenSpaceUI.canNextLine)
             { 
-                EndDialogue(); 
+                EndDialogue();
                 return;
             }
             DialogueLine dequeLine = currentLines.Dequeue();
 
             // ¡Magia aquí! Le decimos al Trigger que ejecute la acción si es que existe
-            if (currentTrigger != null)
+            if (currentTrigger != null && !string.IsNullOrEmpty(dequeLine.actionName))
             {
                 currentTrigger.ExecuteAction(dequeLine.actionName);
+                
             }
             screenSpaceUI.ShowLine(dequeLine);
         }

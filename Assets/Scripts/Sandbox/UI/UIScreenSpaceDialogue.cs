@@ -19,11 +19,17 @@ namespace Signs
 
         public bool isTyping = false;
         private string lineaActualCompleta = "";
+        public bool canNextLine;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
         
+        }
+
+        public void SetActiveNextLineButton(bool state)
+        {
+            canNextLine = state;
         }
 
         public void ShowLine(DialogueLine line)
