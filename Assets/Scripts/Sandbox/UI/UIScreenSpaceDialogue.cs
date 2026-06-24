@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +30,12 @@ namespace Signs
         public void SetActiveNextLineButton(bool state)
         {
             canNextLine = state;
+        }
+
+        public IEnumerator SetActiveNextLineButton(Action onComplete)
+        {
+            yield return new WaitForSeconds(6);
+            onComplete?.Invoke();
         }
 
         public void ShowLine(DialogueLine line)

@@ -1,6 +1,4 @@
-using Signs;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Signs
@@ -56,9 +54,15 @@ namespace Signs
 
         public void DisplayNextLine()
         {
-            if (currentLines.Count == 0 && screenSpaceUI.canNextLine)
-            { 
-                EndDialogue();
+            if (currentLines.Count == 0)
+            {
+                StartCoroutine(screenSpaceUI.SetActiveNextLineButton(() =>
+                {
+                    // Todo este bloque es el Callback.
+                    // ¡Solo se ejecutará cuando el Trigger haga el Invoke()!
+                    screenSpaceUI.canNextLine = true;
+                    EndDialogue();
+                }));
                 return;
             }
             DialogueLine dequeLine = currentLines.Dequeue();
